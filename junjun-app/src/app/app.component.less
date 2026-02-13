@@ -31,6 +31,8 @@ app-contact-section {
 
 .page-shell {
 	min-height: 100vh;
+	width: 100%;
+	min-width: 0;
 	background: radial-gradient(circle at top right, #fffdf8, var(--sand));
 	padding: clamp(1.5rem, 3vw, 3.5rem);
 }
@@ -42,6 +44,13 @@ app-contact-section {
 	padding: 1rem 0 2rem;
 	border-bottom: 1px solid var(--line);
 	flex-wrap: wrap;
+	position: sticky;
+	top: 0;
+	z-index: 20;
+	background-color: var(--sand);
+	opacity: 1;
+	-webkit-backdrop-filter: none;
+	backdrop-filter: none;
 }
 
 .brand {
@@ -52,12 +61,22 @@ app-contact-section {
 	letter-spacing: 0.04em;
 }
 
+#id_navigationBrand_brand {
+	margin: 0;
+	padding: 0;
+}
+
 .brand img {
 	width: 42px;
 	height: 42px;
 	object-fit: cover;
 	border-radius: 50%;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+#id_navigationBrand_brandText {
+	margin-left: 0;
+	padding-left: 0;
 }
 
 .primary-nav {
@@ -110,31 +129,70 @@ app-contact-section {
 
 .menu-toggle {
 	display: none;
-	width: 44px;
-	height: 44px;
-	border-radius: 50%;
-	border: 1px solid var(--line);
-	background: white;
+	width: 42px;
+	height: 42px;
+	padding: 0;
+	border-radius: 12px;
+	border: 1px solid rgba(31, 26, 23, 0.14);
+	background: linear-gradient(180deg, #f8f9fb 0%, #eceff3 100%);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+	-webkit-appearance: none;
+	appearance: none;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	gap: 6px;
+	gap: 4px;
+	line-height: 1;
 	cursor: pointer;
-	transition: border-color 0.2s ease, background 0.2s ease;
+	transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus-visible {
+	border-color: rgba(193, 138, 95, 0.9);
+	box-shadow: 0 0 0 2px rgba(193, 138, 95, 0.35), 0 0 12px rgba(193, 138, 95, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .menu-toggle span {
 	display: block;
-	width: 18px;
+	width: 16px;
 	height: 2px;
+	border-radius: 2px;
+	margin: 0 auto;
 	background: var(--ink);
-	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#id_navigationToggle_button {
+	display: none;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 4px;
+}
+
+#id_navigationToggle_button span {
+	display: none;
+}
+
+#id_navigationToggle_button::before {
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 14px;
+	width: 16px;
+	height: 2px;
+	border-radius: 2px;
+	background: var(--ink);
+	transform: translateX(-50%);
+	box-shadow: 0 6px 0 var(--ink), 0 12px 0 var(--ink);
 }
 
 .nav-overlay {
 	position: fixed;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.35);
+	-webkit-backdrop-filter: blur(3px);
 	backdrop-filter: blur(3px);
 	z-index: 10;
 }
@@ -155,34 +213,55 @@ app-contact-section {
 	background: var(--cocoa);
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1200px) {
 	.nav-overlay {
 		display: none;
 	}
+
+	#id_appComponent_primaryNavigation {
+		background-color: var(--cream);
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		padding: 0.4rem 0.85rem;
+		box-shadow: 0 8px 20px rgba(19, 12, 8, 0.08);
+	}
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1199px) {
 	.site-header {
-		position: relative;
-		padding: 1rem 0 1.5rem;
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		background: var(--sand);
+		padding: 0.9rem 1rem;
+		margin-bottom: 0.75rem;
+		border-radius: 16px;
+		border: 1px solid var(--line);
+	}
+
+	.brand {
+		flex: 1 1 auto;
+		min-width: 0;
+	}
+
+	.brand span {
+		white-space: nowrap;
 	}
 
 	.menu-toggle {
 		display: inline-flex;
 		margin-left: auto;
+		flex-shrink: 0;
 		z-index: 12;
 	}
 
-	.site-header.menu-open .menu-toggle span:nth-child(1) {
-		transform: translateY(4px) rotate(45deg);
-	}
-
-	.site-header.menu-open .menu-toggle span:nth-child(2) {
-		opacity: 0;
-	}
-
-	.site-header.menu-open .menu-toggle span:nth-child(3) {
-		transform: translateY(-4px) rotate(-45deg);
+	#id_navigationToggle_button {
+		display: inline-flex;
+		position: fixed;
+		top: max(30px, env(safe-area-inset-top));
+		right: max(30px, env(safe-area-inset-right));
+		margin: 0;
+		z-index: 30;
 	}
 
 	.nav-cluster {
@@ -191,15 +270,23 @@ app-contact-section {
 		right: 0;
 		bottom: 0;
 		width: min(320px, 80vw);
-		padding: 5rem 2rem 2rem;
-		background: var(--cream);
+		padding: 6.25rem 2rem 2rem;
+		overflow-y: auto;
+		background-color: var(--cream);
+		opacity: 1;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 1.5rem;
+		gap: 1rem;
 		box-shadow: -20px 0 40px rgba(0, 0, 0, 0.12);
 		transform: translateX(100%);
 		transition: transform 0.3s ease;
 		z-index: 11;
+	}
+
+	.nav-cluster,
+	.nav-cluster .primary-nav {
+		-webkit-backdrop-filter: none;
+		backdrop-filter: none;
 	}
 
 	.nav-cluster.open {
@@ -214,29 +301,107 @@ app-contact-section {
 
 	.primary-nav a {
 		font-size: 1rem;
+		width: 100%;
+		padding: 0.7rem 0.9rem;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background-color: #ffffff;
+		opacity: 1;
 	}
 
 	.book-button {
 		width: 100%;
-		text-align: center;
+		text-align: left;
+		padding: 0.7rem 0.9rem;
+		border: 1px solid var(--line);
+		border-radius: 12px;
+		background-color: #ffffff;
+		color: var(--ink);
+		font-size: 1rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+	}
+
+	.book-button:hover {
+		background-color: #ffffff;
+		color: var(--cocoa);
 	}
 }
 
 @media (max-width: 600px) {
+	.brand {
+		width: auto;
+		font-size: 1.55rem;
+	}
+
+	.brand img {
+		width: 52px;
+		height: 52px;
+	}
+
 	.brand span {
-		font-size: 1.1rem;
+		font-size: clamp(1.35rem, 5vw, 1.75rem);
 	}
 
 	.nav-cluster {
-		width: min(360px, 85vw);
-		padding: 4.5rem 1.75rem 2rem;
+		width: min(300px, 78vw);
+		padding: 5.25rem 1.25rem 1.25rem;
+	}
+}
+
+@media (max-width: 500px) {
+	.page-shell {
+		padding: 1rem;
+	}
+
+	.site-header {
+		padding: 0.75rem 0 1rem;
+	}
+
+	.nav-cluster {
+		width: 82vw;
+		padding: 5rem 0.9rem 1rem;
+	}
+
+	#id_appComponent_heroSection,
+	#id_appComponent_aboutSection,
+	#id_appComponent_pricingSection,
+	#id_appComponent_roomReservationSection,
+	#id_appComponent_gallerySection,
+	#id_appComponent_amenitiesSection,
+	#id_appComponent_faqSection,
+	#id_appComponent_contactSection {
+		padding: 0;
+	}
+}
+
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+	#id_navigationToggle_button {
+		top: max(16px, env(safe-area-inset-top));
+		right: max(16px, env(safe-area-inset-right));
+	}
+
+	.nav-cluster {
+		width: min(280px, 72vw);
+		padding: 4rem 0.85rem 0.85rem;
+		gap: 0.75rem;
+	}
+
+	.primary-nav {
+		gap: 0.75rem;
+	}
+
+	.primary-nav a,
+	.book-button {
+		font-size: 0.95rem;
+		padding: 0.55rem 0.75rem;
 	}
 }
 
 main {
 	display: flex;
 	flex-direction: column;
-	gap: 4rem;
+	gap: clamp(1rem, 2.5vw, 2rem);
 	padding-top: 2rem;
 }
 
@@ -245,6 +410,38 @@ main {
 	border-radius: var(--radius-lg);
 	padding: clamp(1.75rem, 3vw, 3.5rem);
 	box-shadow: 0 20px 60px rgba(19, 12, 8, 0.08);
+}
+
+.section-banner {
+	align-self: stretch;
+	width: clamp(120px, 22vw, 260px);
+	display: block;
+	text-align: center;
+	padding: 0.4rem 0.85rem;
+	margin-bottom: 1rem;
+	border-radius: 999px;
+	background: rgba(193, 138, 95, 0.14);
+	color: var(--cocoa);
+	font-size: 0.78rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+#id_appComponent_heroSection,
+#id_appComponent_aboutSection,
+#id_appComponent_pricingSection,
+#id_appComponent_roomReservationSection,
+#id_appComponent_gallerySection,
+#id_appComponent_amenitiesSection,
+#id_appComponent_faqSection,
+#id_appComponent_contactSection {
+	min-height: 100vh;
+	scroll-margin-top: 96px;
+	scroll-snap-align: start;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
 }
 
 .hero {
@@ -627,7 +824,7 @@ blockquote footer {
 	font-size: 0.9rem;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1199px) {
 	.hero,
 	.about,
 	.contact {
@@ -636,8 +833,8 @@ blockquote footer {
 
 	.primary-nav {
 		width: 100%;
-		justify-content: center;
-		order: 3;
+		justify-content: flex-start;
+		order: 1;
 	}
 
 	.book-button {
@@ -645,10 +842,10 @@ blockquote footer {
 	}
 }
 
-@media (max-width: 640px) {
+@media (max-width: 500px) {
 	.site-header {
-		flex-direction: column;
-		align-items: flex-start;
+		flex-direction: row;
+		align-items: center;
 	}
 
 	.hero-inset {

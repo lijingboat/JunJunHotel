@@ -13,8 +13,8 @@ interface ContactInfo {
   template: `
     <div id="id_contactSection_contactCard" class="contact-card">
       <p id="id_contactSection_contactEyebrow" class="eyebrow">{{ brand }}</p>
-      <h3 id="id_contactSection_contactTitle">Plan your stay</h3>
-      <p id="id_contactSection_contactDescription">Ready for your next city escape? Reach out and our concierge will tailor every detail.</p>
+      <h3 id="id_contactSection_contactTitle">Contact & Location</h3>
+      <p id="id_contactSection_contactDescription">Located at 374 College Street in Downtown Toronto, with quick access to transit, shops, and city attractions.</p>
       <div id="id_contactSection_contactList" class="contact-list">
         <a id="id_contactSection_contactPhone" href="" (click)="linkClick.emit($event)">{{ contact.phone }}</a>
         <a id="id_contactSection_contactEmail" href="" (click)="linkClick.emit($event)">{{ contact.email }}</a>
@@ -27,7 +27,7 @@ interface ContactInfo {
       </div>
     </div>
     <figure id="id_contactSection_mapCard" class="map-card">
-      <img id="id_contactSection_mapImage" [src]="contact.mapImage" alt="Rooftop evening view" [attr.title]="'Rooftop evening view'" />
+      <img id="id_contactSection_mapImage" [src]="contact.mapImage" alt="Jun Jun Hotel location map" [attr.title]="'Jun Jun Hotel location map'" />
       <div id="id_contactSection_mapOverlay" class="map-overlay">
         <h4 id="id_contactSection_mapOverlayTitle">Visit Us</h4>
         <p id="id_contactSection_mapOverlayAddress">{{ contact.address }}</p>

@@ -13,9 +13,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       [attr.aria-controls]="controlsId"
       (click)="toggle.emit()"
     >
-      <span id="id_navigationToggle_line_1"></span>
-      <span id="id_navigationToggle_line_2"></span>
-      <span id="id_navigationToggle_line_3"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

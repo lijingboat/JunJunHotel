@@ -7,9 +7,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     <div id="id_roomReservationSection_layout" class="reservation-layout">
       <div id="id_roomReservationSection_content" class="reservation-content">
         <p id="id_roomReservationSection_eyebrow" class="eyebrow">Room Reservation</p>
-        <h3 id="id_roomReservationSection_title">Reserve your preferred stay dates</h3>
+        <h3 id="id_roomReservationSection_title">Reserve your room with no online fee</h3>
         <p id="id_roomReservationSection_description">
-          Share your stay details and our team will confirm the best room option, pricing, and availability.
+          Reservations can be made without a credit card. Cash deposit reservations are accepted in person.
         </p>
         <ul id="id_roomReservationSection_highlightList" class="reservation-highlights">
           @for (highlight of highlights; track highlight; let highlightIndex = $index) {
@@ -31,7 +31,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         <label id="id_roomReservationSection_emailLabel" for="id_roomReservationSection_emailInput">Email</label>
         <input id="id_roomReservationSection_emailInput" type="email" placeholder="you@example.com" required />
 
-        <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">Request Reservation</button>
+        <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">Submit Reservation Request</button>
       </form>
     </div>
   `,
@@ -96,7 +96,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomReservationSectionComponent {
-  readonly highlights = ['Flexible check-in options', 'Transparent nightly rates', 'Concierge confirmation within 24 hours'];
+  readonly highlights = [
+    '4-hour temporary rooms currently from CAD $50 (cash price after tax)',
+    'Check-in from 1:00 PM and check-out by 12:00 PM (noon)',
+    'Optional parking available at CAD $10 per spot per night',
+  ];
 
   submitReservation(event: Event): void {
     event.preventDefault();

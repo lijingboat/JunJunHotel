@@ -30,11 +30,11 @@ export class AppComponent {
   ];
 
   readonly heroCopy = {
-    eyebrow: 'Stylish Urban Apartment Rentals',
-    title: 'Live Like a Local',
+    eyebrow: 'Downtown Toronto Boutique Stay',
+    title: 'Affordable Comfort in the City Core',
     description:
-      'Jun Jun Hotel offers thoughtfully curated city apartments that balance modern comfort with artisanal character. Each stay is infused with soft textures, custom art, and the energy of the neighborhood.',
-    primaryCta: 'Discover Spaces',
+      'Welcome to Jun Jun Hotel. Enjoy queen-bed rooms with private bathrooms, cable LCD TV, and free wireless internet—steps from Toronto culture, restaurants, and transit.',
+    primaryCta: 'View Room Rates',
     secondaryCta: 'About Us',
     image: 'assets/heavenly-connected/hero-living-room.jpg',
     insetImage: 'assets/heavenly-connected/hero-inset-design-vignette.jpg',
@@ -48,34 +48,34 @@ export class AppComponent {
 
   readonly about = {
     eyebrow: 'Our Story',
-    title: 'Design-forward stays in the heart of the city',
+    title: 'Boutique hospitality in Downtown Toronto',
     body:
-      'Situated steps away from galleries, hidden cafes, and leafy parks, Jun Jun Hotel blends modern amenities with soulful styling. Each unit is finished with locally sourced textiles, sculptural lighting, and immersive art moments that invite you to slow down.',
+      'Jun Jun Hotel is located in the heart of Downtown Toronto, close to major commercial, cultural, and tourist areas. We serve business travelers, leisure guests, sports visitors, and unexpected overnight stays.',
     secondary:
-      'From weekend escapes to extended relocations, our spaces feel airy, uncluttered, and deeply personal.',
+      'Guests enjoy affordable rates, group-friendly options, and practical in-room amenities designed for comfort and convenience.',
     featureImage: 'assets/heavenly-connected/about-apartment-detail.jpg',
   };
 
   readonly apartments = [
     {
-      name: 'The Artisan Hideaway',
-      area: '160 sq. m',
+      name: 'Standard Room',
+      area: '1 Queen Bed',
       description:
-        'A cozy, handcrafted retreat layered with textured walls, vintage ceramics, and warm lighting for travelers who adore a creative sanctuary.',
+        'Private bathroom with shower, cable LCD TV, free Wi-Fi, mini fridge, extra sink, marble table, chairs, and one window.',
       image: 'assets/heavenly-connected/apartment-artisan-hideaway.jpeg',
     },
     {
-      name: 'The Urban Oasis',
-      area: '120 sq. m',
+      name: 'Sofa Room',
+      area: '1 Queen Bed + Sofa',
       description:
-        'Lush greenery, minimalist silhouettes, and soothing neutral tones create a restorative escape from the rhythm of downtown.',
+        'Rear-facing large window plus all standard room amenities, with additional sofa seating for a more relaxed stay.',
       image: 'assets/heavenly-connected/apartment-urban-oasis.jpg',
     },
     {
-      name: 'The Midtown Retreat',
-      area: '120 sq. m',
+      name: 'Double Beds Room',
+      area: '2 Queen Beds',
       description:
-        'Sleek modern lines softened with earthy hues and curated local art—perfect for city explorers seeking comfort with personality.',
+        'Best for small groups. Includes private bathroom, cable TV, free Wi-Fi, mini fridge, and rear-facing large window.',
       image: 'assets/heavenly-connected/apartment-midtown-retreat.jpg',
     },
   ];
@@ -124,30 +124,30 @@ export class AppComponent {
 
   readonly faqs = [
     {
-      title: 'Booking Process',
+      title: 'Can I reserve without a credit card?',
       body:
-        'Browse the collection, select dates, and submit the reservation form. We share access instructions and concierge contacts once confirmed.',
+        'Yes. You can come in person, pay a cash deposit, and reserve a room without providing a credit card number.',
     },
     {
-      title: 'Amenities Included',
+      title: 'What are check-in and check-out times?',
       body:
-        'High-speed Wi-Fi, fully stocked kitchens, premium linens, climate control, and curated neighborhood guides are standard.',
+        'One-night stays are from 1:00 PM to 12:00 PM (noon) the next day. Earliest check-in is 1:00 PM and latest check-out is noon.',
     },
     {
-      title: 'Cancellation Policy',
+      title: 'Are pets and smoking allowed?',
       body:
-        'Plans change—we offer flexible cancellations up to 5 days before arrival. Review your confirmation for complete details.',
+        'Pets are not allowed. Smoking must be outside in accordance with Canadian law.',
     },
   ];
 
   readonly contact = {
-    phone: '123-456-7890',
-    email: 'info@mysite.com',
-    address: '500 Terry Francine St.\nSan Francisco, CA 94158',
+    phone: 'Call Front Desk for Reservations',
+    email: 'Email via Contact Page',
+    address: '374 College Street\nToronto, Ontario',
     mapImage: 'assets/heavenly-connected/contact-map-rooftop-view.jpg',
   };
 
-  readonly resourceLinks = ['Privacy Policy', 'Accessibility Statement'];
+  readonly resourceLinks = ['About Us', 'Service', 'Photo', 'FAQ'];
   readonly currentYear = new Date().getFullYear();
 
   toggleMenu(): void {

@@ -62,6 +62,7 @@
     </section>
 
     <section id="id_appComponent_aboutSection" class="panel about">
+      <div id="id_appComponent_aboutBanner" class="section-banner">About</div>
       <div id="id_appComponent_aboutCopy" class="about-copy">
         <p id="id_appComponent_aboutEyebrow" class="eyebrow">{{ about.eyebrow }}</p>
         <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
@@ -75,11 +76,12 @@
     </section>
 
     <section id="id_appComponent_pricingSection" class="panel apartments">
+      <div id="id_appComponent_pricingBanner" class="section-banner">Pricing</div>
       <header id="id_appComponent_apartmentsHeader" class="panel-header">
-        <p id="id_appComponent_apartmentsEyebrow" class="eyebrow">Pricing</p>
+        <p id="id_appComponent_apartmentsEyebrow" class="eyebrow">Service & Pricing</p>
         <div id="id_appComponent_apartmentsHeaderTextWrap">
-          <h3 id="id_appComponent_apartmentsTitle">Plans and rates</h3>
-          <p id="id_appComponent_apartmentsDescription">Choose the apartment tier that fits your stay length, amenities, and preferred comfort level.</p>
+          <h3 id="id_appComponent_apartmentsTitle">Room types and stay options</h3>
+          <p id="id_appComponent_apartmentsDescription">Day and night temporary rooms are available. Four-hour temporary stays currently start at CAD $50 (cash price after tax).</p>
         </div>
       </header>
       <div id="id_appComponent_apartmentsCardGrid" class="card-grid">
@@ -104,11 +106,12 @@
     </section>
 
     <section id="id_appComponent_gallerySection" class="panel gallery">
+      <div id="id_appComponent_galleryBanner" class="section-banner">Gallery</div>
       <div id="id_appComponent_galleryHeader" class="panel-header">
         <p id="id_appComponent_galleryEyebrow" class="eyebrow">Gallery</p>
         <div id="id_appComponent_galleryHeaderTextWrap">
-          <h3 id="id_appComponent_galleryTitle">Glance inside our spaces</h3>
-          <p id="id_appComponent_galleryDescription">Soft light, layered textiles, and sculptural silhouettes capture the mood of Jun Jun Hotel.</p>
+          <h3 id="id_appComponent_galleryTitle">Explore our rooms and amenities</h3>
+          <p id="id_appComponent_galleryDescription">Preview room layouts, furnishings, and in-room essentials before you book.</p>
         </div>
       </div>
       <div id="id_appComponent_galleryGrid" class="gallery-grid">
@@ -141,6 +144,7 @@
     </section>
 
     <section id="id_appComponent_faqSection" class="panel faq">
+      <div id="id_appComponent_faqBanner" class="section-banner">FAQ</div>
       <div id="id_appComponent_faqHeader" class="panel-header">
         <p id="id_appComponent_faqEyebrow" class="eyebrow">FAQ</p>
         <div id="id_appComponent_faqHeaderTextWrap">
@@ -159,6 +163,7 @@
     </section>
 
     <section id="id_appComponent_contactSection" class="panel contact">
+      <div id="id_appComponent_contactBanner" class="section-banner">Contact</div>
       <app-contact-section
         id="id_appComponent_contactSectionComponent"
         [brand]="brand"
