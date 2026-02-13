@@ -5,6 +5,7 @@
 }
 
 :host {
+	--font-nav: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
 	--ink: #1f1a17;
 	--sand: #f7f1ea;
 	--cream: #fff9f5;
@@ -17,6 +18,15 @@
 	--radius-md: 20px;
 	display: block;
 	color: var(--ink);
+	font-family: var(--font-nav);
+}
+
+app-navigation-brand,
+app-navigation-toggle,
+app-navigation-link,
+app-navigation-cta,
+app-contact-section {
+	display: contents;
 }
 
 .page-shell {
@@ -38,7 +48,6 @@
 	display: flex;
 	align-items: center;
 	gap: 0.65rem;
-	font-family: 'Playfair Display', 'Times New Roman', serif;
 	font-size: 1.35rem;
 	letter-spacing: 0.04em;
 }
@@ -54,23 +63,80 @@
 .primary-nav {
 	display: flex;
 	gap: 1.25rem;
-	margin-left: auto;
-	margin-right: 1rem;
+	font-family: var(--font-nav);
 	font-size: 0.95rem;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
 
 .primary-nav a {
-	padding-bottom: 0.25rem;
-	border-bottom: 1px solid transparent;
-	transition: border 0.2s ease, color 0.2s ease;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.1rem;
+	transition: color 0.2s ease;
+}
+
+.primary-nav a::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: -0.15rem;
+	width: 100%;
+	height: 2px;
+	border-radius: 99px;
+	background: linear-gradient(90deg, var(--clay), var(--cocoa));
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.25s ease;
 }
 
 .primary-nav a:hover,
 .primary-nav a:focus-visible {
-	border-color: var(--ink);
 	color: var(--cocoa);
+}
+
+.primary-nav a:hover::after,
+.primary-nav a:focus-visible::after {
+	transform: scaleX(1);
+}
+
+.nav-cluster {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-left: auto;
+}
+
+.menu-toggle {
+	display: none;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	border: 1px solid var(--line);
+	background: white;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 6px;
+	cursor: pointer;
+	transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.menu-toggle span {
+	display: block;
+	width: 18px;
+	height: 2px;
+	background: var(--ink);
+	transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(3px);
+	z-index: 10;
 }
 
 .book-button {
@@ -87,6 +153,84 @@
 
 .book-button:hover {
 	background: var(--cocoa);
+}
+
+@media (min-width: 1025px) {
+	.nav-overlay {
+		display: none;
+	}
+}
+
+@media (max-width: 1024px) {
+	.site-header {
+		position: relative;
+		padding: 1rem 0 1.5rem;
+	}
+
+	.menu-toggle {
+		display: inline-flex;
+		margin-left: auto;
+		z-index: 12;
+	}
+
+	.site-header.menu-open .menu-toggle span:nth-child(1) {
+		transform: translateY(4px) rotate(45deg);
+	}
+
+	.site-header.menu-open .menu-toggle span:nth-child(2) {
+		opacity: 0;
+	}
+
+	.site-header.menu-open .menu-toggle span:nth-child(3) {
+		transform: translateY(-4px) rotate(-45deg);
+	}
+
+	.nav-cluster {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		width: min(320px, 80vw);
+		padding: 5rem 2rem 2rem;
+		background: var(--cream);
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5rem;
+		box-shadow: -20px 0 40px rgba(0, 0, 0, 0.12);
+		transform: translateX(100%);
+		transition: transform 0.3s ease;
+		z-index: 11;
+	}
+
+	.nav-cluster.open {
+		transform: translateX(0);
+	}
+
+	.primary-nav {
+		flex-direction: column;
+		gap: 1rem;
+		width: 100%;
+	}
+
+	.primary-nav a {
+		font-size: 1rem;
+	}
+
+	.book-button {
+		width: 100%;
+		text-align: center;
+	}
+}
+
+@media (max-width: 600px) {
+	.brand span {
+		font-size: 1.1rem;
+	}
+
+	.nav-cluster {
+		width: min(360px, 85vw);
+		padding: 4.5rem 1.75rem 2rem;
+	}
 }
 
 main {
@@ -111,7 +255,6 @@ main {
 }
 
 .hero-text h1 {
-	font-family: 'Playfair Display', 'Times New Roman', serif;
 	font-size: clamp(2.5rem, 4vw, 3.75rem);
 	margin: 0;
 }
@@ -160,13 +303,13 @@ main {
 	margin: 2.5rem 0 0;
 }
 
-.stats dt {
+.stats .stat-value {
 	font-size: 2rem;
 	font-weight: 600;
 	color: var(--cocoa);
 }
 
-.stats dd {
+.stats .stat-label {
 	margin: 0;
 	color: var(--dusk);
 	font-size: 0.9rem;
@@ -472,6 +615,7 @@ blockquote footer {
 	color: white;
 	padding: 1rem 1.25rem;
 	border-radius: var(--radius-md);
+	-webkit-backdrop-filter: blur(4px);
 	backdrop-filter: blur(4px);
 	white-space: pre-line;
 }

@@ -481,7 +481,7 @@ Created by Bellevue Theme
     }
     .thmv-offcanvas-menu-drop .form-select {
         background-color:#1c1715;
-        background-image: url('../images/en-down-arrow.png');
+        background-image: url('../images/02.png');
         border: none;
         color:#FFFFFF;
         padding: 0;
@@ -1385,7 +1385,7 @@ Created by Bellevue Theme
         height: 1.5em;
         padding: .25em .25em;
         color: #000;
-        background: transparent url("../images/model-close-icon.png");
+        background: transparent url("../images/03.png");
         border: 0;
         border-radius: .25rem;
         opacity: 1;
