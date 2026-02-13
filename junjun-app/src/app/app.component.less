@@ -33,6 +33,9 @@ app-contact-section {
 	min-height: 100vh;
 	width: 100%;
 	min-width: 0;
+	position: relative;
+	top: 0;
+	left: 0;
 	background: radial-gradient(circle at top right, #fffdf8, var(--sand));
 	padding: clamp(1.5rem, 3vw, 3.5rem);
 }
@@ -46,8 +49,9 @@ app-contact-section {
 	flex-wrap: wrap;
 	position: sticky;
 	top: 0;
-	z-index: 20;
-	background-color: var(--sand);
+	z-index: 1000;
+	background-color: #f7f1ea;
+	background-image: none;
 	opacity: 1;
 	-webkit-backdrop-filter: none;
 	backdrop-filter: none;
@@ -77,6 +81,8 @@ app-contact-section {
 #id_navigationBrand_brandText {
 	margin-left: 0;
 	padding-left: 0;
+	font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+	font-weight: 800;
 }
 
 .primary-nav {
@@ -172,20 +178,17 @@ app-contact-section {
 }
 
 #id_navigationToggle_button span {
-	display: none;
+	display: block;
+	width: 18px;
+	height: 2px;
+	margin: 0;
+	border-radius: 2px;
+	background-color: var(--ink);
+	opacity: 1;
 }
 
 #id_navigationToggle_button::before {
-	content: '';
-	position: absolute;
-	left: 50%;
-	top: 14px;
-	width: 16px;
-	height: 2px;
-	border-radius: 2px;
-	background: var(--ink);
-	transform: translateX(-50%);
-	box-shadow: 0 6px 0 var(--ink), 0 12px 0 var(--ink);
+	content: none;
 }
 
 .nav-overlay {
@@ -206,6 +209,7 @@ app-contact-section {
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	font-size: 0.85rem;
+	box-shadow: 0 8px 20px rgba(31, 26, 23, 0.2);
 	transition: background 0.2s ease;
 }
 
@@ -213,12 +217,21 @@ app-contact-section {
 	background: var(--cocoa);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
 	.nav-overlay {
 		display: none;
 	}
 
+	.book-button {
+		font-weight: 400;
+		font-size: 0.72rem;
+	}
+
 	#id_appComponent_primaryNavigation {
+		position: relative;
+		z-index: 100;
+		opacity: 1;
+		font-size: 0.72rem;
 		background-color: var(--cream);
 		border: 1px solid var(--line);
 		border-radius: 999px;
@@ -227,7 +240,7 @@ app-contact-section {
 	}
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 767px) {
 	.site-header {
 		position: sticky;
 		top: 0;
@@ -258,7 +271,7 @@ app-contact-section {
 	#id_navigationToggle_button {
 		display: inline-flex;
 		position: fixed;
-		top: max(30px, env(safe-area-inset-top));
+		top: max(15px, env(safe-area-inset-top));
 		right: max(30px, env(safe-area-inset-right));
 		margin: 0;
 		z-index: 30;
@@ -320,10 +333,18 @@ app-contact-section {
 		font-size: 1rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
+		transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 	}
 
 	.book-button:hover {
-		background-color: #ffffff;
+		background-color: var(--sand);
+		border-color: rgba(193, 138, 95, 0.55);
+		color: var(--cocoa);
+	}
+
+	.book-button:focus-visible {
+		background-color: var(--sand);
+		border-color: rgba(193, 138, 95, 0.75);
 		color: var(--cocoa);
 	}
 }
@@ -375,9 +396,9 @@ app-contact-section {
 	}
 }
 
-@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+@media (max-width: 767px) and (max-height: 500px) and (orientation: landscape) {
 	#id_navigationToggle_button {
-		top: max(16px, env(safe-area-inset-top));
+		top: max(15px, env(safe-area-inset-top));
 		right: max(16px, env(safe-area-inset-right));
 	}
 
@@ -401,6 +422,9 @@ app-contact-section {
 main {
 	display: flex;
 	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	text-align: left;
 	gap: clamp(1rem, 2.5vw, 2rem);
 	padding-top: 2rem;
 }
@@ -409,7 +433,7 @@ main {
 	background: var(--cream);
 	border-radius: var(--radius-lg);
 	padding: clamp(1.75rem, 3vw, 3.5rem);
-	box-shadow: 0 20px 60px rgba(19, 12, 8, 0.08);
+	box-shadow: var(--card-shadow);
 }
 
 .section-banner {
@@ -442,6 +466,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
+	box-shadow: var(--card-shadow);
 }
 
 .hero {
@@ -824,7 +849,7 @@ blockquote footer {
 	font-size: 0.9rem;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 767px) {
 	.hero,
 	.about,
 	.contact {
