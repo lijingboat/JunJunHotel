@@ -1,6 +1,7 @@
 <div class="page-shell">
+  <!-- Site navigation -->
   <header class="site-header" [class.menu-open]="isMenuOpen">
-    <app-navigation-brand [brand]="brand" [brandIcon]="brandIcon">
+    <app-navigation-brand [brand]="brand" [brandIcon]="brandIcon" (navigateHome)="scrollToTop()">
       <app-navigation-toggle
         [isOpen]="isMenuOpen"
         controlsId="id_appComponent_primaryNavigation"
@@ -9,8 +10,8 @@
     </app-navigation-brand>
     <div class="nav-cluster" [class.open]="isMenuOpen">
       <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
-        @for (link of navLinks; track link.label) {
-          <app-navigation-link [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
+        @for (link of navLinks; track link.label; let linkIndex = $index) {
+          <app-navigation-link [id]="'nav-link-' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
         }
       </nav>
       <app-navigation-cta label="Book Now" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
@@ -22,6 +23,7 @@
   }
 
   <main>
+    <!-- Hero -->
     <section id="id_appComponent_heroSection" class="panel hero page-section" hidden>
       <div class="hero-text">
         <p class="eyebrow">{{ heroCopy.eyebrow }}</p>
@@ -52,8 +54,9 @@
       </div>
     </section>
 
+    <!-- About -->
     <section id="id_appComponent_aboutSection" class="panel about page-section">
-      <div class="section-banner">About</div>
+      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_aboutSection', $event)">About</button>
       <div class="about-copy">
         <p class="eyebrow">{{ about.eyebrow }}</p>
         <h3>{{ about.title }}</h3>
@@ -66,8 +69,9 @@
       </figure>
     </section>
 
+    <!-- Pricing -->
     <section id="id_appComponent_pricingSection" class="panel apartments page-section">
-      <div class="section-banner">Pricing</div>
+      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_pricingSection', $event)">Pricing</button>
       <header class="panel-header">
         <p class="eyebrow">Service & Pricing</p>
         <div>
@@ -92,12 +96,14 @@
       </div>
     </section>
 
+    <!-- Reservation -->
     <section id="id_appComponent_roomReservationSection" class="panel room-reservation page-section">
       <app-room-reservation-section></app-room-reservation-section>
     </section>
 
+    <!-- Gallery -->
     <section id="id_appComponent_gallerySection" class="panel gallery page-section">
-      <div class="section-banner">Gallery</div>
+      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_gallerySection', $event)">Gallery</button>
       <div class="panel-header">
         <p class="eyebrow">Gallery</p>
         <div>
@@ -114,6 +120,7 @@
       </div>
     </section>
 
+    <!-- Amenities -->
     <section id="id_appComponent_amenitiesSection" class="panel amenities page-section" hidden>
       <div class="panel-header">
         <p class="eyebrow">Amenities</p>
@@ -134,8 +141,9 @@
       </div>
     </section>
 
+    <!-- FAQ -->
     <section id="id_appComponent_faqSection" class="panel faq page-section">
-      <div class="section-banner">FAQ</div>
+      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_faqSection', $event)">FAQ</button>
       <div class="panel-header">
         <p class="eyebrow">FAQ</p>
         <div>
@@ -153,8 +161,9 @@
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="id_appComponent_contactSection" class="panel contact page-section">
-      <div class="section-banner">Contact</div>
+      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_contactSection', $event)">Contact</button>
       <app-contact-section [brand]="brand" [contact]="contact" [resourceLinks]="resourceLinks" (linkClick)="stopNavigation($event)"></app-contact-section>
     </section>
 

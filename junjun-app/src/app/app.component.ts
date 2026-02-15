@@ -5,6 +5,18 @@ import { NavigationCtaComponent } from './components/navigation/navigation-cta.c
 import { NavigationLinkComponent } from './components/navigation/navigation-link.component';
 import { NavigationToggleComponent } from './components/navigation/navigation-toggle.component';
 import { RoomReservationSectionComponent } from './components/room-reservation/room-reservation-section.component';
+import {
+  ABOUT,
+  AMENITIES,
+  APARTMENTS,
+  CONTACT,
+  FAQS,
+  GALLERY_IMAGES,
+  HERO_COPY,
+  HERO_STATS,
+  NAV_LINKS,
+  RESOURCE_LINKS,
+} from './app.content';
 
 @Component({
   selector: 'app-root',
@@ -21,133 +33,16 @@ export class AppComponent {
   readonly brandIcon = 'assets/heavenly-connected/brand-mark-icon.png';
   readonly rooftopImage = 'assets/heavenly-connected/rooftop-evening-view.jpg';
 
-  readonly navLinks = [
-    { label: 'About', target: '#id_appComponent_aboutSection' },
-    { label: 'Pricing', target: '#id_appComponent_pricingSection' },
-    { label: 'Gallery', target: '#id_appComponent_gallerySection' },
-    { label: 'FAQ', target: '#id_appComponent_faqSection' },
-    { label: 'Contact', target: '#id_appComponent_contactSection' },
-  ];
-
-  readonly heroCopy = {
-    eyebrow: 'Downtown Toronto Boutique Stay',
-    title: 'Affordable Comfort in the City Core',
-    description:
-      'Welcome to Jun Jun Hotel. Enjoy queen-bed rooms with private bathrooms, cable LCD TV, and free wireless internet—steps from Toronto culture, restaurants, and transit.',
-    primaryCta: 'View Room Rates',
-    secondaryCta: 'About Us',
-    image: 'assets/heavenly-connected/hero-living-room.jpg',
-    insetImage: 'assets/heavenly-connected/hero-inset-design-vignette.jpg',
-  };
-
-  readonly heroStats = [
-    { value: '12', label: 'Curated Apartments' },
-    { value: '4.9/5', label: 'Guest Rating' },
-    { value: '3', label: 'Cities Covered' },
-  ];
-
-  readonly about = {
-    eyebrow: 'Our Story',
-    title: 'Boutique hospitality in Downtown Toronto',
-    body:
-      'Jun Jun Hotel is located in the heart of Downtown Toronto, close to major commercial, cultural, and tourist areas. We serve business travelers, leisure guests, sports visitors, and unexpected overnight stays.',
-    secondary:
-      'Guests enjoy affordable rates, group-friendly options, and practical in-room amenities designed for comfort and convenience.',
-    featureImage: 'assets/heavenly-connected/about-apartment-detail.jpg',
-  };
-
-  readonly apartments = [
-    {
-      name: 'Standard Room',
-      area: '1 Queen Bed',
-      description:
-        'Private bathroom with shower, cable LCD TV, free Wi-Fi, mini fridge, extra sink, marble table, chairs, and one window.',
-      image: 'assets/heavenly-connected/apartment-artisan-hideaway.jpeg',
-    },
-    {
-      name: 'Sofa Room',
-      area: '1 Queen Bed + Sofa',
-      description:
-        'Rear-facing large window plus all standard room amenities, with additional sofa seating for a more relaxed stay.',
-      image: 'assets/heavenly-connected/apartment-urban-oasis.jpg',
-    },
-    {
-      name: 'Double Beds Room',
-      area: '2 Queen Beds',
-      description:
-        'Best for small groups. Includes private bathroom, cable TV, free Wi-Fi, mini fridge, and rear-facing large window.',
-      image: 'assets/heavenly-connected/apartment-midtown-retreat.jpg',
-    },
-  ];
-
-  readonly galleryImages = [
-    {
-      src: 'assets/heavenly-connected/gallery-sunlit-lounge.jpg',
-      alt: 'Sun-drenched lounge vignette',
-    },
-    {
-      src: 'assets/heavenly-connected/gallery-sculptural-lighting.jpg',
-      alt: 'Living room with sculptural lighting',
-    },
-    { src: 'assets/heavenly-connected/gallery-reading-nook.jpg', alt: 'Contemporary reading nook' },
-    { src: 'assets/heavenly-connected/gallery-gourmet-kitchen.jpg', alt: 'Gourmet kitchen with marble surfaces' },
-    { src: 'assets/heavenly-connected/gallery-cozy-lounge.jpg', alt: 'Cozy lounge corner' },
-    { src: 'assets/heavenly-connected/gallery-suite-hallway.jpg', alt: 'Suite hallway with art' },
-  ];
-
-  readonly amenities = [
-    {
-      title: 'Spa',
-      subtitle: 'Relaxation Retreat',
-      description: 'Massages, facials, and aromatherapy rituals to reset mind and body.',
-      icon: 'assets/heavenly-connected/brand-mark-icon.png',
-    },
-    {
-      title: 'Gym',
-      subtitle: 'Fitness Haven',
-      description: 'A fully equipped studio with curated playlists and personal trainers on-call.',
-      icon: 'assets/heavenly-connected/amenity-gym-icon.png',
-    },
-    {
-      title: 'Pool',
-      subtitle: 'Rooftop Pool',
-      description: 'Take a dip above the skyline, complete with cabanas and craft refreshments.',
-      icon: 'assets/heavenly-connected/amenity-pool-icon.png',
-    },
-    {
-      title: 'Rooftop',
-      subtitle: 'Panoramic Views',
-      description: 'Sunrise yoga, stargazing dinners, and sweeping perspectives of the city.',
-      icon: 'assets/heavenly-connected/amenity-rooftop.jpg',
-    },
-  ];
-
-  readonly faqs = [
-    {
-      title: 'Can I reserve without a credit card?',
-      body:
-        'Yes. You can come in person, pay a cash deposit, and reserve a room without providing a credit card number.',
-    },
-    {
-      title: 'What are check-in and check-out times?',
-      body:
-        'One-night stays are from 1:00 PM to 12:00 PM (noon) the next day. Earliest check-in is 1:00 PM and latest check-out is noon.',
-    },
-    {
-      title: 'Are pets and smoking allowed?',
-      body:
-        'Pets are not allowed. Smoking must be outside in accordance with Canadian law.',
-    },
-  ];
-
-  readonly contact = {
-    phone: 'Call Front Desk for Reservations',
-    email: 'Email via Contact Page',
-    address: '374 College Street\nToronto, Ontario',
-    mapImage: 'assets/heavenly-connected/contact-map-rooftop-view.jpg',
-  };
-
-  readonly resourceLinks = ['About Us', 'Service', 'Photo', 'FAQ'];
+  readonly navLinks = NAV_LINKS;
+  readonly heroCopy = HERO_COPY;
+  readonly heroStats = HERO_STATS;
+  readonly about = ABOUT;
+  readonly apartments = APARTMENTS;
+  readonly galleryImages = GALLERY_IMAGES;
+  readonly amenities = AMENITIES;
+  readonly faqs = FAQS;
+  readonly contact = CONTACT;
+  readonly resourceLinks = [...RESOURCE_LINKS];
   readonly currentYear = new Date().getFullYear();
 
   toggleMenu(): void {
@@ -156,6 +51,17 @@ export class AppComponent {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+  scrollToTop(event?: Event): void {
+    event?.preventDefault();
+    this.closeMenu();
+
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   scrollTo(target: string, event: Event): void {

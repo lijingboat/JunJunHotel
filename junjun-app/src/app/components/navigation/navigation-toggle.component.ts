@@ -10,8 +10,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       aria-label="Toggle navigation"
       [attr.aria-expanded]="isOpen"
       [attr.aria-controls]="controlsId"
-      (click)="onClick($event)"
-      (dblclick)="onDoubleClick($event)"
+      (click)="toggle.emit()"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -24,17 +23,4 @@ export class NavigationToggleComponent {
   @Input({ required: true }) isOpen = false;
   @Input({ required: true }) controlsId = '';
   @Output() toggle = new EventEmitter<void>();
-
-  onClick(event: MouseEvent): void {
-    if (event.detail > 1) {
-      return;
-    }
-
-    this.toggle.emit();
-  }
-
-  onDoubleClick(event: MouseEvent): void {
-    event.preventDefault();
-    this.toggle.emit();
-  }
 }
