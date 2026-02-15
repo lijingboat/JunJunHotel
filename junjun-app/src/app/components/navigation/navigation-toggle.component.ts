@@ -5,13 +5,13 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   standalone: true,
   template: `
     <button
-      id="id_navigationToggle_button"
       class="menu-toggle"
       type="button"
       aria-label="Toggle navigation"
       [attr.aria-expanded]="isOpen"
       [attr.aria-controls]="controlsId"
-      (click)="toggle.emit()"
+      (click)="onClick($event)"
+      (dblclick)="onDoubleClick($event)"
     >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -24,4 +24,17 @@ export class NavigationToggleComponent {
   @Input({ required: true }) isOpen = false;
   @Input({ required: true }) controlsId = '';
   @Output() toggle = new EventEmitter<void>();
+
+  onClick(event: MouseEvent): void {
+    if (event.detail > 1) {
+      return;
+    }
+
+    this.toggle.emit();
+  }
+
+  onDoubleClick(event: MouseEvent): void {
+    event.preventDefault();
+    this.toggle.emit();
+  }
 }
