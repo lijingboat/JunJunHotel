@@ -151,40 +151,18 @@
 @breakpoint-tablet: @breakpoint-m;
 @breakpoint-lg: @breakpoint-l;
 
-// ===== RESPONSIVE DESIGN MIXINS =====
-// Convenient mixins for common responsive patterns
-
-// Mobile-first: Show element at specific breakpoint and above
-.respond-s() {
-  @media (min-width: @breakpoint-s) {
-    &
-  }
-}
-
-.respond-m() {
-  @media (min-width: @breakpoint-m) {
-    &
-  }
-}
-
-.respond-l() {
-  @media (min-width: @breakpoint-l) {
-    &
-  }
-}
-
-// Desktop-first: Hide/modify element below specific breakpoint
-.hide-below-m() {
-  @media (max-width: (@breakpoint-m - 1)) {
-    &
-  }
-}
-
-.hide-below-l() {
-  @media (max-width: (@breakpoint-l - 1)) {
-    &
-  }
-}
+// ===== RESPONSIVE DESIGN HELPERS =====
+// Use these breakpoint variables in @media queries:
+//
+// Mobile-first examples:
+//   @media (min-width: @breakpoint-s) { /* Small screens and up */ }
+//   @media (min-width: @breakpoint-m) { /* Medium screens and up */ }
+//   @media (min-width: @breakpoint-l) { /* Large screens and up */ }
+//
+// Desktop-first examples:
+//   @media (max-width: (@breakpoint-l - 1)) { /* Below large */ }
+//   @media (max-width: (@breakpoint-m - 1)) { /* Below medium */ }
+//   @media (max-width: (@breakpoint-s - 1)) { /* Below small (XS only) */ }
 
 // ===== INSET POSITIONING =====
 @inset-offset: 1rem;
