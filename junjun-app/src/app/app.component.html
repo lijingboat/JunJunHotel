@@ -1,95 +1,96 @@
-<div class="page-shell">
+<div id="id_appComponent_pageShell" class="page-shell">
   <!-- Site navigation -->
-  <header class="site-header" [class.menu-open]="isMenuOpen">
-    <app-navigation-brand [brand]="brand" [brandIcon]="brandIcon" (navigateHome)="scrollToTop()">
+  <header id="id_appComponent_siteHeader" class="site-header" [class.menu-open]="isMenuOpen">
+    <app-navigation-brand id="id_appComponent_navigationBrand" [brand]="brand" [brandIcon]="brandIcon" (navigateHome)="scrollToTop()">
       <app-navigation-toggle
+        id="id_appComponent_navigationToggle"
         [isOpen]="isMenuOpen"
         controlsId="id_appComponent_primaryNavigation"
         (toggle)="toggleMenu()"
       ></app-navigation-toggle>
     </app-navigation-brand>
-    <div class="nav-cluster" [class.open]="isMenuOpen">
+    <div id="id_appComponent_navCluster" class="nav-cluster" [class.open]="isMenuOpen">
       <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
         @for (link of navLinks; track link.label; let linkIndex = $index) {
-          <app-navigation-link [id]="'nav-link-' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
+          <app-navigation-link [id]="'id_appComponent_navLink_' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
         }
       </nav>
-      <app-navigation-cta label="Book Now" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+      <app-navigation-cta id="id_appComponent_navigationCta" label="Book Now" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
     </div>
   </header>
 
   @if (isMenuOpen) {
-    <div class="nav-overlay" (click)="closeMenu()"></div>
+	  <div id="id_appComponent_navOverlay" class="nav-overlay" (click)="closeMenu()"></div>
   }
 
-  <main>
+  <main id="id_appComponent_main">
     <!-- Hero -->
     <section id="id_appComponent_heroSection" class="panel hero page-section" hidden>
-      <div class="hero-text">
-        <p class="eyebrow">{{ heroCopy.eyebrow }}</p>
-        <h1>{{ brand }}</h1>
-        <h2>{{ heroCopy.title }}</h2>
-        <p>{{ heroCopy.description }}</p>
-        <div class="hero-cta">
-          <a href="" class="btn primary" (click)="scrollTo('#id_appComponent_pricingSection', $event)">{{ heroCopy.primaryCta }}</a>
-          <a href="" class="btn ghost" (click)="scrollTo('#id_appComponent_aboutSection', $event)">{{ heroCopy.secondaryCta }}</a>
+      <div id="id_appComponent_heroText" class="hero-text">
+        <p id="id_appComponent_heroEyebrow" class="eyebrow">{{ heroCopy.eyebrow }}</p>
+        <h1 id="id_appComponent_heroBrandTitle">{{ brand }}</h1>
+        <h2 id="id_appComponent_heroTitle">{{ heroCopy.title }}</h2>
+        <p id="id_appComponent_heroDescription">{{ heroCopy.description }}</p>
+        <div id="id_appComponent_heroCta" class="hero-cta">
+          <a id="id_appComponent_heroPrimaryCta" href="" class="btn primary" (click)="scrollTo('#id_appComponent_pricingSection', $event)">{{ heroCopy.primaryCta }}</a>
+          <a id="id_appComponent_heroSecondaryCta" href="" class="btn ghost" (click)="scrollTo('#id_appComponent_aboutSection', $event)">{{ heroCopy.secondaryCta }}</a>
         </div>
-        <div class="stats" role="list">
-          @for (stat of heroStats; track stat.label) {
-            <div class="stat" role="listitem">
-              <p class="stat-value">{{ stat.value }}</p>
-              <p class="stat-label">{{ stat.label }}</p>
+        <div id="id_appComponent_heroStats" class="stats" role="list">
+          @for (stat of heroStats; track stat.label; let statIndex = $index) {
+            <div [attr.id]="'id_appComponent_heroStat_' + statIndex" class="stat" role="listitem">
+              <p [attr.id]="'id_appComponent_heroStatValue_' + statIndex" class="stat-value">{{ stat.value }}</p>
+              <p [attr.id]="'id_appComponent_heroStatLabel_' + statIndex" class="stat-label">{{ stat.label }}</p>
             </div>
           }
         </div>
       </div>
-      <div class="hero-media">
-        <figure class="hero-frame">
-          <img [src]="heroCopy.image" alt="Boutique living room" [attr.title]="heroCopy.title" />
+      <div id="id_appComponent_heroMedia" class="hero-media">
+        <figure id="id_appComponent_heroFrame" class="hero-frame">
+          <img id="id_appComponent_heroImage" [src]="heroCopy.image" alt="Boutique living room" [attr.title]="heroCopy.title" />
         </figure>
-        <div class="hero-inset">
-          <img [src]="heroCopy.insetImage" alt="Design vignette" [attr.title]="'Design vignette'" />
-          <p>Thoughtfully curated interiors</p>
+        <div id="id_appComponent_heroInset" class="hero-inset">
+          <img id="id_appComponent_heroInsetImage" [src]="heroCopy.insetImage" alt="Design vignette" [attr.title]="'Design vignette'" />
+          <p id="id_appComponent_heroInsetText">Thoughtfully curated interiors</p>
         </div>
       </div>
     </section>
 
     <!-- About -->
     <section id="id_appComponent_aboutSection" class="panel about page-section">
-      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_aboutSection', $event)">About</button>
-      <div class="about-copy">
-        <p class="eyebrow">{{ about.eyebrow }}</p>
-        <h3>{{ about.title }}</h3>
-        <p>{{ about.body }}</p>
-        <p>{{ about.secondary }}</p>
-        <a href="" class="text-link" (click)="stopNavigation($event)">Meet the Hosts</a>
+      <button id="id_appComponent_aboutBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_aboutSection', $event)">About</button>
+      <div id="id_appComponent_aboutCopy" class="about-copy">
+        <p id="id_appComponent_aboutEyebrow" class="eyebrow">{{ about.eyebrow }}</p>
+        <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
+        <p id="id_appComponent_aboutBody">{{ about.body }}</p>
+        <p id="id_appComponent_aboutSecondary">{{ about.secondary }}</p>
+        <a id="id_appComponent_aboutLink" href="" class="text-link" (click)="stopNavigation($event)">Meet the Hosts</a>
       </div>
-      <figure class="about-media">
-        <img [src]="about.featureImage" alt="Apartment detail" [attr.title]="'Apartment detail'" />
+      <figure id="id_appComponent_aboutMedia" class="about-media">
+        <img id="id_appComponent_aboutImage" [src]="about.featureImage" alt="Apartment detail" [attr.title]="'Apartment detail'" />
       </figure>
     </section>
 
     <!-- Pricing -->
     <section id="id_appComponent_pricingSection" class="panel apartments page-section">
-      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_pricingSection', $event)">Pricing</button>
-      <header class="panel-header">
-        <p class="eyebrow">Service & Pricing</p>
-        <div>
-          <h3>Room types and stay options</h3>
-          <p>Day and night temporary rooms are available. Four-hour temporary stays currently start at CAD $50 (cash price after tax).</p>
+      <button id="id_appComponent_pricingBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_pricingSection', $event)">Pricing</button>
+      <header id="id_appComponent_pricingHeader" class="panel-header">
+        <p id="id_appComponent_pricingEyebrow" class="eyebrow">Service & Pricing</p>
+        <div id="id_appComponent_pricingHeaderContent">
+          <h3 id="id_appComponent_pricingTitle">Room types and stay options</h3>
+          <p id="id_appComponent_pricingDescription">Day and night temporary rooms are available. Four-hour temporary stays currently start at CAD $50 (cash price after tax).</p>
         </div>
       </header>
-      <div class="card-grid">
-        @for (home of apartments; track home.name) {
-          <article class="stay-card">
-            <figure>
-              <img [src]="home.image" alt="{{ home.name }}" title="{{ home.name }}" />
-              <span class="badge">{{ home.area }}</span>
+      <div id="id_appComponent_pricingCardGrid" class="card-grid">
+        @for (home of apartments; track home.name; let apartmentIndex = $index) {
+          <article [attr.id]="'id_appComponent_pricingCard_' + apartmentIndex" class="stay-card">
+            <figure [attr.id]="'id_appComponent_pricingFigure_' + apartmentIndex">
+              <img [attr.id]="'id_appComponent_pricingImage_' + apartmentIndex" [src]="home.image" alt="{{ home.name }}" title="{{ home.name }}" />
+              <span [attr.id]="'id_appComponent_pricingBadge_' + apartmentIndex" class="badge">{{ home.area }}</span>
             </figure>
-            <div class="card-body">
-              <h4>{{ home.name }}</h4>
-              <p>{{ home.description }}</p>
-              <a href="" class="text-link" (click)="stopNavigation($event)">Book a Stay</a>
+            <div [attr.id]="'id_appComponent_pricingCardBody_' + apartmentIndex" class="card-body">
+              <h4 [attr.id]="'id_appComponent_pricingCardTitle_' + apartmentIndex">{{ home.name }}</h4>
+              <p [attr.id]="'id_appComponent_pricingCardDescription_' + apartmentIndex">{{ home.description }}</p>
+              <a [attr.id]="'id_appComponent_pricingCardLink_' + apartmentIndex" href="" class="text-link" (click)="stopNavigation($event)">Book a Stay</a>
             </div>
           </article>
         }
@@ -98,23 +99,23 @@
 
     <!-- Reservation -->
     <section id="id_appComponent_roomReservationSection" class="panel room-reservation page-section">
-      <app-room-reservation-section></app-room-reservation-section>
+      <app-room-reservation-section id="id_appComponent_roomReservation"></app-room-reservation-section>
     </section>
 
     <!-- Gallery -->
     <section id="id_appComponent_gallerySection" class="panel gallery page-section">
-      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_gallerySection', $event)">Gallery</button>
-      <div class="panel-header">
-        <p class="eyebrow">Gallery</p>
-        <div>
-          <h3>Explore our rooms and amenities</h3>
-          <p>Preview room layouts, furnishings, and in-room essentials before you book.</p>
+      <button id="id_appComponent_galleryBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_gallerySection', $event)">Gallery</button>
+      <div id="id_appComponent_galleryHeader" class="panel-header">
+        <p id="id_appComponent_galleryEyebrow" class="eyebrow">Gallery</p>
+        <div id="id_appComponent_galleryHeaderContent">
+          <h3 id="id_appComponent_galleryTitle">Explore our rooms and amenities</h3>
+          <p id="id_appComponent_galleryDescription">Preview room layouts, furnishings, and in-room essentials before you book.</p>
         </div>
       </div>
-      <div class="gallery-grid">
-        @for (image of galleryImages; track image.src) {
-          <figure>
-            <img [src]="image.src" alt="{{ image.alt }}" title="{{ image.alt }}" />
+      <div id="id_appComponent_galleryGrid" class="gallery-grid">
+        @for (image of galleryImages; track image.src; let galleryIndex = $index) {
+          <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex">
+            <img [attr.id]="'id_appComponent_galleryImage_' + galleryIndex" [src]="image.src" alt="{{ image.alt }}" title="{{ image.alt }}" />
           </figure>
         }
       </div>
@@ -122,20 +123,21 @@
 
     <!-- Amenities -->
     <section id="id_appComponent_amenitiesSection" class="panel amenities page-section" hidden>
-      <div class="panel-header">
-        <p class="eyebrow">Amenities</p>
-        <div>
-          <h3>Our Offerings</h3>
-          <p>Balance work and leisure with spa rituals, rooftop swims, and movement studios curated for modern travelers.</p>
+      <button id="id_appComponent_amenitiesBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_amenitiesSection', $event)">Amenities</button>
+      <div id="id_appComponent_amenitiesHeader" class="panel-header">
+        <p id="id_appComponent_amenitiesEyebrow" class="eyebrow">Amenities</p>
+        <div id="id_appComponent_amenitiesHeaderContent">
+          <h3 id="id_appComponent_amenitiesTitle">Our Offerings</h3>
+          <p id="id_appComponent_amenitiesDescription">Balance work and leisure with spa rituals, rooftop swims, and movement studios curated for modern travelers.</p>
         </div>
       </div>
-      <div class="amenity-grid">
-        @for (amenity of amenities; track amenity.title) {
-          <article class="amenity-card">
-            <img [src]="amenity.icon" alt="{{ amenity.title }} icon" title="{{ amenity.title }}" />
-            <p class="eyebrow">{{ amenity.subtitle }}</p>
-            <h4>{{ amenity.title }}</h4>
-            <p>{{ amenity.description }}</p>
+      <div id="id_appComponent_amenityGrid" class="amenity-grid">
+        @for (amenity of amenities; track amenity.title; let amenityIndex = $index) {
+          <article [attr.id]="'id_appComponent_amenityCard_' + amenityIndex" class="amenity-card">
+            <img [attr.id]="'id_appComponent_amenityIcon_' + amenityIndex" [src]="amenity.icon" alt="{{ amenity.title }} icon" title="{{ amenity.title }}" />
+            <p [attr.id]="'id_appComponent_amenitySubtitle_' + amenityIndex" class="eyebrow">{{ amenity.subtitle }}</p>
+            <h4 [attr.id]="'id_appComponent_amenityTitle_' + amenityIndex">{{ amenity.title }}</h4>
+            <p [attr.id]="'id_appComponent_amenityDescription_' + amenityIndex">{{ amenity.description }}</p>
           </article>
         }
       </div>
@@ -143,19 +145,19 @@
 
     <!-- FAQ -->
     <section id="id_appComponent_faqSection" class="panel faq page-section">
-      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_faqSection', $event)">FAQ</button>
-      <div class="panel-header">
-        <p class="eyebrow">FAQ</p>
-        <div>
-          <h3>Frequently Asked Questions</h3>
-          <p>Transparent policies and thoughtful touches keep every journey stress-free.</p>
+      <button id="id_appComponent_faqBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_faqSection', $event)">FAQ</button>
+      <div id="id_appComponent_faqHeader" class="panel-header">
+        <p id="id_appComponent_faqEyebrow" class="eyebrow">FAQ</p>
+        <div id="id_appComponent_faqHeaderContent">
+          <h3 id="id_appComponent_faqTitle">Frequently Asked Questions</h3>
+          <p id="id_appComponent_faqDescription">Transparent policies and thoughtful touches keep every journey stress-free.</p>
         </div>
       </div>
-      <div class="faq-grid">
-        @for (item of faqs; track item.title) {
-          <article>
-            <h4>{{ item.title }}</h4>
-            <p>{{ item.body }}</p>
+      <div id="id_appComponent_faqGrid" class="faq-grid">
+        @for (item of faqs; track item.title; let faqIndex = $index) {
+          <article [attr.id]="'id_appComponent_faqItem_' + faqIndex">
+            <h4 [attr.id]="'id_appComponent_faqItemTitle_' + faqIndex">{{ item.title }}</h4>
+            <p [attr.id]="'id_appComponent_faqItemBody_' + faqIndex">{{ item.body }}</p>
           </article>
         }
       </div>
@@ -163,13 +165,13 @@
 
     <!-- Contact -->
     <section id="id_appComponent_contactSection" class="panel contact page-section">
-      <button type="button" class="section-banner" (click)="scrollTo('#id_appComponent_contactSection', $event)">Contact</button>
-      <app-contact-section [brand]="brand" [contact]="contact" [resourceLinks]="resourceLinks" (linkClick)="stopNavigation($event)"></app-contact-section>
+      <button id="id_appComponent_contactBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_contactSection', $event)">Contact</button>
+      <app-contact-section id="id_appComponent_contactComponent" [brand]="brand" [contact]="contact" [resourceLinks]="resourceLinks" (linkClick)="stopNavigation($event)"></app-contact-section>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <p>© 2026 Jun Jun Hotel</p>
+  <footer id="id_appComponent_footer" class="site-footer">
+    <p id="id_appComponent_footerText">© 2026 Jun Jun Hotel</p>
   </footer>
 </div>

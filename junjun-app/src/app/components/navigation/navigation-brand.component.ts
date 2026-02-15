@@ -4,10 +4,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   selector: 'app-navigation-brand',
   standalone: true,
   template: `
-    <div class="brand">
-      <button class="brand__home" type="button" (click)="navigateHome.emit()" [attr.aria-label]="brand + ' home'">
-        <img class="brand__icon" [src]="brandIcon" [alt]="brand + ' logo'" [attr.title]="brand" />
-        <span class="brand__text">{{ brand }}</span>
+    <div id="id_navigationBrand_container" class="brand">
+      <button id="id_navigationBrand_homeButton" class="brand__home" type="button" (click)="navigateHome.emit()" [attr.aria-label]="brand + ' home'">
+        <img id="id_navigationBrand_icon" class="brand__icon" [src]="brandIcon" [alt]="brand + ' logo'" [attr.title]="brand" />
+        <span id="id_navigationBrand_text" class="brand__text">{{ brand }}</span>
       </button>
       <ng-content></ng-content>
     </div>

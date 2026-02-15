@@ -5,6 +5,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   standalone: true,
   template: `
     <button
+      id="id_navigationToggle_button"
       class="menu-toggle"
       type="button"
       aria-label="Toggle navigation"
@@ -12,9 +13,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       [attr.aria-controls]="controlsId"
       (click)="toggle.emit()"
     >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
+      <span id="id_navigationToggle_bar_1" aria-hidden="true"></span>
+      <span id="id_navigationToggle_bar_2" aria-hidden="true"></span>
+      <span id="id_navigationToggle_bar_3" aria-hidden="true"></span>
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
