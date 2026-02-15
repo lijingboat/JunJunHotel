@@ -1,12 +1,13 @@
 <div id="id_appComponent_pageShell" class="page-shell">
   <header id="id_appComponent_siteHeader" class="site-header" [class.menu-open]="isMenuOpen">
-    <app-navigation-brand id="id_appComponent_navigationBrandComponent" [brand]="brand" [brandIcon]="brandIcon"></app-navigation-brand>
-    <app-navigation-toggle
-      id="id_appComponent_navigationToggleComponent"
-      [isOpen]="isMenuOpen"
-      controlsId="id_appComponent_primaryNavigation"
-      (toggle)="toggleMenu()"
-    ></app-navigation-toggle>
+    <app-navigation-brand id="id_appComponent_navigationBrandComponent" [brand]="brand" [brandIcon]="brandIcon">
+      <app-navigation-toggle
+        id="id_appComponent_navigationToggleComponent"
+        [isOpen]="isMenuOpen"
+        controlsId="id_appComponent_primaryNavigation"
+        (toggle)="toggleMenu()"
+      ></app-navigation-toggle>
+    </app-navigation-brand>
     <div id="id_appComponent_navCluster" class="nav-cluster" [class.open]="isMenuOpen">
       <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
         @for (link of navLinks; track link.label; let linkIndex = $index) {

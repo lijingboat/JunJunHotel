@@ -7,6 +7,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     <div id="id_navigationBrand_brand" class="brand">
       <img id="id_navigationBrand_brandIcon" [src]="brandIcon" [alt]="brand + ' logo'" [attr.title]="brand" />
       <span id="id_navigationBrand_brandText">{{ brand }}</span>
+      <ng-content></ng-content>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

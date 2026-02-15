@@ -15,29 +15,29 @@
 @spacing-9xl: 3.5rem;
 
 // ===== SIZING VARIABLES =====
-@size-icon-sm: 16px;
-@size-icon: 18px;
-@size-icon-lg: 42px;
-@size-icon-xl: 52px;
-@size-icon-stat: 70px;
+@size-icon-sm: 1rem;
+@size-icon: 1.125rem;
+@size-icon-lg: 2.625rem;
+@size-icon-xl: 3.25rem;
+@size-icon-stat: 4.375rem;
 
-@height-image-card: 260px;
-@height-gallery-item: 220px;
-@height-map-min: 320px;
-@height-inset-image: 120px;
+@height-image-card: 16.25rem;
+@height-gallery-item: 13.75rem;
+@height-map-min: 20rem;
+@height-inset-image: 7.5rem;
 
-@width-inset-card: 180px;
-@width-nav-mobile: min(320px, 80vw);
-@width-nav-mobile-sm: min(300px, 78vw);
+@width-inset-card: 11.25rem;
+@width-nav-mobile: min(20rem, 80vw);
+@width-nav-mobile-sm: min(18.75rem, 78vw);
 @width-nav-mobile-xs: 82vw;
-@width-nav-mobile-landscape: min(280px, 72vw);
+@width-nav-mobile-landscape: min(17.5rem, 72vw);
 
 // ===== BORDER RADIUS VARIABLES =====
-@radius-xs: 2px;
-@radius-sm: 12px;
-@radius-md: 20px;
-@radius-lg: 32px;
-@radius-full: 999px;
+@radius-xs: 0.125rem;
+@radius-sm: 0.75rem;
+@radius-md: 1.25rem;
+@radius-lg: 2rem;
+@radius-full: 62.4375rem;
 
 // ===== TYPOGRAPHY VARIABLES =====
 @font-size-eyebrow: 0.75rem;
@@ -95,13 +95,13 @@
 @padding-contact: 2rem;
 
 // ===== SHADOW VARIABLES =====
-@shadow-card: 0 25px 60px rgba(23, 17, 14, 0.15);
-@shadow-card-sm: 0 15px 35px rgba(0, 0, 0, 0.08);
-@shadow-brand-image: 0 10px 25px rgba(0, 0, 0, 0.15);
-@shadow-button: 0 8px 20px rgba(31, 26, 23, 0.2);
-@shadow-menu-toggle-focus: 0 0 0 2px rgba(193, 138, 95, 0.35), 0 0 12px rgba(193, 138, 95, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-@shadow-nav-menu: -20px 0 40px rgba(0, 0, 0, 0.12);
-@shadow-nav-header: 0 8px 20px rgba(19, 12, 8, 0.08);
+@shadow-card: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
+@shadow-card-sm: 0 0.9375rem 2.1875rem rgba(0, 0, 0, 0.08);
+@shadow-brand-image: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.15);
+@shadow-button: 0 0.5rem 1.25rem rgba(31, 26, 23, 0.2);
+@shadow-menu-toggle-focus: 0 0 0 0.125rem rgba(193, 138, 95, 0.35), 0 0 0.75rem rgba(193, 138, 95, 0.45), inset 0 0.0625rem 0 rgba(255, 255, 255, 0.9);
+@shadow-nav-menu: -1.25rem 0 2.5rem rgba(0, 0, 0, 0.12);
+@shadow-nav-header: 0 0.5rem 1.25rem rgba(19, 12, 8, 0.08);
 
 // ===== TRANSITION VARIABLES =====
 @transition-fast: 0.15s ease;
@@ -114,21 +114,21 @@
 @scale-hidden: scaleX(0);
 
 // ===== GRID VARIABLES =====
-@grid-min-card: 240px;
-@grid-min-gallery: 180px;
-@grid-min-quote: 220px;
-@grid-min-amenity: 200px;
-@grid-min-faq: 220px;
+@grid-min-card: 15rem;
+@grid-min-gallery: 11.25rem;
+@grid-min-quote: 13.75rem;
+@grid-min-amenity: 12.5rem;
+@grid-min-faq: 13.75rem;
 
 // ===== BOOTSTRAP RESPONSIVE BREAKPOINTS (4 LAYERS) =====
 // Mobile-first approach: base styles are for XS, then add larger breakpoints
 // This follows Bootstrap 5 conventions for responsive design
 //
 // BREAKPOINT LAYERS:
-// XS (Extra Small) - 0 to 575px   - Mobile phones (default/base styles)
-// S  (Small)       - 576px+        - Landscape phones & small tablets  
-// M  (Medium)      - 768px+        - Tablets & small desktops
-// L  (Large)       - 992px+        - Desktops & large displays
+// XS (Extra Small) - 0 to 35.9375rem   - Mobile phones (default/base styles)
+// S  (Small)       - 36rem+             - Landscape phones & small tablets  
+// M  (Medium)      - 48rem+             - Tablets & small desktops
+// L  (Large)       - 62rem+             - Desktops & large displays
 //
 // USAGE:
 // For mobile-first (RECOMMENDED):
@@ -141,9 +141,9 @@
 //   @media (max-width: (@breakpoint-m - 1)) { ... }  // Apply below M
 //
 @breakpoint-xs: 0;      // Extra Small (default, mobile)
-@breakpoint-s: 576px;   // Small (landscape phones)
-@breakpoint-m: 768px;   // Medium (tablets)
-@breakpoint-l: 992px;   // Large (desktops)
+@breakpoint-s: 36rem;   // Small (landscape phones)
+@breakpoint-m: 48rem;   // Medium (tablets)
+@breakpoint-l: 62rem;   // Large (desktops)
 
 // Legacy breakpoint aliases for backward compatibility
 @breakpoint-sm: @breakpoint-s;
@@ -167,13 +167,13 @@
 // ===== INSET POSITIONING =====
 @inset-offset: 1rem;
 @inset-offset-lg: 1.5rem;
-@inset-bottom-mobile: 15px;
-@inset-right-mobile: 30px;
-@inset-button-toggle: 4px;
+@inset-bottom-mobile: 0.9375rem;
+@inset-right-mobile: 1.875rem;
+@inset-button-toggle: 0.25rem;
 
 // ===== FILTER & EFFECTS =====
-@blur-overlay: 3px;
-@blur-map-overlay: 4px;
+@blur-overlay: 0.1875rem;
+@blur-map-overlay: 0.25rem;
 @saturation-gallery: 1.1;
 
 // ===== ASPECT RATIOS & DIMENSIONS =====
@@ -181,8 +181,8 @@
 @min-height-section: 100vh;
 @min-height-page: 100%;
 @min-width-page: 0;
-@border-radius-nav: 16px;
-@border-radius-soft: 99px;
+@border-radius-nav: 1rem;
+@border-radius-soft: 6.1875rem;
 
 // ===== ADDITIONAL PADDING COMBINATIONS =====
 @padding-nav-mobile-tight: 0.7rem 0.9rem;
@@ -201,15 +201,15 @@
 // ===== ADDITIONAL GAPS =====
 @gap-nav-mobile: 1rem;
 @gap-nav-landscape: 0.75rem;
-@gap-toggle-spans: 4px;
+@gap-toggle-spans: 0.25rem;
 
 // ===== ADDITIONAL POSITIONING =====
 @offset-nav-underline: -0.15rem;
 @offset-inset-sm: -1rem;
-@inset-right-mobile-landscape: 16px;
-@scroll-margin-sections: 96px;
+@inset-right-mobile-landscape: 1rem;
+@scroll-margin-sections: 6rem;
 @padding-nav-landscape: 4rem;
-@gallery-border-radius: 14px;
+@gallery-border-radius: 0.875rem;
 
 // ===== OPACITY VALUES =====
 @opacity-line: 0.12;
@@ -236,9 +236,9 @@
 	--cocoa: #8a5d37;
 	--dusk: #4d4035;
 	--line: rgba(31, 26, 23, 0.12);
-	--card-shadow: 0 25px 60px rgba(23, 17, 14, 0.15);
-	--radius-lg: 32px;
-	--radius-md: 20px;
+	--card-shadow: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
+	--radius-lg: 2rem;
+	--radius-md: 1.25rem;
 	display: block;
 	color: var(--ink);
 	font-family: var(--font-nav);
@@ -268,7 +268,7 @@ app-contact-section {
 	align-items: center;
 	gap: @gap-nav;
 	padding: @spacing-2xl 0 @spacing-6xl;
-	border-bottom: 1px solid var(--line);
+	border-bottom: 0.0625rem solid var(--line);
 	flex-wrap: wrap;
 	position: sticky;
 	top: 0;
@@ -362,9 +362,9 @@ app-contact-section {
 	height: @size-icon-lg;
 	padding: 0;
 	border-radius: @radius-sm;
-	border: 1px solid rgba(31, 26, 23, @opacity-border);
+	border: 0.0625rem solid rgba(31, 26, 23, @opacity-border);
 	background: linear-gradient(180deg, #f8f9fb 0%, #eceff3 100%);
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+	box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), inset 0 0.0625rem 0 rgba(255, 255, 255, 0.85);
 	-webkit-appearance: none;
 	appearance: none;
 	align-items: center;
@@ -456,7 +456,7 @@ app-contact-section {
 		opacity: 1;
 		font-size: @font-size-nav-tablet;
 		background-color: var(--cream);
-		border: 1px solid var(--line);
+		border: 0.0625rem solid var(--line);
 		border-radius: @radius-full;
 		padding: @padding-nav-pill;
 		box-shadow: @shadow-nav-header;
@@ -472,7 +472,7 @@ app-contact-section {
 		padding: @padding-mobile-sm;
 		margin-bottom: @spacing-lg;
 		border-radius: @border-radius-nav;
-		border: 1px solid var(--line);
+		border: 0.0625rem solid var(--line);
 	}
 
 	.brand {
@@ -539,7 +539,7 @@ app-contact-section {
 		font-size: @font-size-base;
 		width: 100%;
 		padding: @padding-nav-mobile-tight;
-		border: 1px solid var(--line);
+		border: 0.0625rem solid var(--line);
 		border-radius: @radius-sm;
 		background-color: #ffffff;
 		opacity: 1;
@@ -549,7 +549,7 @@ app-contact-section {
 		width: 100%;
 		text-align: left;
 		padding: @padding-nav-mobile-tight;
-		border: 1px solid var(--line);
+		border: 0.0625rem solid var(--line);
 		border-radius: @radius-sm;
 		background-color: #ffffff;
 		color: var(--ink);
@@ -593,6 +593,16 @@ app-contact-section {
 	}
 }
 
+@media (max-width: (@breakpoint-m - 1)) and (orientation: portrait) {
+	#id_navigationToggle_button {
+		position: static;
+		top: auto;
+		right: auto;
+		margin-left: auto;
+		z-index: auto;
+	}
+}
+
 @media (max-width: (@breakpoint-s - 1)) {
 	.page-shell {
 		padding: @padding-mobile;
@@ -619,7 +629,7 @@ app-contact-section {
 	}
 }
 
-@media (max-width: (@breakpoint-l - 1)) and (max-height: 500px) and (orientation: landscape) {
+@media (max-width: (@breakpoint-l - 1)) and (max-height: 31.25rem) and (orientation: landscape) {
 	#id_navigationToggle_button {
 		top: max(@inset-bottom-mobile, env(safe-area-inset-top));
 		right: max(@inset-right-mobile-landscape, env(safe-area-inset-right));
@@ -661,7 +671,7 @@ main {
 
 .section-banner {
 	align-self: stretch;
-	width: clamp(120px, 22vw, 260px);
+	width: clamp(7.5rem, 22vw, 16.25rem);
 	display: block;
 	text-align: center;
 	padding: @spacing-sm @spacing-xl;
@@ -684,7 +694,7 @@ main {
 #id_appComponent_faqSection,
 #id_appComponent_contactSection {
 	min-height: @min-height-section;
-	scroll-margin-top: 96px;
+	scroll-margin-top: @scroll-margin-sections;
 	scroll-snap-align: start;
 	display: flex;
 	flex-direction: column;
@@ -728,7 +738,7 @@ main {
 	letter-spacing: @letter-spacing-xs;
 	text-transform: uppercase;
 	font-size: @font-size-small;
-	border: 1px solid var(--ink);
+	border: 0.0625rem solid var(--ink);
 }
 
 .btn.primary {
@@ -743,7 +753,7 @@ main {
 
 .stats {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr));
 	gap: @gap-stat;
 	margin: @spacing-7xl 0 0;
 }
@@ -791,7 +801,7 @@ main {
 }
 
 .hero-inset img {
-	border-radius: 14px;
+	border-radius: @gallery-border-radius;
 	margin-bottom: @spacing-base;
 	height: @height-inset-image;
 	object-fit: cover;
@@ -943,7 +953,7 @@ blockquote {
 	border-radius: var(--radius-md);
 	background: white;
 	box-shadow: @shadow-card;
-	min-height: 200px;
+	min-height: 12.5rem;
 }
 
 blockquote p {
