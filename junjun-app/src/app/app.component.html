@@ -57,7 +57,6 @@
 
     <!-- About -->
     <section id="id_appComponent_aboutSection" class="panel about page-section">
-      <button id="id_appComponent_aboutBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_aboutSection', $event)">About</button>
       <div id="id_appComponent_aboutCopy" class="about-copy">
         <p id="id_appComponent_aboutEyebrow" class="eyebrow">{{ about.eyebrow }}</p>
         <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
@@ -72,7 +71,6 @@
 
     <!-- Pricing -->
     <section id="id_appComponent_pricingSection" class="panel apartments page-section">
-      <button id="id_appComponent_pricingBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_pricingSection', $event)">Pricing</button>
       <header id="id_appComponent_pricingHeader" class="panel-header">
         <p id="id_appComponent_pricingEyebrow" class="eyebrow">Service & Pricing</p>
         <div id="id_appComponent_pricingHeaderContent">
@@ -104,7 +102,6 @@
 
     <!-- Gallery -->
     <section id="id_appComponent_gallerySection" class="panel gallery page-section">
-      <button id="id_appComponent_galleryBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_gallerySection', $event)">Gallery</button>
       <div id="id_appComponent_galleryHeader" class="panel-header">
         <p id="id_appComponent_galleryEyebrow" class="eyebrow">Gallery</p>
         <div id="id_appComponent_galleryHeaderContent">
@@ -123,7 +120,6 @@
 
     <!-- Amenities -->
     <section id="id_appComponent_amenitiesSection" class="panel amenities page-section" hidden>
-      <button id="id_appComponent_amenitiesBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_amenitiesSection', $event)">Amenities</button>
       <div id="id_appComponent_amenitiesHeader" class="panel-header">
         <p id="id_appComponent_amenitiesEyebrow" class="eyebrow">Amenities</p>
         <div id="id_appComponent_amenitiesHeaderContent">
@@ -145,7 +141,6 @@
 
     <!-- FAQ -->
     <section id="id_appComponent_faqSection" class="panel faq page-section">
-      <button id="id_appComponent_faqBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_faqSection', $event)">FAQ</button>
       <div id="id_appComponent_faqHeader" class="panel-header">
         <p id="id_appComponent_faqEyebrow" class="eyebrow">FAQ</p>
         <div id="id_appComponent_faqHeaderContent">
@@ -165,7 +160,6 @@
 
     <!-- Contact -->
     <section id="id_appComponent_contactSection" class="panel contact page-section">
-      <button id="id_appComponent_contactBanner" type="button" class="section-banner" (click)="scrollTo('#id_appComponent_contactSection', $event)">Contact</button>
       <app-contact-section id="id_appComponent_contactComponent" [brand]="brand" [contact]="contact" [resourceLinks]="resourceLinks" (linkClick)="stopNavigation($event)"></app-contact-section>
     </section>
 
