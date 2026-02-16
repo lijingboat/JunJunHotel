@@ -1,3 +1,18 @@
+// ===== FONT FAMILY =====
+@font-nav: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
+// ===== COLOR PALETTE =====
+@ink: #1f1a17;
+@sand: #f7f1ea;
+@cream: #fff9f5;
+@clay: #c18a5f;
+@cocoa: #8a5d37;
+@dusk: #4d4035;
+@line: rgba(31, 26, 23, 0.12);
+@card-shadow: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
+@radius-lg: 2rem;
+@radius-md: 1.25rem;
+
 // ===== TYPOGRAPHY VARIABLES =====
 @font-level-logo: 1.5rem;
 @font-level-nav: 0.95rem;
@@ -227,20 +242,9 @@
 }
 
 :host {
-	--font-nav: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-	--ink: #1f1a17;
-	--sand: #f7f1ea;
-	--cream: #fff9f5;
-	--clay: #c18a5f;
-	--cocoa: #8a5d37;
-	--dusk: #4d4035;
-	--line: rgba(31, 26, 23, 0.12);
-	--card-shadow: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
-	--radius-lg: 2rem;
-	--radius-md: 1.25rem;
 	display: block;
-	color: var(--ink);
-	font-family: var(--font-nav);
+	color: @ink;
+	font-family: @font-nav;
 }
 
 app-navigation-brand,
@@ -258,7 +262,7 @@ app-contact-section {
 	position: relative;
 	top: 0;
 	left: 0;
-	background: radial-gradient(circle at top right, #fffdf8, var(--sand));
+	background: radial-gradient(circle at top right, #fffdf8, @sand);
 	padding: @padding-responsive;
 }
 
@@ -267,12 +271,12 @@ app-contact-section {
 	align-items: center;
 	gap: @gap-nav;
 	padding: @spacing-2xl 0 @spacing-6xl;
-	border-bottom: 0.0625rem solid var(--line);
+	border-bottom: 0.0625rem solid @line;
 	flex-wrap: wrap;
 	position: sticky;
 	top: 0;
 	z-index: 1000;
-	background-color: var(--cream);
+	background-color: @cream;
 	background-image: none;
 	opacity: 1;
 	-webkit-backdrop-filter: none;
@@ -296,7 +300,7 @@ app-contact-section {
 	border: 0;
 	padding: 0;
 	cursor: pointer;
-	color: var(--ink);
+	color: @ink;
 }
 
 .brand__icon {
@@ -339,7 +343,7 @@ app-contact-section {
 	width: 100%;
 	height: @radius-xs;
 	border-radius: @border-radius-soft;
-	background: linear-gradient(@opacity-gradient-direction, var(--clay), var(--cocoa));
+	background: linear-gradient(@opacity-gradient-direction, @clay, @cocoa);
 	transform: @scale-hidden;
 	transform-origin: left;
 	transition: transform @transition-smooth;
@@ -347,7 +351,7 @@ app-contact-section {
 
 .primary-nav a:hover,
 .primary-nav a:focus-visible {
-	color: var(--cocoa);
+	color: @cocoa;
 }
 
 .primary-nav a:hover::after,
@@ -395,7 +399,7 @@ app-contact-section {
 	height: @radius-xs;
 	border-radius: @radius-xs;
 	margin: 0 auto;
-	background: var(--ink);
+	background: @ink;
 }
 
 .menu-toggle::before {
@@ -414,8 +418,8 @@ app-contact-section {
 .book-button {
 	padding: @padding-button-nav;
 	border-radius: @radius-full;
-	background: var(--ink);
-	color: var(--cream);
+	background: @ink;
+	color: @cream;
 	font-weight: 600;
 	letter-spacing: @letter-spacing-sm;
 	text-transform: uppercase;
@@ -425,7 +429,7 @@ app-contact-section {
 }
 
 .book-button:hover {
-	background: var(--cocoa);
+	background: @cocoa;
 }
 
 @media (min-width: @breakpoint-l) {
@@ -443,8 +447,8 @@ app-contact-section {
 		z-index: 100;
 		opacity: 1;
 		font-size: @font-size-nav-tablet;
-		background-color: var(--cream);
-		border: 0.0625rem solid var(--line);
+		background-color: @cream;
+		border: 0.0625rem solid @line;
 		border-radius: @radius-full;
 		padding: @padding-nav-pill;
 		box-shadow: @shadow-nav-header;
@@ -456,11 +460,11 @@ app-contact-section {
 		position: sticky;
 		top: 0;
 		z-index: 20;
-		background: var(--sand);
+		background: @sand;
 		padding: @padding-mobile-sm;
 		margin-bottom: @spacing-lg;
 		border-radius: @border-radius-nav;
-		border: 0.0625rem solid var(--line);
+		border: 0.0625rem solid @line;
 	}
 
 	.brand {
@@ -484,7 +488,7 @@ app-contact-section {
 		width: @width-nav-mobile;
 		padding: @padding-nav-mobile-top @spacing-6xl @spacing-6xl;
 		overflow-y: auto;
-		background-color: var(--cream);
+		background-color: @cream;
 		opacity: 1;
 		flex-direction: column;
 		align-items: flex-start;
@@ -515,7 +519,7 @@ app-contact-section {
 		font-size: @font-size-base;
 		width: 100%;
 		padding: @padding-nav-mobile-tight;
-		border: 0.0625rem solid var(--line);
+		border: 0.0625rem solid @line;
 		border-radius: @radius-sm;
 		background-color: #ffffff;
 		opacity: 1;
@@ -525,10 +529,10 @@ app-contact-section {
 		width: 100%;
 		text-align: left;
 		padding: @padding-nav-mobile-tight;
-		border: 0.0625rem solid var(--line);
+		border: 0.0625rem solid @line;
 		border-radius: @radius-sm;
 		background-color: #ffffff;
-		color: var(--ink);
+		color: @ink;
 		font-size: @font-size-base;
 		font-weight: 700;
 		letter-spacing: @letter-spacing-sm;
@@ -536,15 +540,15 @@ app-contact-section {
 	}
 
 	.book-button:hover {
-		background-color: var(--sand);
+		background-color: @sand;
 		border-color: rgba(193, 138, 95, 0.55);
-		color: var(--cocoa);
+		color: @cocoa;
 	}
 
 	.book-button:focus-visible {
-		background-color: var(--sand);
+		background-color: @sand;
 		border-color: rgba(193, 138, 95, 0.75);
-		color: var(--cocoa);
+		color: @cocoa;
 	}
 }
 
@@ -648,10 +652,10 @@ main {
 }
 
 .panel {
-	background: var(--cream);
-	border-radius: var(--radius-lg);
+	background: @cream;
+	border-radius: @radius-lg;
 	padding: @padding-responsive-sm;
-	box-shadow: var(--card-shadow);
+	box-shadow: @card-shadow;
 }
 
 .section-banner {
@@ -665,8 +669,8 @@ main {
 	margin-bottom: @spacing-2xl;
 	border-radius: @radius-full;
 	border: 0.0625rem solid rgba(31, 26, 23, 0.2);
-	background: var(--cream);
-	color: var(--ink);
+	background: @cream;
+	color: @ink;
 	font-size: @font-size-label;
 	font-weight: 600;
 	letter-spacing: @letter-spacing-md;
@@ -687,7 +691,7 @@ main {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	box-shadow: var(--card-shadow);
+	box-shadow: @card-shadow;
 }
 
 .page-section + .page-section {
@@ -717,7 +721,7 @@ main {
 .hero-text h2 {
 	font-size: @font-size-h2;
 	margin: 0.35rem 0 @spacing-2xl;
-	color: var(--cocoa);
+	color: @cocoa;
 }
 
 .hero-text p {
@@ -738,17 +742,17 @@ main {
 	letter-spacing: @letter-spacing-xs;
 	text-transform: uppercase;
 	font-size: @font-size-small;
-	border: 0.0625rem solid var(--ink);
+	border: 0.0625rem solid @ink;
 }
 
 .btn.primary {
-	background: var(--ink);
-	color: var(--cream);
+	background: @ink;
+	color: @cream;
 }
 
 .btn.ghost {
 	background: transparent;
-	color: var(--ink);
+	color: @ink;
 }
 
 .stats {
@@ -761,12 +765,12 @@ main {
 .stats .stat-value {
 	font-size: @font-size-stat;
 	font-weight: 600;
-	color: var(--cocoa);
+	color: @cocoa;
 }
 
 .stats .stat-label {
 	margin: 0;
-	color: var(--dusk);
+	color: @dusk;
 	font-size: @font-size-sm;
 }
 
@@ -776,7 +780,7 @@ main {
 
 .hero-frame {
 	margin: 0;
-	border-radius: var(--radius-lg);
+	border-radius: @radius-lg;
 	overflow: hidden;
 	box-shadow: @shadow-card;
 }
@@ -792,7 +796,7 @@ main {
 	right: -@inset-offset;
 	bottom: -@inset-offset;
 	background: rgba(255, 255, 255, @opacity-card-bg);
-	border-radius: var(--radius-md);
+	border-radius: @radius-md;
 	padding: @spacing-lg;
 	width: @width-inset-card;
 	box-shadow: @shadow-card;
@@ -811,7 +815,7 @@ main {
 	text-transform: uppercase;
 	letter-spacing: @letter-spacing-lg;
 	font-size: @font-size-eyebrow;
-	color: var(--dusk);
+	color: @dusk;
 	margin: 0 0 @spacing-lg;
 }
 
@@ -829,13 +833,13 @@ main {
 
 .about-copy p {
 	line-height: @line-height-relaxed;
-	color: var(--dusk);
+	color: @dusk;
 }
 
 .about-media img {
 	width: 100%;
-	border-radius: var(--radius-lg);
-	box-shadow: var(--card-shadow);
+	border-radius: @radius-lg;
+	box-shadow: @card-shadow;
 }
 
 .panel-header {
@@ -852,7 +856,7 @@ main {
 
 .panel-header p {
 	margin: 0.4rem 0 0;
-	color: var(--dusk);
+	color: @dusk;
 	max-width: 42ch;
 }
 
@@ -865,7 +869,7 @@ main {
 
 .stay-card {
 	background: white;
-	border-radius: var(--radius-md);
+	border-radius: @radius-md;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -909,7 +913,7 @@ main {
 
 .card-body p {
 	margin: 0;
-	color: var(--dusk);
+	color: @dusk;
 	line-height: @line-height-base;
 }
 
@@ -950,7 +954,7 @@ main {
 blockquote {
 	margin: 0;
 	padding: @padding-quote;
-	border-radius: var(--radius-md);
+	border-radius: @radius-md;
 	background: white;
 	box-shadow: @shadow-card;
 	min-height: 12.5rem;
@@ -959,13 +963,13 @@ blockquote {
 blockquote p {
 	font-size: @font-size-base;
 	line-height: @line-height-relaxed;
-	color: var(--dusk);
+	color: @dusk;
 }
 
 blockquote footer {
 	margin-top: @spacing-2xl;
 	font-weight: 600;
-	color: var(--cocoa);
+	color: @cocoa;
 }
 
 .amenity-grid {
@@ -977,7 +981,7 @@ blockquote footer {
 
 .amenity-card {
 	padding: @padding-amenity;
-	border-radius: var(--radius-md);
+	border-radius: @radius-md;
 	background: white;
 	box-shadow: @shadow-card-sm;
 	text-align: center;
@@ -1000,7 +1004,7 @@ blockquote footer {
 .faq-grid article {
 	padding: @padding-faq;
 	background: white;
-	border-radius: var(--radius-md);
+	border-radius: @radius-md;
 	box-shadow: @shadow-card-sm;
 }
 
@@ -1011,7 +1015,7 @@ blockquote footer {
 .faq-grid p {
 	margin: 0;
 	line-height: @line-height-base;
-	color: var(--dusk);
+	color: @dusk;
 }
 
 .contact {
@@ -1023,7 +1027,7 @@ blockquote footer {
 
 .contact-card {
 	background: white;
-	border-radius: var(--radius-lg);
+	border-radius: @radius-lg;
 	padding: @padding-contact;
 	box-shadow: @shadow-card;
 }
@@ -1038,7 +1042,7 @@ blockquote footer {
 
 .address {
 	white-space: pre-line;
-	color: var(--dusk);
+	color: @dusk;
 }
 
 .footer-links {
@@ -1051,7 +1055,7 @@ blockquote footer {
 .map-card {
 	margin: 0;
 	position: relative;
-	border-radius: var(--radius-lg);
+	border-radius: @radius-lg;
 	overflow: hidden;
 	box-shadow: @shadow-card;
 }
@@ -1069,7 +1073,7 @@ blockquote footer {
 	background: rgba(0, 0, 0, @opacity-dark-overlay);
 	color: white;
 	padding: @spacing-2xl 1.25rem;
-	border-radius: var(--radius-md);
+	border-radius: @radius-md;
 	-webkit-backdrop-filter: blur(@blur-map-overlay);
 	backdrop-filter: blur(@blur-map-overlay);
 	white-space: pre-line;
@@ -1078,7 +1082,7 @@ blockquote footer {
 .site-footer {
 	text-align: center;
 	padding: @padding-contact 0 0;
-	color: var(--dusk);
+	color: @dusk;
 	font-size: @font-size-sm;
 }
 
