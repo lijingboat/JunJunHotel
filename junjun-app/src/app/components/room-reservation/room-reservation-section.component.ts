@@ -45,16 +45,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
       .reservation-content p {
         margin-top: 0;
-        color: var(--dusk);
+        color: #4d4035;
         line-height: 1.6;
       }
 
       .reservation-highlights {
         margin: 1rem 0 0;
         padding-left: 1.1rem;
-        color: var(--dusk);
+        color: #4d4035;
         display: grid;
         gap: 0.45rem;
+        font-size: clamp(0.98rem, 0.3vw + 0.92rem, 1.08rem);
       }
 
       .reservation-form {
@@ -62,19 +63,19 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         gap: 0.65rem;
         padding: 1.25rem;
         background: #ffffff;
-        border-radius: var(--radius-md);
-        box-shadow: var(--card-shadow);
+        border-radius: 1.25rem;
+        box-shadow: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
       }
 
       .reservation-form label {
-        font-size: 0.8rem;
+        font-size: clamp(0.85rem, 0.2vw + 0.82rem, 0.95rem);
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--dusk);
+        color: #4d4035;
       }
 
       .reservation-form input {
-        border: 1px solid var(--line);
+        border: 1px solid rgba(31, 26, 23, 0.12);
         border-radius: 12px;
         padding: 0.75rem 0.85rem;
         font: inherit;

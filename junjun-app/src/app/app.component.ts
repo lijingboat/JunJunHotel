@@ -7,14 +7,12 @@ import { NavigationToggleComponent } from './components/navigation/navigation-to
 import { RoomReservationSectionComponent } from './components/room-reservation/room-reservation-section.component';
 import {
   ABOUT,
-  AMENITIES,
-  APARTMENTS,
+  ABOUT_IMAGES,
   CONTACT,
   FAQS,
   GALLERY_IMAGES,
-  HERO_COPY,
-  HERO_STATS,
   NAV_LINKS,
+  ROOM_PRICING,
   RESOURCE_LINKS,
 } from './app.content';
 
@@ -30,16 +28,13 @@ import {
 export class AppComponent {
   isMenuOpen = false;
   readonly brand = 'Jun Jun Hotel';
-  readonly brandIcon = 'assets/heavenly-connected/brand-mark-icon.png';
-  readonly rooftopImage = 'assets/heavenly-connected/rooftop-evening-view.jpg';
+  readonly brandIcon = 'assets/image/Bedroom.png';
 
   readonly navLinks = NAV_LINKS;
-  readonly heroCopy = HERO_COPY;
-  readonly heroStats = HERO_STATS;
   readonly about = ABOUT;
-  readonly apartments = APARTMENTS;
+  readonly aboutImages = ABOUT_IMAGES;
+  readonly roomPricing = ROOM_PRICING;
   readonly galleryImages = GALLERY_IMAGES;
-  readonly amenities = AMENITIES;
   readonly faqs = FAQS;
   readonly contact = CONTACT;
   readonly resourceLinks = [...RESOURCE_LINKS];

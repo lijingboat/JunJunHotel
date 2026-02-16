@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 
 interface ContactInfo {
   phone: string;
-  email: string;
   address: string;
-  mapImage: string;
+  mapEmbedUrl: string;
 }
 
 @Component({
@@ -12,26 +11,20 @@ interface ContactInfo {
   standalone: true,
   template: `
     <div id="id_contactSection_contactCard" class="contact-card">
-      <p id="id_contactSection_contactEyebrow" class="eyebrow">{{ brand }}</p>
-      <h3 id="id_contactSection_contactTitle">Contact & Location</h3>
-      <p id="id_contactSection_contactDescription">Located at 374 College Street in Downtown Toronto, with quick access to transit, shops, and city attractions.</p>
+      <h3 id="id_contactSection_contactTitle">{{ brand }}</h3>
       <div id="id_contactSection_contactList" class="contact-list">
-        <a id="id_contactSection_contactPhone" href="" (click)="linkClick.emit($event)">{{ contact.phone }}</a>
-        <a id="id_contactSection_contactEmail" href="" (click)="linkClick.emit($event)">{{ contact.email }}</a>
-      </div>
-      <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>
-      <div id="id_contactSection_footerLinks" class="footer-links">
-        @for (link of resourceLinks; track link; let resourceIndex = $index) {
-          <a [attr.id]="'id_contactSection_footerLink_' + resourceIndex" href="" (click)="linkClick.emit($event)">{{ link }}</a>
-        }
+        <p id="id_contactSection_contactPhone">{{ contact.phone }}</p>
+        <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>
       </div>
     </div>
     <figure id="id_contactSection_mapCard" class="map-card">
-      <img id="id_contactSection_mapImage" [src]="contact.mapImage" alt="Jun Jun Hotel location map" [attr.title]="'Jun Jun Hotel location map'" />
-      <div id="id_contactSection_mapOverlay" class="map-overlay">
-        <h4 id="id_contactSection_mapOverlayTitle">Visit Us</h4>
-        <p id="id_contactSection_mapOverlayAddress">{{ contact.address }}</p>
-      </div>
+      <iframe
+        id="id_contactSection_mapFrame"
+        [attr.src]="contact.mapEmbedUrl"
+        title="Jun Jun Hotel map"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
     </figure>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

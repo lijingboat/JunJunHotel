@@ -67,3 +67,55 @@ Improve navigation/menu behavior, section interaction and visual contrast, simpl
 ### Files modified in this session:
 - `junjun-app/src/app/app.component.less` (3 updates: CSS→LESS conversion, z-index fix, hamburger visibility fix)
 - `junjun-app/src/app/app.component.html` (1 update: removed 6 banner buttons)
+
+---
+
+## Recent updates (2026-02-16)
+
+### Navigation and header
+- Added explicit left/right padding for `id_appComponent_siteHeader` on medium and large viewports.
+- Updated CTA label from **Book Now** to **Room Reservation**.
+- Updated brand icon source to `assets/image/Bedroom.png` while keeping round logo styling.
+- Enlarged and modernized `id_navigationBrand_text` logo typography.
+
+### Hidden sections removed
+- Removed hidden **Hero** section from [junjun-app/src/app/app.component.html](junjun-app/src/app/app.component.html).
+- Removed hidden **Amenities** section from [junjun-app/src/app/app.component.html](junjun-app/src/app/app.component.html).
+
+### About redesign
+- Rebuilt `id_appComponent_aboutSection` content and structure.
+- Added embedded image set:
+  - `assets/image/Hotel_Room_01.jpg`
+  - `assets/image/Hotel_Room_02.jpg`
+  - `assets/image/Hotel_Room_03.jpg`
+- Rewrote About text to describe Jun Jun Hotel downtown affordability, flexible stay hours, and included amenities.
+
+### Section labels and readability
+- Added clear top-left section labels for: **About**, **Pricing**, **Room Reservation**, **Gallery**, **Frenently Asked Questions**, **Contact**.
+- Applied responsive readable typography across section text/table content.
+
+### Pricing redesign
+- Replaced card grid with a structured table under Pricing:
+  - Standard Room | 1-2 persons | 24 Hours | CAD$120 | Clean Bedding and Free Toilet Paper
+  - Extend Room | 1-3 persons | 24 Hours | CAD$150 | Clean Bedding and Free Toilet Paper
+  - Basement Room | 1-2 persons | 24 Hours | CAD$100 | Clean Bedding and Free Toilet Paper
+  - Temporary Room | 1-2 persons | 4 Hours | CAD$80 | Clean Bedding and Free Toilet Paper
+
+### Gallery interaction
+- Added hover zoom effect so gallery images enlarge on hover.
+
+### FAQ updates
+- Updated section label text to **Frenently Asked Questions**.
+- Changed FAQ layout to single vertical stack (top-to-bottom).
+- Formatted each item with **Q:** and **A:** at the same readable font size.
+
+### Contact updates
+- Updated contact details to:
+  - Jun Jun Hotel
+  - 647-349-9220
+  - 374 Collge St. M5T 1S6
+- Replaced static map image with embedded Google map iframe for the requested address.
+
+### Supporting updates
+- Updated shared content constants in [junjun-app/src/app/app.content.ts](junjun-app/src/app/app.content.ts) for new about images, pricing table rows, FAQ/contact content.
+- Updated reservation component inline styles to remove dependency on CSS custom properties and improve readability.

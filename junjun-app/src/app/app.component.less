@@ -1,5 +1,6 @@
 // ===== FONT FAMILY =====
 @font-nav: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+@font-logo: 'Poppins', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
 
 // ===== COLOR PALETTE =====
 @ink: #1f1a17;
@@ -270,7 +271,7 @@ app-contact-section {
 	display: flex;
 	align-items: center;
 	gap: @gap-nav;
-	padding: @spacing-2xl 0 @spacing-6xl;
+	padding: @spacing-2xl @spacing-2xl @spacing-6xl;
 	border-bottom: 0.0625rem solid @line;
 	flex-wrap: wrap;
 	position: sticky;
@@ -314,14 +315,16 @@ app-contact-section {
 .brand__text {
 	margin-left: 0;
 	padding-left: 0;
-	font-size: @font-size-brand-lg;
+	font-family: @font-logo;
+	font-size: clamp(1.65rem, 0.9vw + 1.35rem, 2.25rem);
 	font-weight: 800;
+	letter-spacing: 0.03em;
 }
 
 .primary-nav {
 	display: flex;
 	gap: @gap-nav-gap;
-	font-family: var(--font-nav);
+	font-family: @font-nav;
 	font-size: @font-size-nav-footer;
 	text-transform: uppercase;
 	letter-spacing: @letter-spacing-sm;
@@ -433,6 +436,11 @@ app-contact-section {
 }
 
 @media (min-width: @breakpoint-l) {
+	.site-header {
+		padding-left: @spacing-6xl;
+		padding-right: @spacing-6xl;
+	}
+
 	.nav-overlay {
 		display: none;
 	}
@@ -452,6 +460,13 @@ app-contact-section {
 		border-radius: @radius-full;
 		padding: @padding-nav-pill;
 		box-shadow: @shadow-nav-header;
+	}
+}
+
+@media (min-width: @breakpoint-m) and (max-width: (@breakpoint-l - 1)) {
+	.site-header {
+		padding-left: @spacing-4xl;
+		padding-right: @spacing-4xl;
 	}
 }
 
@@ -576,7 +591,7 @@ app-contact-section {
 	}
 
 	.brand__text {
-		font-size: @font-size-brand-mobile-responsive;
+		font-size: clamp(1.35rem, 3vw, 1.8rem);
 	}
 
 	.nav-cluster {
@@ -654,30 +669,19 @@ main {
 	box-shadow: @card-shadow;
 }
 
-.section-banner {
-	align-self: stretch;
-	width: clamp(7.5rem, 22vw, 16.25rem);
+.section-label {
 	display: inline-flex;
 	align-items: center;
-	justify-content: center;
-	text-align: center;
-	padding: @spacing-sm @spacing-xl;
-	margin-bottom: @spacing-2xl;
+	margin: 0 0 @spacing-3xl;
+	padding: @spacing-sm @spacing-2xl;
 	border-radius: @radius-full;
 	border: 0.0625rem solid rgba(31, 26, 23, 0.2);
-	background: @cream;
+	background: #f4e7db;
 	color: @ink;
-	font-size: @font-size-label;
-	font-weight: 600;
-	letter-spacing: @letter-spacing-md;
+	font-size: clamp(0.82rem, 0.25vw + 0.78rem, 0.95rem);
+	font-weight: 700;
+	letter-spacing: @letter-spacing-sm;
 	text-transform: uppercase;
-	cursor: pointer;
-}
-
-.section-banner:hover,
-.section-banner:focus-visible {
-	background: #efe2d5;
-	border-color: rgba(193, 138, 95, 0.8);
 }
 
 .page-section {
@@ -698,8 +702,18 @@ main {
 .page-section p,
 .page-section li,
 .page-section a,
-.page-section button {
-	font-size: @font-level-content;
+.page-section button,
+.page-section td,
+.page-section th {
+	font-size: clamp(0.98rem, 0.35vw + 0.92rem, 1.08rem);
+}
+
+.page-section h3 {
+	font-size: clamp(1.35rem, 0.85vw + 1.15rem, 1.9rem);
+}
+
+.page-section h4 {
+	font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem);
 }
 
 .hero {
@@ -816,15 +830,13 @@ main {
 }
 
 .about {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: @spacing-6xl;
-	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: @spacing-5xl;
 }
 
 .about-copy h3 {
-	font-size: @font-size-h3-about;
-	margin: 0 0 @spacing-2xl;
+	margin: 0 0 @spacing-3xl;
 }
 
 .about-copy p {
@@ -832,9 +844,21 @@ main {
 	color: @dusk;
 }
 
+.about-media-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: @spacing-2xl;
+}
+
+.about-media {
+	margin: 0;
+}
+
 .about-media img {
 	width: 100%;
-	border-radius: @radius-lg;
+	height: clamp(10rem, 18vw, 13.5rem);
+	object-fit: cover;
+	border-radius: @radius-md;
 	box-shadow: @card-shadow;
 }
 
@@ -856,61 +880,34 @@ main {
 	max-width: 42ch;
 }
 
-.card-grid {
-	margin-top: @spacing-6xl;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(@grid-min-card, 1fr));
-	gap: @spacing-4xl;
+.pricing-table-wrapper {
+	margin-top: @spacing-4xl;
+	overflow-x: auto;
 }
 
-.stay-card {
-	background: white;
+.pricing-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #fff;
 	border-radius: @radius-md;
 	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	height: 100%;
-	box-shadow: @shadow-card;
+	box-shadow: @shadow-card-sm;
 }
 
-.stay-card figure {
-	position: relative;
-	margin: 0;
+.pricing-table th,
+.pricing-table td {
+	padding: @spacing-2xl @spacing-3xl;
+	text-align: left;
+	border-bottom: 0.0625rem solid @line;
 }
 
-.stay-card img {
-	width: 100%;
-	height: @height-image-card;
-	object-fit: cover;
+.pricing-table th {
+	background: #f2e4d7;
+	font-weight: 700;
 }
 
-.badge {
-	position: absolute;
-	bottom: @spacing-2xl;
-	left: @spacing-2xl;
-	background: rgba(255, 255, 255, @opacity-card-bg);
-	padding: @padding-badge;
-	border-radius: @radius-full;
-	font-size: @font-size-badge;
-	letter-spacing: @letter-spacing-sm;
-}
-
-.card-body {
-	padding: @padding-card;
-	display: flex;
-	flex-direction: column;
-	gap: @spacing-lg;
-}
-
-.card-body h4 {
-	margin: 0;
-	font-size: @font-size-h4;
-}
-
-.card-body p {
-	margin: 0;
-	color: @dusk;
-	line-height: @line-height-base;
+.pricing-table tbody tr:last-child td {
+	border-bottom: 0;
 }
 
 .text-link {
@@ -938,6 +935,12 @@ main {
 	height: @height-gallery-item;
 	object-fit: cover;
 	filter: saturate(@saturation-gallery);
+	transition: transform @transition-smooth;
+}
+
+.gallery-grid figure:hover img,
+.gallery-grid figure:focus-within img {
+	transform: scale(1.08);
 }
 
 .quote-grid {
@@ -993,8 +996,8 @@ blockquote footer {
 .faq-grid {
 	margin-top: @spacing-6xl;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(@grid-min-faq, 1fr));
-	gap: @gap-nav-gap;
+	grid-template-columns: 1fr;
+	gap: @spacing-2xl;
 }
 
 .faq-grid article {
@@ -1004,14 +1007,15 @@ blockquote footer {
 	box-shadow: @shadow-card-sm;
 }
 
-.faq-grid h4 {
-	margin: 0 0 @spacing-lg;
-}
-
-.faq-grid p {
+.faq-line {
 	margin: 0;
 	line-height: @line-height-base;
 	color: @dusk;
+	font-size: clamp(1rem, 0.35vw + 0.92rem, 1.08rem);
+}
+
+.faq-line + .faq-line {
+	margin-top: @spacing-lg;
 }
 
 .contact {
@@ -1031,21 +1035,14 @@ blockquote footer {
 .contact-list {
 	display: flex;
 	flex-direction: column;
-	gap: 0.35rem;
-	margin: @spacing-2xl 0;
+	gap: @spacing-lg;
+	margin: @spacing-2xl 0 0;
 	font-weight: 600;
 }
 
 .address {
-	white-space: pre-line;
+	white-space: normal;
 	color: @dusk;
-}
-
-.footer-links {
-	margin-top: @spacing-2xl;
-	display: flex;
-	gap: @gap-nav;
-	font-size: @font-size-small;
 }
 
 .map-card {
@@ -1056,23 +1053,11 @@ blockquote footer {
 	box-shadow: @shadow-card;
 }
 
-.map-card img {
+.map-card iframe {
 	width: 100%;
 	height: 100%;
 	min-height: @height-map-min;
-	object-fit: cover;
-}
-
-.map-overlay {
-	position: absolute;
-	inset: auto @inset-offset-lg @inset-offset-lg @inset-offset-lg;
-	background: rgba(0, 0, 0, @opacity-dark-overlay);
-	color: white;
-	padding: @spacing-2xl 1.25rem;
-	border-radius: @radius-md;
-	-webkit-backdrop-filter: blur(@blur-map-overlay);
-	backdrop-filter: blur(@blur-map-overlay);
-	white-space: pre-line;
+	border: 0;
 }
 
 .site-footer {
@@ -1083,8 +1068,7 @@ blockquote footer {
 }
 
 @media (max-width: (@breakpoint-l - 1)) {
-	.hero,
-	.about,
+	.about-media-grid,
 	.contact {
 		grid-template-columns: 1fr;
 	}
@@ -1106,18 +1090,8 @@ blockquote footer {
 		align-items: center;
 	}
 
-	.hero-inset {
-		position: relative;
-		right: auto;
-		bottom: auto;
-		margin-top: @spacing-2xl;
-	}
-
-	.hero-cta {
-		flex-direction: column;
-	}
-
-	.footer-links {
-		flex-direction: column;
+	.pricing-table th,
+	.pricing-table td {
+		padding: @spacing-lg @spacing-xl;
 	}
 }
