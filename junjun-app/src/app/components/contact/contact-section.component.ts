@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ContactInfo {
   phone: string;
@@ -20,7 +21,7 @@ interface ContactInfo {
     <figure id="id_contactSection_mapCard" class="map-card">
       <iframe
         id="id_contactSection_mapFrame"
-        [attr.src]="contact.mapEmbedUrl"
+        [src]="safeMapUrl"
         title="Jun Jun Hotel map"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -29,9 +30,17 @@ interface ContactInfo {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ContactSectionComponent {
+export class ContactSectionComponent implements OnInit {
   @Input({ required: true }) brand = '';
   @Input({ required: true }) contact!: ContactInfo;
   @Input({ required: true }) resourceLinks: string[] = [];
   @Output() linkClick = new EventEmitter<Event>();
+
+  safeMapUrl: SafeResourceUrl = '';
+
+  constructor(private sanitizer: DomSanitizer) {}
+
+  ngOnInit(): void {
+    this.safeMapUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.contact.mapEmbedUrl);
+  }
 }
