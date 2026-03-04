@@ -8,12 +8,14 @@ import { RoomReservationSectionComponent } from './components/room-reservation/r
 import {
   ABOUT,
   ABOUT_IMAGES,
+  ASSETS,
   CONTACT,
   FAQS,
   GALLERY_IMAGES,
   NAV_LINKS,
-  ROOM_PRICING,
   RESOURCE_LINKS,
+  ROOM_PRICING,
+  SITE_META,
 } from './app.content';
 
 @Component({
@@ -27,18 +29,19 @@ import {
 })
 export class AppComponent {
   isMenuOpen = false;
-  readonly brand = 'Jun Jun Hotel';
-  readonly brandIcon = 'assets/image/Bedroom.png';
+  readonly brand = SITE_META.brand;
+  readonly brandIcon = ASSETS.brandIcon;
 
   readonly navLinks = NAV_LINKS;
   readonly about = ABOUT;
   readonly aboutImages = ABOUT_IMAGES;
   readonly roomPricing = ROOM_PRICING;
   readonly galleryImages = GALLERY_IMAGES;
+  readonly GALLERY_DESCRIPTION = 'The following are the picked images showcasing our rooms and amenities.';
   readonly faqs = FAQS;
   readonly contact = CONTACT;
   readonly resourceLinks = [...RESOURCE_LINKS];
-  readonly currentYear = new Date().getFullYear();
+  readonly currentYear = SITE_META.year;
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -74,3 +77,4 @@ export class AppComponent {
     event.preventDefault();
   }
 }
+

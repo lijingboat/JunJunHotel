@@ -271,7 +271,7 @@ app-contact-section {
 	display: flex;
 	align-items: center;
 	gap: @gap-nav;
-	padding: @spacing-2xl @spacing-2xl @spacing-6xl;
+	padding: 16px;
 	border-bottom: 0.0625rem solid @line;
 	flex-wrap: wrap;
 	position: sticky;
@@ -685,7 +685,7 @@ main {
 }
 
 .page-section {
-	min-height: @min-height-section;
+	min-height: auto;
 	scroll-margin-top: @scroll-margin-sections;
 	scroll-snap-align: start;
 	display: flex;
@@ -839,27 +839,51 @@ main {
 	margin: 0 0 @spacing-3xl;
 }
 
-.about-copy p {
-	line-height: @line-height-relaxed;
-	color: @dusk;
+.about-copy-with-media {
+	display: flex;
+	align-items: flex-start;
+	gap: @spacing-4xl;
+	flex-wrap: wrap;
 }
 
 .about-media-grid {
-	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	display: flex;
 	gap: @spacing-2xl;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .about-media {
 	margin: 0;
 }
 
-.about-media img {
-	width: 100%;
-	height: clamp(10rem, 18vw, 13.5rem);
+.about-media-circle {
+	margin: 0;
+}
+
+.about-media-circle img {
+	width: clamp(120px, 20vw, 200px);
+	height: clamp(120px, 20vw, 200px);
 	object-fit: cover;
-	border-radius: @radius-md;
+	border-radius: 50%;
 	box-shadow: @card-shadow;
+	display: block;
+}
+
+.about-copy {
+	flex: 1 1 300px;
+	min-width: 300px;
+}
+
+.about-copy p {
+	line-height: @line-height-relaxed;
+	color: @dusk;
+	white-space: pre-wrap;
+	margin: 0 0 1rem 0;
+}
+
+.about-copy p:last-child {
+	margin-bottom: 0;
 }
 
 .panel-header {

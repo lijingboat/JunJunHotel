@@ -27,17 +27,20 @@
     <!-- About -->
     <section id="id_appComponent_aboutSection" class="panel about page-section">
       <p id="id_appComponent_aboutLabel" class="section-label">About</p>
-      <div id="id_appComponent_aboutCopy" class="about-copy">
+      <div id="id_appComponent_aboutContent" class="about-content">
         <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
-        <p id="id_appComponent_aboutBody">{{ about.body }}</p>
-        <p id="id_appComponent_aboutSecondary">{{ about.secondary }}</p>
-      </div>
-      <div id="id_appComponent_aboutMediaGrid" class="about-media-grid">
-        @for (image of aboutImages; track image.src; let aboutImageIndex = $index) {
-          <figure [attr.id]="'id_appComponent_aboutFigure_' + aboutImageIndex" class="about-media">
-            <img [attr.id]="'id_appComponent_aboutImage_' + aboutImageIndex" [src]="image.src" [alt]="image.alt" title="Hotel room image" />
-          </figure>
-        }
+        <div id="id_appComponent_aboutCopyWithMedia" class="about-copy-with-media">
+          <div id="id_appComponent_aboutMediaGrid" class="about-media-grid">
+            @for (image of aboutImages; track image.src; let aboutImageIndex = $index) {
+              <figure [attr.id]="'id_appComponent_aboutFigure_' + aboutImageIndex" class="about-media-circle">
+                <img [attr.id]="'id_appComponent_aboutImage_' + aboutImageIndex" [src]="image.src" [alt]="image.alt" title="Hotel room image" />
+              </figure>
+            }
+          </div>
+          <div id="id_appComponent_aboutCopy" class="about-copy">
+            <p id="id_appComponent_aboutBody">{{ about.body }}</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -86,8 +89,7 @@
       <p id="id_appComponent_galleryLabel" class="section-label">Gallery</p>
       <div id="id_appComponent_galleryHeader" class="panel-header">
         <div id="id_appComponent_galleryHeaderContent">
-          <h3 id="id_appComponent_galleryTitle">Explore our rooms and amenities</h3>
-          <p id="id_appComponent_galleryDescription">Preview room layouts, furnishings, and in-room essentials before you book.</p>
+          <p id="id_appComponent_galleryDescription">{{ GALLERY_DESCRIPTION }}</p>
         </div>
       </div>
       <div id="id_appComponent_galleryGrid" class="gallery-grid">
