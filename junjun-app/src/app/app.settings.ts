@@ -30,15 +30,12 @@ export const NAV_LINKS = [
 // ===== ABOUT SECTION =====
 export const ABOUT = {
   title: 'Welcome to Jun Jun Hotel',
-  body: `A more polished and concentrated introduction can highlight the suite's strengths with clearer emphasis on location, comfort, and everyday convenience. The accommodation presents itself as a private, well‑appointed space situated in one of downtown Toronto's most practical and culturally rich districts. Its position places guests within immediate reach of essential amenities and vibrant neighbourhoods, making it an appealing choice for visitors seeking both accessibility and value.
-
-The presence of T&T Supermarket just steps away is a defining advantage, offering effortless access to fresh produce, prepared meals, and Asian groceries—an uncommon level of convenience for central Toronto stays and a major benefit for long‑term guests who prefer to cook or shop frequently.
-
-The surrounding area enhances the experience further. Kensington Market, with its eclectic mix of cafés, global cuisine, and independent shops, is only a short walk away, providing a lively atmosphere and endless dining options. The suite is also exceptionally close to the University of Toronto's St. George campus, making it ideal for students, visiting scholars, and professionals attending campus events. Chinatown lies just beyond, offering late‑night eateries, specialty markets, and a dynamic cultural environment that enriches daily life.
-
-Inside, the suite is designed to balance comfort with functionality. A queen‑size bed ensures restful sleep, while the private shower provides personal convenience without shared facilities. The wooden flooring contributes to a clean, modern aesthetic, and the large 40‑inch television offers entertainment for evenings in. Fast, reliable internet supports remote work, online study, and streaming without interruption, making the space suitable for both leisure and productivity.
-
-Affordability remains one of the suite's most compelling qualities. With flexible pricing and adaptable service durations, guests can tailor their stay to their needs rather than conforming to rigid hotel structures. This makes the accommodation accessible to a wide range of visitors, from short‑term travellers to long‑term residents seeking a stable, well‑located base in the city.`,
+  paragraphs: [
+    `Welcome to a closer look at Jun Jun Hotel, a comfortable and well-located private suite designed for guests who value convenience, affordability, and a smooth stay in the heart of downtown Toronto. Set in one of the city’s most practical and culturally active neighbourhoods, the suite places visitors near daily essentials, major destinations, and vibrant urban districts. This balance makes it especially suitable for students, professionals, long-term guests, and travellers who want a central home base that feels easy to live in.`,
+    `🌆 Location and Everyday Convenience\nThe suite offers exceptional accessibility. T&T Supermarket is only steps away, making it easy to pick up fresh groceries, ready-made meals, and Asian specialty items without long walks or transit rides. This is a major advantage for extended stays and for guests who like to cook regularly. Kensington Market is also within walking distance, offering a lively mix of global cuisine, independent shops, and creative local culture. The University of Toronto’s St. George campus is nearby as well, making the suite a practical choice for students, visiting academics, and conference attendees. Chinatown is just beyond, with late-night eateries and specialty markets that add energy and convenience to daily life.`,
+    `🛏️ Interior Comfort and Practical Features\nInside, the suite is designed for both comfort and function. A queen-size bed provides generous sleeping space, while a private shower offers convenience without shared facilities. Wooden flooring adds a clean, modern aesthetic, and a large 40-inch TV supports relaxing evenings indoors. Fast, stable internet enables remote work, online study, streaming, and video calls with ease. Together, these features create a dependable, self-contained environment suitable for both short visits and longer stays.`,
+    `💰 Flexible and Affordable Stays\nAffordability remains one of Jun Jun Hotel’s strongest advantages. Flexible pricing and adaptable service durations allow guests to select a stay pattern that fits their real needs instead of rigid hotel structures. This makes the suite a smart and dependable option for travellers, students, and long-term residents who want a well-located Toronto base without the high cost of traditional accommodations.`,
+  ],
 } as const;
 
 export const ABOUT_IMAGES = [
@@ -59,6 +56,38 @@ export const ABOUT_IMAGES = [
 // ===== PRICING SECTION =====
 export const PRICING = {
   title: 'Room types and stay options',
+  columns: [
+    {
+      key: 'roomType',
+      title: { xs: 'Room', s: 'Room', m: 'Room Type', l: 'Room Type' },
+      width: { xs: 34, s: 34, m: 30, l: 30 },
+      visible: { xs: true, s: true, m: true, l: true },
+    },
+    {
+      key: 'capacity',
+      title: { xs: 'Capacity', s: 'Capacity', m: 'Capacity', l: 'Capacity' },
+      width: { xs: 18, s: 20, m: 16, l: 16 },
+      visible: { xs: true, s: true, m: true, l: true },
+    },
+    {
+      key: 'duration',
+      title: { xs: 'Duration', s: 'Duration', m: 'Duration', l: 'Duration' },
+      width: { xs: 18, s: 20, m: 16, l: 16 },
+      visible: { xs: true, s: true, m: true, l: true },
+    },
+    {
+      key: 'priceAfterTax',
+      title: { xs: 'Price', s: 'Price', m: 'Price (after tax)', l: 'Price (after tax)' },
+      width: { xs: 30, s: 26, m: 18, l: 18 },
+      visible: { xs: true, s: true, m: true, l: true },
+    },
+    {
+      key: 'facility',
+      title: { xs: 'Facility', s: 'Facility', m: 'Facility', l: 'Facility' },
+      width: { xs: 0, s: 0, m: 20, l: 20 },
+      visible: { xs: false, s: false, m: true, l: true },
+    },
+  ],
   rooms: [
     {
       roomType: 'Standard Room',
@@ -122,10 +151,17 @@ export const FAQS = [
   },
 ] as const;
 
+export const FAQ_CONFIG = {
+  showIndex: true,
+  questionPrefix: 'Q',
+  answerPrefix: 'A',
+} as const;
+
 // ===== CONTACT SECTION =====
 export const CONTACT = {
   phone: '647-349-9220',
-  address: '374 Collge St. M5T 1S6',
+  address: '374 College St. M5T 1S6 Toronto ON CANADA',
+  email: 'junjunhotel@gmail.com',
   mapEmbedUrl:
     'https://maps.google.com/maps?q=374%20College%20St%20Toronto%20ON%20M5T%201S6&t=&z=15&ie=UTF8&iwloc=&output=embed',
 } as const;

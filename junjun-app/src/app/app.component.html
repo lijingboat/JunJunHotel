@@ -29,17 +29,15 @@
       <p id="id_appComponent_aboutLabel" class="section-label">About</p>
       <div id="id_appComponent_aboutContent" class="about-content">
         <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
-        <div id="id_appComponent_aboutCopyWithMedia" class="about-copy-with-media">
-          <div id="id_appComponent_aboutMediaGrid" class="about-media-grid">
-            @for (image of aboutImages; track image.src; let aboutImageIndex = $index) {
-              <figure [attr.id]="'id_appComponent_aboutFigure_' + aboutImageIndex" class="about-media-circle">
-                <img [attr.id]="'id_appComponent_aboutImage_' + aboutImageIndex" [src]="image.src" [alt]="image.alt" title="Hotel room image" />
+        <div id="id_appComponent_aboutCopy" class="about-copy">
+          @for (paragraph of aboutParagraphs; track paragraph; let paragraphIndex = $index) {
+            <p [attr.id]="'id_appComponent_aboutBody_' + paragraphIndex">{{ paragraph }}</p>
+            @if (paragraphIndex < aboutImages.length) {
+              <figure [attr.id]="'id_appComponent_aboutFigure_' + paragraphIndex" class="about-media-circle about-media-inline">
+                <img [attr.id]="'id_appComponent_aboutImage_' + paragraphIndex" [src]="aboutImages[paragraphIndex].src" [alt]="aboutImages[paragraphIndex].alt" title="Hotel room image" />
               </figure>
             }
-          </div>
-          <div id="id_appComponent_aboutCopy" class="about-copy">
-            <p id="id_appComponent_aboutBody">{{ about.body }}</p>
-          </div>
+          }
         </div>
       </div>
     </section>
@@ -49,28 +47,32 @@
       <p id="id_appComponent_pricingLabel" class="section-label">Pricing</p>
       <header id="id_appComponent_pricingHeader" class="panel-header">
         <div id="id_appComponent_pricingHeaderContent">
-          <h3 id="id_appComponent_pricingTitle">Room types and stay options</h3>
+          <h3 id="id_appComponent_pricingTitle">{{ pricingTitle }}</h3>
         </div>
       </header>
       <div id="id_appComponent_pricingTableWrapper" class="pricing-table-wrapper">
         <table id="id_appComponent_pricingTable" class="pricing-table">
           <thead id="id_appComponent_pricingTableHead">
             <tr id="id_appComponent_pricingTableHeaderRow">
-              <th id="id_appComponent_pricingHeader_roomType" scope="col">Room Type</th>
-              <th id="id_appComponent_pricingHeader_capacity" scope="col">Capacity</th>
-              <th id="id_appComponent_pricingHeader_duration" scope="col">Duration</th>
-              <th id="id_appComponent_pricingHeader_price" scope="col">Price (after tax)</th>
-              <th id="id_appComponent_pricingHeader_facility" scope="col">Facility</th>
+              @for (column of visiblePricingColumns; track column.key) {
+                <th
+                  [attr.id]="'id_appComponent_pricingHeader_' + column.key"
+                  scope="col"
+                  [style.width.%]="column.width[currentViewport]"
+                >
+                  {{ column.title[currentViewport] }}
+                </th>
+              }
             </tr>
           </thead>
           <tbody id="id_appComponent_pricingTableBody">
             @for (room of roomPricing; track room.roomType; let roomIndex = $index) {
               <tr [attr.id]="'id_appComponent_pricingRow_' + roomIndex">
-                <td [attr.id]="'id_appComponent_pricingRoomType_' + roomIndex">{{ room.roomType }}</td>
-                <td [attr.id]="'id_appComponent_pricingCapacity_' + roomIndex">{{ room.capacity }}</td>
-                <td [attr.id]="'id_appComponent_pricingDuration_' + roomIndex">{{ room.duration }}</td>
-                <td [attr.id]="'id_appComponent_pricingPrice_' + roomIndex">{{ room.priceAfterTax }}</td>
-                <td [attr.id]="'id_appComponent_pricingFacility_' + roomIndex">{{ room.facility }}</td>
+                @for (column of visiblePricingColumns; track column.key) {
+                  <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex">
+                    {{ getPricingValue(room, column.key) }}
+                  </td>
+                }
               </tr>
             }
           </tbody>
@@ -87,11 +89,6 @@
     <!-- Gallery -->
     <section id="id_appComponent_gallerySection" class="panel gallery page-section">
       <p id="id_appComponent_galleryLabel" class="section-label">Gallery</p>
-      <div id="id_appComponent_galleryHeader" class="panel-header">
-        <div id="id_appComponent_galleryHeaderContent">
-          <p id="id_appComponent_galleryDescription">{{ GALLERY_DESCRIPTION }}</p>
-        </div>
-      </div>
       <div id="id_appComponent_galleryGrid" class="gallery-grid">
         @for (image of galleryImages; track image.src; let galleryIndex = $index) {
           <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex">
@@ -107,8 +104,10 @@
       <div id="id_appComponent_faqGrid" class="faq-grid">
         @for (item of faqs; track item.title; let faqIndex = $index) {
           <article [attr.id]="'id_appComponent_faqItem_' + faqIndex">
-            <p [attr.id]="'id_appComponent_faqItemQuestion_' + faqIndex" class="faq-line"><strong>Q:</strong> {{ item.title }}</p>
-            <p [attr.id]="'id_appComponent_faqItemAnswer_' + faqIndex" class="faq-line"><strong>A:</strong> {{ item.body }}</p>
+            <p [attr.id]="'id_appComponent_faqItemQuestion_' + faqIndex" class="faq-line">
+              <strong>{{ faqConfig.questionPrefix }}{{ faqConfig.showIndex ? faqIndex + 1 : '' }}:</strong> {{ item.title }}
+            </p>
+            <p [attr.id]="'id_appComponent_faqItemAnswer_' + faqIndex" class="faq-line"><strong>{{ faqConfig.answerPrefix }}:</strong> {{ item.body }}</p>
           </article>
         }
       </div>

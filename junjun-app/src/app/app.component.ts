@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { ContactSectionComponent } from './components/contact/contact-section.component';
 import { NavigationBrandComponent } from './components/navigation/navigation-brand.component';
 import { NavigationCtaComponent } from './components/navigation/navigation-cta.component';
@@ -10,13 +10,18 @@ import {
   ABOUT_IMAGES,
   ASSETS,
   CONTACT,
+  FAQ_CONFIG,
   FAQS,
-  GALLERY_IMAGES,
+  GALLERY,
   NAV_LINKS,
+  PRICING,
   RESOURCE_LINKS,
   ROOM_PRICING,
   SITE_META,
 } from './app.content';
+
+type ViewportTier = 'xs' | 's' | 'm' | 'l';
+type RoomKey = 'roomType' | 'capacity' | 'duration' | 'priceAfterTax' | 'facility';
 
 @Component({
   selector: 'app-root',
@@ -34,14 +39,61 @@ export class AppComponent {
 
   readonly navLinks = NAV_LINKS;
   readonly about = ABOUT;
+  readonly aboutParagraphs = ABOUT.paragraphs;
   readonly aboutImages = ABOUT_IMAGES;
+  readonly pricingTitle = PRICING.title;
   readonly roomPricing = ROOM_PRICING;
-  readonly galleryImages = GALLERY_IMAGES;
-  readonly GALLERY_DESCRIPTION = 'The following are the picked images showcasing our rooms and amenities.';
+  readonly pricingColumns = PRICING.columns;
+  readonly galleryImages = GALLERY.images;
   readonly faqs = FAQS;
+  readonly faqConfig = FAQ_CONFIG;
   readonly contact = CONTACT;
   readonly resourceLinks = [...RESOURCE_LINKS];
   readonly currentYear = SITE_META.year;
+  currentViewport: ViewportTier = 'l';
+
+  constructor() {
+    this.updateViewportTier();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateViewportTier();
+  }
+
+  private updateViewportTier(): void {
+    if (typeof window === 'undefined') {
+      this.currentViewport = 'l';
+      return;
+    }
+
+    const width = window.innerWidth;
+
+    if (width < 576) {
+      this.currentViewport = 'xs';
+      return;
+    }
+
+    if (width < 768) {
+      this.currentViewport = 's';
+      return;
+    }
+
+    if (width < 992) {
+      this.currentViewport = 'm';
+      return;
+    }
+
+    this.currentViewport = 'l';
+  }
+
+  get visiblePricingColumns() {
+    return this.pricingColumns.filter((column) => column.visible[this.currentViewport]);
+  }
+
+  getPricingValue(room: (typeof this.roomPricing)[number], key: RoomKey): string {
+    return room[key];
+  }
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;

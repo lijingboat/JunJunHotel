@@ -6,6 +6,7 @@ export {
   PRICING,
   GALLERY,
   FAQS,
+  FAQ_CONFIG,
   CONTACT,
   RESOURCE_LINKS,
   SITE_META,

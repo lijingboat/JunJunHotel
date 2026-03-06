@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 interface ContactInfo {
   phone: string;
   address: string;
+  email: string;
   mapEmbedUrl: string;
 }
 
@@ -12,15 +13,6 @@ interface ContactInfo {
   standalone: true,
   template: `
     <div id="id_contactSection_container" class="contact-container">
-      <figure id="id_contactSection_mapCard" class="map-card">
-        <iframe
-          id="id_contactSection_mapFrame"
-          [src]="safeMapUrl"
-          title="Jun Jun Hotel map"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </figure>
       <div id="id_contactSection_contactCard" class="contact-card">
         <h3 id="id_contactSection_contactTitle">{{ brand }}</h3>
         <div id="id_contactSection_contactList" class="contact-list">
@@ -32,8 +24,21 @@ interface ContactInfo {
             <span class="contact-label">Address:</span>
             <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>
           </div>
+          <div id="id_contactSection_contactEmailWrapper" class="contact-item">
+            <span class="contact-label">Email:</span>
+            <p id="id_contactSection_contactEmail">{{ contact.email }}</p>
+          </div>
         </div>
       </div>
+      <figure id="id_contactSection_mapCard" class="map-card">
+        <iframe
+          id="id_contactSection_mapFrame"
+          [src]="safeMapUrl"
+          title="Jun Jun Hotel map"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </figure>
     </div>
   `,
   styles: [`
@@ -67,6 +72,9 @@ interface ContactInfo {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      border-radius: 1.25rem;
+      background: #ffffff;
+      box-shadow: 0 0.9375rem 2.1875rem rgba(0, 0, 0, 0.08);
     }
     #id_contactSection_contactTitle {
       margin: 0 0 1.5rem 0;
@@ -78,8 +86,10 @@ interface ContactInfo {
       gap: 1.5rem;
     }
     .contact-item {
-      display: flex;
+      display: grid;
+      grid-template-columns: 88px 1fr;
       gap: 0.5rem;
+      align-items: start;
     }
     .contact-label {
       font-weight: 700;

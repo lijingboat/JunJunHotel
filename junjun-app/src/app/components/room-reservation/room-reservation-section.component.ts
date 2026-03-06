@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
     <div id="id_roomReservationSection_layout" class="reservation-layout">
       <div id="id_roomReservationSection_content" class="reservation-content">
-        <p id="id_roomReservationSection_eyebrow" class="eyebrow">Room Reservation</p>
         <h3 id="id_roomReservationSection_title">Reserve your room with no online fee</h3>
         <p id="id_roomReservationSection_description">
           Reservations can be made without a credit card. Cash deposit reservations are accepted in person.
