@@ -140,21 +140,27 @@ export const FAQS = [
   {
     title: 'Can I reserve without a credit card?',
     body: 'Yes. You can come in person, pay a cash deposit, and reserve a room without providing a credit card number.',
+    highlightColor: '#fff8dc',
   },
   {
     title: 'What are check-in and check-out times?',
     body: 'One-night stays are from 1:00 PM to 12:00 PM (noon) the next day. Earliest check-in is 1:00 PM and latest check-out is noon.',
+    highlightColor: '#e8f5ff',
   },
   {
     title: 'Are pets and smoking allowed?',
     body: 'Pets are not allowed. Smoking must be outside in accordance with Canadian law.',
+    highlightColor: '#eef8ee',
   },
 ] as const;
 
 export const FAQ_CONFIG = {
-  showIndex: true,
+  showIndex: false,
   questionPrefix: 'Q',
   answerPrefix: 'A',
+  indexPrefix: '#',
+  useHashIndexStyle: true,
+  indexHighlightTextColor: '#8a5d37',
 } as const;
 
 // ===== CONTACT SECTION =====
@@ -170,12 +176,39 @@ export const CONTACT = {
 // ===== RESOURCE LINKS =====
 export const RESOURCE_LINKS = ['About Us', 'Service', 'Photo', 'FAQ'] as const;
 
-// ===== NOTICE BAR =====
-export const NOTICE_BAR = {
-  message: 'Welcome! Special rates available for extended stays. Contact us for details.',
-  level: 'blue' as const,
-  visible: true,
+// ===== NOTICE BARS =====
+// level: 'navy' | 'red' | 'blue' | 'green'
+// beginDate default: today (applied in component when omitted)
+// expireDate default: forever '9999-12-31' (applied in component when omitted)
+// faqTargetIndex default: null (no FAQ navigation)
+export const NOTICE_BARS = [
+  {
+    id: 'notice_welcome',
+    message: 'Welcome! Special rates available for extended stays. Contact us for details.',
+    level: 'red' as const,
+    visible: true,
+    beginDate: undefined,
+    expireDate: undefined,
+    faqTargetIndex: null,
+  },
+  {
+    id: 'notice_faq_help',
+    message: 'Need answers fast? Click this bar to jump to FAQ item #1.',
+    level: 'blue' as const,
+    visible: true,
+    beginDate: undefined,
+    expireDate: undefined,
+    faqTargetIndex: 0,
+  },
+] as const;
+
+export const NOTICE_BAR_CONFIG = {
+  defaultBeginDate: 'today',
+  defaultExpireDate: '9999-12-31',
+  defaultTextColor: '#f8f6ef',
+  stickyBelowNav: true,
 } as const;
+
 
 
 
@@ -185,6 +218,22 @@ export const ROOM_RESERVATION_CONFIG = {
   showContent: true,
   showHighlights: true,
   showForm: true,
+} as const;
+
+// ===== NAV LANGUAGE =====
+export const NAV_LANGUAGE_CONFIG = {
+  visible: true,
+  options: [
+    { value: 'en', label: 'English' },
+  ],
+  defaultValue: 'en',
+} as const;
+
+// ===== PRICING DISPLAY =====
+export const PRICING_DISPLAY_CONFIG = {
+  enableRowContrast: true,
+  oddRowBackground: '#fff9f5',
+  evenRowBackground: '#f7f1ea',
 } as const;
 
 // ===== STYLING VARIABLES =====

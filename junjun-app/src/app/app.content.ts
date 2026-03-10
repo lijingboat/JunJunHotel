@@ -12,8 +12,11 @@ export {
   SITE_META,
   ASSETS,
   STYLING,
-  NOTICE_BAR,
+  NOTICE_BARS,
+  NOTICE_BAR_CONFIG,
   ROOM_RESERVATION_CONFIG,
+  NAV_LANGUAGE_CONFIG,
+  PRICING_DISPLAY_CONFIG,
 } from './app.settings';
 
 // Keep ROOM_PRICING for backward compatibility

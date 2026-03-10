@@ -14,13 +14,16 @@ import {
   FAQ_CONFIG,
   FAQS,
   GALLERY,
+  NAV_LANGUAGE_CONFIG,
   NAV_LINKS,
+  NOTICE_BARS,
+  NOTICE_BAR_CONFIG,
+  PRICING_DISPLAY_CONFIG,
   PRICING,
   RESOURCE_LINKS,
   ROOM_PRICING,
-  SITE_META,
-  NOTICE_BAR,
   ROOM_RESERVATION_CONFIG,
+  SITE_META,
 } from './app.content';
 
 type ViewportTier = 'xs' | 's' | 'm' | 'l';
@@ -41,20 +44,24 @@ export class AppComponent {
   readonly brandIcon = ASSETS.brandIcon;
 
   readonly navLinks = NAV_LINKS;
-  readonly noticeBar = NOTICE_BAR;
+  readonly noticeBars = NOTICE_BARS;
+  readonly noticeBarConfig = NOTICE_BAR_CONFIG;
   readonly about = ABOUT;
   readonly aboutParagraphs = ABOUT.paragraphs;
   readonly aboutImages = ABOUT_IMAGES;
   readonly pricingTitle = PRICING.title;
   readonly roomPricing = ROOM_PRICING;
   readonly pricingColumns = PRICING.columns;
+  readonly pricingDisplayConfig = PRICING_DISPLAY_CONFIG;
   readonly galleryImages = GALLERY.images;
   readonly faqs = FAQS;
   readonly faqConfig = FAQ_CONFIG;
   readonly contact = CONTACT;
   readonly resourceLinks = [...RESOURCE_LINKS];
+  readonly navLanguageConfig = NAV_LANGUAGE_CONFIG;
+  selectedLanguage: string = NAV_LANGUAGE_CONFIG.defaultValue;
   readonly currentYear = SITE_META.year;
-    readonly roomReservationConfig = ROOM_RESERVATION_CONFIG;
+  readonly roomReservationConfig = ROOM_RESERVATION_CONFIG;
   currentViewport: ViewportTier = 'l';
 
   constructor() {
@@ -96,8 +103,48 @@ export class AppComponent {
     return this.pricingColumns.filter((column) => column.visible[this.currentViewport]);
   }
 
+  get activeNoticeBars() {
+    const today = this.toIsoDate(new Date());
+    return this.noticeBars.filter((notice) => {
+      if (!notice.visible) {
+        return false;
+      }
+
+      const beginDate = notice.beginDate ?? (this.noticeBarConfig.defaultBeginDate === 'today' ? today : this.noticeBarConfig.defaultBeginDate);
+      const expireDate = notice.expireDate ?? this.noticeBarConfig.defaultExpireDate;
+      return beginDate <= today && today <= expireDate;
+    });
+  }
+
   getPricingValue(room: (typeof this.roomPricing)[number], key: RoomKey): string {
     return room[key];
+  }
+
+  getFaqIndexLabel(faqIndex: number): string {
+    if (!this.faqConfig.showIndex) {
+      return '';
+    }
+
+    const baseIndex = `${faqIndex + 1}`;
+    if (this.faqConfig.useHashIndexStyle) {
+      return `${this.faqConfig.indexPrefix}${baseIndex}`;
+    }
+
+    return `${this.faqConfig.questionPrefix}${baseIndex}`;
+  }
+
+  onNoticeNavigateToFaq(faqIndex: number): void {
+    const faqSelector = `#id_appComponent_faqItem_${faqIndex}`;
+    this.scrollToTargetSelector(faqSelector);
+  }
+
+  onLanguageChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement | null;
+    if (!selectElement) {
+      return;
+    }
+
+    this.selectedLanguage = selectElement.value;
   }
 
   toggleMenu(): void {
@@ -123,11 +170,21 @@ export class AppComponent {
     event.preventDefault();
     this.closeMenu();
 
+    this.scrollToTargetSelector(target);
+  }
+
+  private scrollToTargetSelector(target: string): void {
+    this.closeMenu();
+
     if (typeof window === 'undefined') {
       return;
     }
 
     document.querySelector(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  private toIsoDate(date: Date): string {
+    return date.toISOString().slice(0, 10);
   }
 
   stopNavigation(event: Event): void {

@@ -16,6 +16,17 @@
         }
       </nav>
       <app-navigation-cta id="id_appComponent_navigationCta" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+
+      @if (navLanguageConfig.visible) {
+        <div id="id_appComponent_navLanguage" class="nav-language">
+          <label id="id_appComponent_navLanguageLabel" class="nav-language__label" for="id_appComponent_navLanguageSelect">Language</label>
+          <select id="id_appComponent_navLanguageSelect" class="nav-language__select" [value]="selectedLanguage" (change)="onLanguageChange($event)">
+            @for (option of navLanguageConfig.options; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+      }
     </div>
   </header>
 
@@ -23,7 +34,16 @@
 	  <div id="id_appComponent_navOverlay" class="nav-overlay" (click)="closeMenu()"></div>
   }
 
-  <app-notice-bar id="id_appComponent_noticeBar" [config]="noticeBar"></app-notice-bar>
+  <section id="id_appComponent_noticeBars" class="notice-bars-wrapper" [class.notice-bars-sticky]="noticeBarConfig.stickyBelowNav">
+    @for (notice of activeNoticeBars; track notice.id) {
+      <app-notice-bar
+        [id]="'id_appComponent_noticeBar_' + notice.id"
+        [config]="notice"
+        [textColor]="noticeBarConfig.defaultTextColor"
+        (navigateToFaq)="onNoticeNavigateToFaq($event)"
+      ></app-notice-bar>
+    }
+  </section>
 
   <main id="id_appComponent_main">
     <!-- About -->
@@ -33,16 +53,20 @@
         <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
         <div id="id_appComponent_aboutCopy" class="about-copy">
           @for (paragraph of aboutParagraphs; track paragraph; let paragraphIndex = $index) {
-            <p [attr.id]="'id_appComponent_aboutBody_' + paragraphIndex">{{ paragraph }}</p>
-            @if (paragraphIndex < aboutImages.length) {
-              <figure 
-                [attr.id]="'id_appComponent_aboutFigure_' + paragraphIndex" 
-                class="about-media-circle about-media-inline"
-                [class.about-media-left]="paragraphIndex % 2 === 0"
-                [class.about-media-right]="paragraphIndex % 2 !== 0">
-                <img [attr.id]="'id_appComponent_aboutImage_' + paragraphIndex" [src]="aboutImages[paragraphIndex].src" [alt]="aboutImages[paragraphIndex].alt" title="Hotel room image" />
-              </figure>
-            }
+            <p [attr.id]="'id_appComponent_aboutBody_' + paragraphIndex">
+              @if (paragraphIndex < aboutImages.length) {
+                <img
+                  [attr.id]="'id_appComponent_aboutImage_' + paragraphIndex"
+                  class="about-inline-image"
+                  [class.about-inline-image--left]="paragraphIndex % 2 === 0"
+                  [class.about-inline-image--right]="paragraphIndex % 2 !== 0"
+                  [src]="aboutImages[paragraphIndex].src"
+                  [alt]="aboutImages[paragraphIndex].alt"
+                  title="Hotel room image"
+                />
+              }
+              {{ paragraph }}
+            </p>
           }
         </div>
       </div>
@@ -57,7 +81,13 @@
         </div>
       </header>
       <div id="id_appComponent_pricingTableWrapper" class="pricing-table-wrapper">
-        <table id="id_appComponent_pricingTable" class="pricing-table">
+        <table
+          id="id_appComponent_pricingTable"
+          class="pricing-table"
+          [class.pricing-table--contrast]="pricingDisplayConfig.enableRowContrast"
+          [style.--pricing-row-odd]="pricingDisplayConfig.oddRowBackground"
+          [style.--pricing-row-even]="pricingDisplayConfig.evenRowBackground"
+        >
           <thead id="id_appComponent_pricingTableHead">
             <tr id="id_appComponent_pricingTableHeaderRow">
               @for (column of visiblePricingColumns; track column.key) {
@@ -110,9 +140,14 @@
       <p id="id_appComponent_faqLabel" class="section-label">Frenently Asked Questions</p>
       <div id="id_appComponent_faqGrid" class="faq-grid">
         @for (item of faqs; track item.title; let faqIndex = $index) {
-          <article [attr.id]="'id_appComponent_faqItem_' + faqIndex">
+          <article [attr.id]="'id_appComponent_faqItem_' + faqIndex" [style.--faq-highlight]="item.highlightColor">
+            @if (faqConfig.showIndex) {
+              <p [attr.id]="'id_appComponent_faqIndex_' + faqIndex" class="faq-index-line">
+                <span class="faq-index-text" [style.color]="faqConfig.indexHighlightTextColor">{{ getFaqIndexLabel(faqIndex) }}</span>
+              </p>
+            }
             <p [attr.id]="'id_appComponent_faqItemQuestion_' + faqIndex" class="faq-line">
-              <strong>{{ faqConfig.questionPrefix }}{{ faqConfig.showIndex ? faqIndex + 1 : '' }}:</strong> {{ item.title }}
+              <strong>{{ faqConfig.questionPrefix }}:</strong> {{ item.title }}
             </p>
             <p [attr.id]="'id_appComponent_faqItemAnswer_' + faqIndex" class="faq-line"><strong>{{ faqConfig.answerPrefix }}:</strong> {{ item.body }}</p>
           </article>
