@@ -124,14 +124,14 @@ export const PRICING = {
 export const GALLERY = {
   description: 'The following are the picked images showcasing our rooms and amenities.',
   images: [
-    { src: 'assets/image/Hotel_Room_01.jpg', alt: 'Hotel room view 1' },
-    { src: 'assets/image/Hotel_Room_02.jpg', alt: 'Hotel room view 2' },
-    { src: 'assets/image/Hotel_Room_03.jpg', alt: 'Hotel room view 3' },
-    { src: 'assets/image/Hotel_Room_04.jpg', alt: 'Hotel room view 4' },
-    { src: 'assets/image/Hotel_Room_05.jpg', alt: 'Hotel room view 5' },
-    { src: 'assets/image/Hotel_Room_06.jpg', alt: 'Hotel room view 6' },
-    { src: 'assets/image/Hotel_Room_07.jpg', alt: 'Hotel room view 7' },
-    { src: 'assets/image/Hotel_Room_08.jpg', alt: 'Hotel room view 8' },
+    { src: 'assets/image/Hotel_Room_01.jpg', alt: 'Hotel room view 1', label: 'Standard Room' },
+    { src: 'assets/image/Hotel_Room_02.jpg', alt: 'Hotel room view 2', label: 'Deluxe Suite' },
+    { src: 'assets/image/Hotel_Room_03.jpg', alt: 'Hotel room view 3', label: 'Queen Bed' },
+    { src: 'assets/image/Hotel_Room_04.jpg', alt: 'Hotel room view 4', label: 'Bathroom' },
+    { src: 'assets/image/Hotel_Room_05.jpg', alt: 'Hotel room view 5', label: 'Living Area' },
+    { src: 'assets/image/Hotel_Room_06.jpg', alt: 'Hotel room view 6', label: 'Amenities' },
+    { src: 'assets/image/Hotel_Room_07.jpg', alt: 'Hotel room view 7', label: 'Room Details' },
+    { src: 'assets/image/Hotel_Room_08.jpg', alt: 'Hotel room view 8', label: 'Comfort Space' },
   ],
 } as const;
 
@@ -162,12 +162,30 @@ export const CONTACT = {
   phone: '647-349-9220',
   address: '374 College St. M5T 1S6 Toronto ON CANADA',
   email: 'junjunhotel@gmail.com',
+  operationHours: '24 hours',
   mapEmbedUrl:
     'https://maps.google.com/maps?q=374%20College%20St%20Toronto%20ON%20M5T%201S6&t=&z=15&ie=UTF8&iwloc=&output=embed',
 } as const;
 
 // ===== RESOURCE LINKS =====
 export const RESOURCE_LINKS = ['About Us', 'Service', 'Photo', 'FAQ'] as const;
+
+// ===== NOTICE BAR =====
+export const NOTICE_BAR = {
+  message: 'Welcome! Special rates available for extended stays. Contact us for details.',
+  level: 'blue' as const,
+  visible: true,
+} as const;
+
+
+
+
+// ===== ROOM RESERVATION VISIBILITY =====
+export const ROOM_RESERVATION_CONFIG = {
+  showContent: true,
+  showHighlights: true,
+  showForm: true,
+} as const;
 
 // ===== STYLING VARIABLES =====
 export const STYLING = {

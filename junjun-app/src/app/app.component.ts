@@ -5,6 +5,7 @@ import { NavigationCtaComponent } from './components/navigation/navigation-cta.c
 import { NavigationLinkComponent } from './components/navigation/navigation-link.component';
 import { NavigationToggleComponent } from './components/navigation/navigation-toggle.component';
 import { RoomReservationSectionComponent } from './components/room-reservation/room-reservation-section.component';
+import { NoticeBarComponent } from './components/notice-bar/notice-bar.component';
 import {
   ABOUT,
   ABOUT_IMAGES,
@@ -18,6 +19,8 @@ import {
   RESOURCE_LINKS,
   ROOM_PRICING,
   SITE_META,
+  NOTICE_BAR,
+  ROOM_RESERVATION_CONFIG,
 } from './app.content';
 
 type ViewportTier = 'xs' | 's' | 'm' | 'l';
@@ -26,7 +29,7 @@ type RoomKey = 'roomType' | 'capacity' | 'duration' | 'priceAfterTax' | 'facilit
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ContactSectionComponent, NavigationBrandComponent, NavigationToggleComponent, NavigationLinkComponent, NavigationCtaComponent, RoomReservationSectionComponent],
+  imports: [ContactSectionComponent, NavigationBrandComponent, NavigationToggleComponent, NavigationLinkComponent, NavigationCtaComponent, RoomReservationSectionComponent, NoticeBarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,6 +41,7 @@ export class AppComponent {
   readonly brandIcon = ASSETS.brandIcon;
 
   readonly navLinks = NAV_LINKS;
+  readonly noticeBar = NOTICE_BAR;
   readonly about = ABOUT;
   readonly aboutParagraphs = ABOUT.paragraphs;
   readonly aboutImages = ABOUT_IMAGES;
@@ -50,6 +54,7 @@ export class AppComponent {
   readonly contact = CONTACT;
   readonly resourceLinks = [...RESOURCE_LINKS];
   readonly currentYear = SITE_META.year;
+    readonly roomReservationConfig = ROOM_RESERVATION_CONFIG;
   currentViewport: ViewportTier = 'l';
 
   constructor() {

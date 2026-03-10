@@ -23,6 +23,8 @@
 	  <div id="id_appComponent_navOverlay" class="nav-overlay" (click)="closeMenu()"></div>
   }
 
+  <app-notice-bar id="id_appComponent_noticeBar" [config]="noticeBar"></app-notice-bar>
+
   <main id="id_appComponent_main">
     <!-- About -->
     <section id="id_appComponent_aboutSection" class="panel about page-section">
@@ -33,7 +35,11 @@
           @for (paragraph of aboutParagraphs; track paragraph; let paragraphIndex = $index) {
             <p [attr.id]="'id_appComponent_aboutBody_' + paragraphIndex">{{ paragraph }}</p>
             @if (paragraphIndex < aboutImages.length) {
-              <figure [attr.id]="'id_appComponent_aboutFigure_' + paragraphIndex" class="about-media-circle about-media-inline">
+              <figure 
+                [attr.id]="'id_appComponent_aboutFigure_' + paragraphIndex" 
+                class="about-media-circle about-media-inline"
+                [class.about-media-left]="paragraphIndex % 2 === 0"
+                [class.about-media-right]="paragraphIndex % 2 !== 0">
                 <img [attr.id]="'id_appComponent_aboutImage_' + paragraphIndex" [src]="aboutImages[paragraphIndex].src" [alt]="aboutImages[paragraphIndex].alt" title="Hotel room image" />
               </figure>
             }
@@ -83,7 +89,7 @@
     <!-- Room Reservation -->
     <section id="id_appComponent_roomReservationSection" class="panel room-reservation page-section">
       <p id="id_appComponent_roomReservationLabel" class="section-label">Room Reservation</p>
-      <app-room-reservation-section id="id_appComponent_roomReservation"></app-room-reservation-section>
+      <app-room-reservation-section id="id_appComponent_roomReservation" [config]="roomReservationConfig"></app-room-reservation-section>
     </section>
 
     <!-- Gallery -->
@@ -91,8 +97,9 @@
       <p id="id_appComponent_galleryLabel" class="section-label">Gallery</p>
       <div id="id_appComponent_galleryGrid" class="gallery-grid">
         @for (image of galleryImages; track image.src; let galleryIndex = $index) {
-          <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex">
+          <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex" class="gallery-item">
             <img [attr.id]="'id_appComponent_galleryImage_' + galleryIndex" [src]="image.src" alt="{{ image.alt }}" title="{{ image.alt }}" />
+            <figcaption [attr.id]="'id_appComponent_galleryLabel_' + galleryIndex" class="gallery-label">{{ image.label }}</figcaption>
           </figure>
         }
       </div>

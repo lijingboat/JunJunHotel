@@ -9,10 +9,20 @@
 @clay: #c18a5f;
 @cocoa: #8a5d37;
 @dusk: #4d4035;
+@white: #ffffff;
 @line: rgba(31, 26, 23, 0.12);
 @card-shadow: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
 @radius-lg: 2rem;
 @radius-md: 1.25rem;
+
+// ===== INTERACTIVE COLOR STATES =====
+@clay-hover-light: rgba(193, 138, 95, 0.55);
+@clay-hover-medium: rgba(193, 138, 95, 0.75);
+@clay-hover-strong: rgba(193, 138, 95, 0.9);
+
+// ===== GRADIENTS =====
+@gradient-page-shell: radial-gradient(circle at top right, #fffdf8, @sand);
+@gradient-menu-toggle: linear-gradient(180deg, #f8f9fb 0%, #eceff3 100%);
 
 // ===== TYPOGRAPHY VARIABLES =====
 @font-level-logo: 1.5rem;
@@ -38,6 +48,14 @@
 @font-size-h2: @font-level-content;
 @font-size-stat: @font-level-content;
 @font-size-h1: @font-level-content;
+
+// ===== RESPONSIVE FONT SIZES (WITH CLAMP) =====
+@font-size-brand-text: clamp(1.65rem, 0.9vw + 1.35rem, 2.25rem);
+@font-size-brand-mobile-text: clamp(1.35rem, 3vw, 1.8rem);
+@font-size-section-label: clamp(0.82rem, 0.25vw + 0.78rem, 0.95rem);
+@font-size-section-text: clamp(0.98rem, 0.35vw + 0.92rem, 1.08rem);
+@font-size-h3-section: clamp(1.35rem, 0.85vw + 1.15rem, 1.9rem);
+@font-size-h4-section: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem);
 
 @line-height-base: 1.6;
 @line-height-relaxed: 1.7;
@@ -113,6 +131,10 @@
 @radius-lg: 2rem;
 @radius-full: 62.4375rem;
 
+// ===== BORDER WIDTHS =====
+@border-thin: 0.0625rem;
+@border-medium: 0.125rem;
+
 // ===== SHADOWS =====
 @shadow-card: 0 1.5625rem 3.75rem rgba(23, 17, 14, 0.15);
 @shadow-card-sm: 0 0.9375rem 2.1875rem rgba(0, 0, 0, 0.08);
@@ -121,11 +143,14 @@
 @shadow-menu-toggle-focus: 0 0 0 0.125rem rgba(193, 138, 95, 0.35), 0 0 0.75rem rgba(193, 138, 95, 0.45), inset 0 0.0625rem 0 rgba(255, 255, 255, 0.9);
 @shadow-nav-menu: -1.25rem 0 2.5rem rgba(0, 0, 0, 0.12);
 @shadow-nav-header: 0 0.5rem 1.25rem rgba(19, 12, 8, 0.08);
+@shadow-site-header: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+@shadow-menu-toggle: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), inset 0 0.0625rem 0 rgba(255, 255, 255, 0.85);
 
 // ===== EFFECTS =====
 @blur-overlay: 0.1875rem;
 @blur-map-overlay: 0.25rem;
 @saturation-gallery: 1.1;
+@scale-gallery-hover: 1.3;
 
 // ===== TRANSITIONS & MOTION =====
 @transition-fast: 0.15s ease;
@@ -233,7 +258,22 @@
 @opacity-dark-overlay: 0.6;
 @opacity-card-bg: 0.92;
 @opacity-gradient-direction: 90deg;
+@opacity-section-label-border: 0.2;
+@opacity-section-border-top: 0.16;
 @nav-overlay: 0.35;
+
+// ===== MARGINS & TEXT =====
+@margin-hero-h2-top: 0.35rem;
+@text-indent-about: 2rem;
+@margin-paragraph-bottom: 1rem;
+
+// ===== ABOUT IMAGE SIZING =====
+@about-image-size-min: 140px;
+@about-image-size-vw: 22vw;
+@about-image-size-max: 220px;
+
+// ===== RESPONSIVE GAP SCALING =====
+@gap-section-vertical: clamp(@spacing-2xl, 2.5vw, @spacing-6xl);
 
 // ===== COLOR VARIABLES (CSS CUSTOM PROPERTIES) =====
 @supports not (font-variation-settings: normal) {
@@ -263,7 +303,7 @@ app-contact-section {
 	position: relative;
 	top: 0;
 	left: 0;
-	background: radial-gradient(circle at top right, #fffdf8, @sand);
+	background: @gradient-page-shell;
 	padding: @padding-responsive;
 }
 
@@ -271,8 +311,8 @@ app-contact-section {
 	display: flex;
 	align-items: center;
 	gap: @gap-nav;
-	padding: 16px;
-	border-bottom: 0.0625rem solid @line;
+	padding: @spacing-6xl;
+	border-bottom: @border-thin solid @line;
 	flex-wrap: wrap;
 	position: sticky;
 	top: 0;
@@ -282,7 +322,7 @@ app-contact-section {
 	opacity: 1;
 	-webkit-backdrop-filter: none;
 	backdrop-filter: none;
-	box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+	box-shadow: @shadow-site-header;
 }
 
 .brand {
@@ -316,7 +356,7 @@ app-contact-section {
 	margin-left: 0;
 	padding-left: 0;
 	font-family: @font-logo;
-	font-size: clamp(1.65rem, 0.9vw + 1.35rem, 2.25rem);
+	font-size: @font-size-brand-text;
 	font-weight: 800;
 	letter-spacing: 0.03em;
 }
@@ -376,9 +416,9 @@ app-contact-section {
 	height: @size-icon-lg;
 	padding: 0;
 	border-radius: @radius-sm;
-	border: 0.0625rem solid rgba(31, 26, 23, @opacity-border);
-	background: linear-gradient(180deg, #f8f9fb 0%, #eceff3 100%);
-	box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), inset 0 0.0625rem 0 rgba(255, 255, 255, 0.85);
+	border: @border-thin solid rgba(31, 26, 23, @opacity-border);
+	background: @gradient-menu-toggle;
+	box-shadow: @shadow-menu-toggle;
 	-webkit-appearance: none;
 	appearance: none;
 	align-items: center;
@@ -392,7 +432,7 @@ app-contact-section {
 
 .menu-toggle:hover,
 .menu-toggle:focus-visible {
-	border-color: rgba(193, 138, 95, 0.9);
+	border-color: @clay-hover-strong;
 	box-shadow: @shadow-menu-toggle-focus;
 }
 
@@ -456,7 +496,7 @@ app-contact-section {
 		opacity: 1;
 		font-size: @font-size-nav-tablet;
 		background-color: @cream;
-		border: 0.0625rem solid @line;
+		border: @border-thin solid @line;
 		border-radius: @radius-full;
 		padding: @padding-nav-pill;
 		box-shadow: @shadow-nav-header;
@@ -479,7 +519,7 @@ app-contact-section {
 		padding: @padding-mobile-sm;
 		margin-bottom: @spacing-lg;
 		border-radius: @border-radius-nav;
-		border: 0.0625rem solid @line;
+		border: @border-thin solid @line;
 	}
 
 	.brand {
@@ -537,9 +577,9 @@ app-contact-section {
 		font-size: @font-size-base;
 		width: 100%;
 		padding: @padding-nav-mobile-tight;
-		border: 0.0625rem solid @line;
+		border: @border-thin solid @line;
 		border-radius: @radius-sm;
-		background-color: #ffffff;
+		background-color: @white;
 		opacity: 1;
 	}
 
@@ -547,9 +587,9 @@ app-contact-section {
 		width: 100%;
 		text-align: left;
 		padding: @padding-nav-mobile-tight;
-		border: 0.0625rem solid @line;
+		border: @border-thin solid @line;
 		border-radius: @radius-sm;
-		background-color: #ffffff;
+		background-color: @white;
 		color: @ink;
 		font-size: @font-size-base;
 		font-weight: 700;
@@ -559,13 +599,13 @@ app-contact-section {
 
 	.book-button:hover {
 		background-color: @sand;
-		border-color: rgba(193, 138, 95, 0.55);
+		border-color: @clay-hover-light;
 		color: @cocoa;
 	}
 
 	.book-button:focus-visible {
 		background-color: @sand;
-		border-color: rgba(193, 138, 95, 0.75);
+		border-color: @clay-hover-medium;
 		color: @cocoa;
 	}
 }
@@ -591,7 +631,7 @@ app-contact-section {
 	}
 
 	.brand__text {
-		font-size: clamp(1.35rem, 3vw, 1.8rem);
+		font-size: @font-size-brand-mobile-text;
 	}
 
 	.nav-cluster {
@@ -658,7 +698,7 @@ main {
 	justify-content: flex-start;
 	align-items: stretch;
 	text-align: left;
-	gap: clamp(@spacing-2xl, 2.5vw, @spacing-6xl);
+	gap: @gap-section-vertical;
 	padding-top: @spacing-6xl;
 }
 
@@ -675,10 +715,10 @@ main {
 	margin: 0 0 @spacing-3xl;
 	padding: @spacing-sm @spacing-2xl;
 	border-radius: @radius-full;
-	border: 0.0625rem solid rgba(31, 26, 23, 0.2);
+	border: @border-thin solid rgba(31, 26, 23, @opacity-section-label-border);
 	background: #f4e7db;
 	color: @ink;
-	font-size: clamp(0.82rem, 0.25vw + 0.78rem, 0.95rem);
+	font-size: @font-size-section-label;
 	font-weight: 700;
 	letter-spacing: @letter-spacing-sm;
 	text-transform: uppercase;
@@ -694,7 +734,7 @@ main {
 }
 
 .page-section + .page-section {
-	border-top: 0.125rem solid rgba(31, 26, 23, 0.16);
+	border-top: @border-medium solid rgba(31, 26, 23, @opacity-section-border-top);
 	padding-top: @spacing-4xl;
 }
 
@@ -704,15 +744,15 @@ main {
 .page-section button,
 .page-section td,
 .page-section th {
-	font-size: clamp(0.98rem, 0.35vw + 0.92rem, 1.08rem);
+	font-size: @font-size-section-text;
 }
 
 .page-section h3 {
-	font-size: clamp(1.35rem, 0.85vw + 1.15rem, 1.9rem);
+	font-size: @font-size-h3-section;
 }
 
 .page-section h4 {
-	font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem);
+	font-size: @font-size-h4-section;
 }
 
 .hero {
@@ -729,7 +769,7 @@ main {
 
 .hero-text h2 {
 	font-size: @font-size-h2;
-	margin: 0.35rem 0 @spacing-2xl;
+	margin: @margin-hero-h2-top 0 @spacing-2xl;
 	color: @cocoa;
 }
 
@@ -843,8 +883,8 @@ main {
 }
 
 .about-media-circle img {
-	width: clamp(140px, 22vw, 220px);
-	height: clamp(140px, 22vw, 220px);
+	width: clamp(@about-image-size-min, @about-image-size-vw, @about-image-size-max);
+	height: clamp(@about-image-size-min, @about-image-size-vw, @about-image-size-max);
 	object-fit: cover;
 	border-radius: 50%;
 	box-shadow: @card-shadow;
@@ -852,8 +892,19 @@ main {
 }
 
 .about-media-inline {
+	margin: @spacing-xl 0;
+}
+
+.about-media-left {
+	float: left;
+	margin-right: @spacing-3xl;
+	margin-left: 0;
+}
+
+.about-media-right {
 	float: right;
-	margin: @spacing-xl 0 @spacing-xl @spacing-3xl;
+	margin-left: @spacing-3xl;
+	margin-right: 0;
 }
 
 .about-copy {
@@ -865,7 +916,7 @@ main {
 	color: @dusk;
 	white-space: pre-line;
 	text-align: justify;
-	margin: 0 0 1rem 0;
+	margin: 0 0 @margin-paragraph-bottom 0;
 }
 
 .about-copy p:last-child {
@@ -939,6 +990,7 @@ main {
 	border-radius: @gallery-border-radius;
 	overflow: hidden;
 	aspect-ratio: 1.618 / 1;
+	position: relative;
 }
 
 .gallery-grid img {
@@ -949,9 +1001,32 @@ main {
 	transition: transform @transition-smooth;
 }
 
+.gallery-label {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: @spacing-2xl;
+	background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+	color: @white;
+	font-size: @font-size-base;
+	font-weight: 600;
+	letter-spacing: @letter-spacing-xs;
+	text-align: center;
+	opacity: 0;
+	transform: translateY(@spacing-2xl);
+	transition: opacity @transition-smooth, transform @transition-smooth;
+}
+
 .gallery-grid figure:hover img,
 .gallery-grid figure:focus-within img {
-	transform: scale(1.16);
+	transform: scale(@scale-gallery-hover);
+}
+
+.gallery-grid figure:hover .gallery-label,
+.gallery-grid figure:focus-within .gallery-label {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 .quote-grid {
@@ -1049,6 +1124,12 @@ blockquote footer {
 		margin: @spacing-xl auto;
 	}
 
+	.about-media-left,
+	.about-media-right {
+		float: none;
+		margin: @spacing-xl auto;
+	}
+
 	.primary-nav {
 		width: 100%;
 		justify-content: flex-start;
@@ -1062,7 +1143,7 @@ blockquote footer {
 
 @media (min-width: @breakpoint-m) {
 	.about-copy p {
-		text-indent: 2rem;
+		text-indent: @text-indent-about;
 	}
 }
 

@@ -12,6 +12,8 @@ export {
   SITE_META,
   ASSETS,
   STYLING,
+  NOTICE_BAR,
+  ROOM_RESERVATION_CONFIG,
 } from './app.settings';
 
 // Keep ROOM_PRICING for backward compatibility

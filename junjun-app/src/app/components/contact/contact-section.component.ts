@@ -5,6 +5,7 @@ interface ContactInfo {
   phone: string;
   address: string;
   email: string;
+  operationHours: string;
   mapEmbedUrl: string;
 }
 
@@ -27,6 +28,10 @@ interface ContactInfo {
           <div id="id_contactSection_contactEmailWrapper" class="contact-item">
             <span class="contact-label">Email:</span>
             <p id="id_contactSection_contactEmail">{{ contact.email }}</p>
+          </div>
+          <div id="id_contactSection_contactHoursWrapper" class="contact-item">
+            <span class="contact-label">Hours:</span>
+            <p id="id_contactSection_contactHours">{{ contact.operationHours }}</p>
           </div>
         </div>
       </div>

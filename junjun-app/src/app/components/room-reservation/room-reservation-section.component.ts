@@ -1,44 +1,59 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Input } from '@angular/core';
+
+interface RoomReservationVisibility {
+  showContent: boolean;
+  showHighlights: boolean;
+  showForm: boolean;
+}
 
 @Component({
   selector: 'app-room-reservation-section',
   standalone: true,
   template: `
     <div id="id_roomReservationSection_layout" class="reservation-layout">
-      <div id="id_roomReservationSection_content" class="reservation-content">
-        <h3 id="id_roomReservationSection_title">Reserve your room with no online fee</h3>
-        <p id="id_roomReservationSection_description">
-          Reservations can be made without a credit card. Cash deposit reservations are accepted in person.
-        </p>
-        <ul id="id_roomReservationSection_highlightList" class="reservation-highlights">
-          @for (highlight of highlights; track highlight; let highlightIndex = $index) {
-            <li [attr.id]="'id_roomReservationSection_highlightItem_' + highlightIndex">{{ highlight }}</li>
+      @if (config.showContent || config.showHighlights) {
+        <div id="id_roomReservationSection_content" class="reservation-content">
+          @if (config.showContent) {
+            <h3 id="id_roomReservationSection_title">Reserve your room with no online fee</h3>
+            <p id="id_roomReservationSection_description">
+              Reservations can be made without a credit card. Cash deposit reservations are accepted in person.
+            </p>
           }
-        </ul>
-      </div>
+          @if (config.showHighlights) {
+            <ul id="id_roomReservationSection_highlightList" class="reservation-highlights">
+              @for (highlight of highlights; track highlight; let highlightIndex = $index) {
+                <li [attr.id]="'id_roomReservationSection_highlightItem_' + highlightIndex">{{ highlight }}</li>
+              }
+            </ul>
+          }
+        </div>
+      }
 
-      <form id="id_roomReservationSection_form" class="reservation-form" (submit)="submitReservation($event)">
-        <label id="id_roomReservationSection_checkInLabel" for="id_roomReservationSection_checkInInput">Check-in</label>
-        <input id="id_roomReservationSection_checkInInput" type="date" required />
+      @if (config.showForm) {
+        <form id="id_roomReservationSection_form" class="reservation-form" (submit)="submitReservation($event)">
+          <label id="id_roomReservationSection_checkInLabel" for="id_roomReservationSection_checkInInput">Check-in</label>
+          <input id="id_roomReservationSection_checkInInput" type="date" required />
 
-        <label id="id_roomReservationSection_checkOutLabel" for="id_roomReservationSection_checkOutInput">Check-out</label>
-        <input id="id_roomReservationSection_checkOutInput" type="date" required />
+          <label id="id_roomReservationSection_checkOutLabel" for="id_roomReservationSection_checkOutInput">Check-out</label>
+          <input id="id_roomReservationSection_checkOutInput" type="date" required />
 
-        <label id="id_roomReservationSection_guestCountLabel" for="id_roomReservationSection_guestCountInput">Guests</label>
-        <input id="id_roomReservationSection_guestCountInput" type="number" min="1" max="10" value="2" required />
+          <label id="id_roomReservationSection_guestCountLabel" for="id_roomReservationSection_guestCountInput">Guests</label>
+          <input id="id_roomReservationSection_guestCountInput" type="number" min="1" max="10" value="2" required />
 
-        <label id="id_roomReservationSection_emailLabel" for="id_roomReservationSection_emailInput">Email</label>
-        <input id="id_roomReservationSection_emailInput" type="email" placeholder="you@example.com" required />
+          <label id="id_roomReservationSection_emailLabel" for="id_roomReservationSection_emailInput">Email</label>
+          <input id="id_roomReservationSection_emailInput" type="email" placeholder="you@example.com" required />
 
-        <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">Submit Reservation Request</button>
-      </form>
+          <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">Submit Reservation Request</button>
+        </form>
+      }
     </div>
   `,
   styles: [
     `
       .reservation-layout {
         display: grid;
-        grid-template-columns: 1.2fr 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
         gap: 1.5rem;
       }
 
@@ -96,6 +111,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomReservationSectionComponent {
+    @Input({ required: true }) config!: RoomReservationVisibility;
+
   readonly highlights = [
     '4-hour temporary rooms currently from CAD $50 (cash price after tax)',
     'Check-in from 1:00 PM and check-out by 12:00 PM (noon)',
