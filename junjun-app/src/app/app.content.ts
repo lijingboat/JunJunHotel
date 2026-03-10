@@ -17,6 +17,7 @@ export {
   ROOM_RESERVATION_CONFIG,
   NAV_LANGUAGE_CONFIG,
   PRICING_DISPLAY_CONFIG,
+  STRINGS,
 } from './app.settings';
 
 // Keep ROOM_PRICING for backward compatibility

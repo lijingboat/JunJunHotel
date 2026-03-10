@@ -10,16 +10,8 @@
       ></app-navigation-toggle>
     </app-navigation-brand>
     <div id="id_appComponent_navCluster" class="nav-cluster" [class.open]="isMenuOpen">
-      <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
-        @for (link of navLinks; track link.label; let linkIndex = $index) {
-          <app-navigation-link [id]="'id_appComponent_navLink_' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
-        }
-      </nav>
-      <app-navigation-cta id="id_appComponent_navigationCta" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
-
       @if (navLanguageConfig.visible) {
         <div id="id_appComponent_navLanguage" class="nav-language">
-          <label id="id_appComponent_navLanguageLabel" class="nav-language__label" for="id_appComponent_navLanguageSelect">Language</label>
           <select id="id_appComponent_navLanguageSelect" class="nav-language__select" [value]="selectedLanguage" (change)="onLanguageChange($event)">
             @for (option of navLanguageConfig.options; track option.value) {
               <option [value]="option.value">{{ option.label }}</option>
@@ -27,6 +19,12 @@
           </select>
         </div>
       }
+      <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
+        @for (link of translatedNavLinks; track link.label; let linkIndex = $index) {
+          <app-navigation-link [id]="'id_appComponent_navLink_' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
+        }
+      </nav>
+      <app-navigation-cta id="id_appComponent_navigationCta" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
     </div>
   </header>
 
@@ -48,11 +46,11 @@
   <main id="id_appComponent_main">
     <!-- About -->
     <section id="id_appComponent_aboutSection" class="panel about page-section">
-      <p id="id_appComponent_aboutLabel" class="section-label">About</p>
+      <p id="id_appComponent_aboutLabel" class="section-label">{{ translatedNavLinks[0].label }}</p>
       <div id="id_appComponent_aboutContent" class="about-content">
-        <h3 id="id_appComponent_aboutTitle">{{ about.title }}</h3>
+        <h3 id="id_appComponent_aboutTitle">{{ translatedAboutTitle }}</h3>
         <div id="id_appComponent_aboutCopy" class="about-copy">
-          @for (paragraph of aboutParagraphs; track paragraph; let paragraphIndex = $index) {
+          @for (paragraph of translatedAboutParagraphs; track paragraph; let paragraphIndex = $index) {
             <p [attr.id]="'id_appComponent_aboutBody_' + paragraphIndex">
               @if (paragraphIndex < aboutImages.length) {
                 <img
@@ -74,12 +72,7 @@
 
     <!-- Pricing -->
     <section id="id_appComponent_pricingSection" class="panel apartments page-section">
-      <p id="id_appComponent_pricingLabel" class="section-label">Pricing</p>
-      <header id="id_appComponent_pricingHeader" class="panel-header">
-        <div id="id_appComponent_pricingHeaderContent">
-          <h3 id="id_appComponent_pricingTitle">{{ pricingTitle }}</h3>
-        </div>
-      </header>
+      <p id="id_appComponent_pricingLabel" class="section-label">{{ translatedPricingLabel }}</p>
       <div id="id_appComponent_pricingTableWrapper" class="pricing-table-wrapper">
         <table
           id="id_appComponent_pricingTable"
@@ -96,13 +89,13 @@
                   scope="col"
                   [style.width.%]="column.width[currentViewport]"
                 >
-                  {{ column.title[currentViewport] }}
+                  {{ getTranslatedPricingColumnTitle(column.key) }}
                 </th>
               }
             </tr>
           </thead>
           <tbody id="id_appComponent_pricingTableBody">
-            @for (room of roomPricing; track room.roomType; let roomIndex = $index) {
+            @for (room of translatedPricingRooms; track room.roomType; let roomIndex = $index) {
               <tr [attr.id]="'id_appComponent_pricingRow_' + roomIndex">
                 @for (column of visiblePricingColumns; track column.key) {
                   <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex">
@@ -118,15 +111,15 @@
 
     <!-- Room Reservation -->
     <section id="id_appComponent_roomReservationSection" class="panel room-reservation page-section">
-      <p id="id_appComponent_roomReservationLabel" class="section-label">Room Reservation</p>
+      <p id="id_appComponent_roomReservationLabel" class="section-label">{{ translatedNavLinks[0] ? translatedNavLinks[0].label : 'Room Reservation' }}</p>
       <app-room-reservation-section id="id_appComponent_roomReservation" [config]="roomReservationConfig"></app-room-reservation-section>
     </section>
 
     <!-- Gallery -->
     <section id="id_appComponent_gallerySection" class="panel gallery page-section">
-      <p id="id_appComponent_galleryLabel" class="section-label">Gallery</p>
+      <p id="id_appComponent_galleryLabel" class="section-label">{{ translatedGalleryLabel }}</p>
       <div id="id_appComponent_galleryGrid" class="gallery-grid">
-        @for (image of galleryImages; track image.src; let galleryIndex = $index) {
+        @for (image of translatedGalleryImages; track image.src; let galleryIndex = $index) {
           <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex" class="gallery-item">
             <img [attr.id]="'id_appComponent_galleryImage_' + galleryIndex" [src]="image.src" alt="{{ image.alt }}" title="{{ image.alt }}" />
             <figcaption [attr.id]="'id_appComponent_galleryLabel_' + galleryIndex" class="gallery-label">{{ image.label }}</figcaption>
@@ -137,19 +130,19 @@
 
     <!-- FAQ -->
     <section id="id_appComponent_faqSection" class="panel faq page-section">
-      <p id="id_appComponent_faqLabel" class="section-label">Frenently Asked Questions</p>
+      <p id="id_appComponent_faqLabel" class="section-label">{{ translatedFaqLabel }}</p>
       <div id="id_appComponent_faqGrid" class="faq-grid">
-        @for (item of faqs; track item.title; let faqIndex = $index) {
-          <article [attr.id]="'id_appComponent_faqItem_' + faqIndex" [style.--faq-highlight]="item.highlightColor">
+        @for (item of translatedFaqs; track item.title; let faqIndex = $index) {
+          <article [attr.id]="'id_appComponent_faqItem_' + faqIndex" [style.--faq-highlight]="faqs[faqIndex].highlightColor">
             @if (faqConfig.showIndex) {
               <p [attr.id]="'id_appComponent_faqIndex_' + faqIndex" class="faq-index-line">
                 <span class="faq-index-text" [style.color]="faqConfig.indexHighlightTextColor">{{ getFaqIndexLabel(faqIndex) }}</span>
               </p>
             }
             <p [attr.id]="'id_appComponent_faqItemQuestion_' + faqIndex" class="faq-line">
-              <strong>{{ faqConfig.questionPrefix }}:</strong> {{ item.title }}
+              <strong>{{ translatedFaqPrefix.question }}:</strong> {{ item.title }}
             </p>
-            <p [attr.id]="'id_appComponent_faqItemAnswer_' + faqIndex" class="faq-line"><strong>{{ faqConfig.answerPrefix }}:</strong> {{ item.body }}</p>
+            <p [attr.id]="'id_appComponent_faqItemAnswer_' + faqIndex" class="faq-line"><strong>{{ translatedFaqPrefix.answer }}:</strong> {{ item.body }}</p>
           </article>
         }
       </div>

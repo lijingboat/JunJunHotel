@@ -368,6 +368,8 @@ app-contact-section {
 	font-size: @font-size-nav-footer;
 	text-transform: uppercase;
 	letter-spacing: @letter-spacing-sm;
+	flex-grow: 1;
+	justify-content: center;
 }
 
 .primary-nav a {
@@ -407,20 +409,14 @@ app-contact-section {
 	align-items: center;
 	gap: @gap-nav;
 	margin-left: auto;
+	justify-content: flex-end;
 }
 
 .nav-language {
 	display: inline-flex;
 	align-items: center;
 	gap: @spacing-sm;
-}
-
-.nav-language__label {
-	font-size: @font-size-eyebrow;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: @letter-spacing-sm;
-	color: @dusk;
+	order: 0;
 }
 
 .nav-language__select {
@@ -581,9 +577,7 @@ app-contact-section {
 	}
 
 	.nav-language {
-		width: 100%;
-		justify-content: space-between;
-		margin-left: 0;
+		align-self: flex-start;
 	}
 
 	.nav-cluster,
@@ -728,18 +722,25 @@ main {
 	align-items: stretch;
 	text-align: left;
 	gap: @gap-section-vertical;
-	padding-top: @spacing-6xl;
+	padding-top: 0;
 }
 
 .notice-bars-wrapper {
-	width: 100%;
-	margin-top: @spacing-3xl;
+	width: 100vw;
+	margin-left: calc(-50vw + 50%);
+	margin-top: 0;
+	padding: @spacing-2xl @spacing-6xl;
+	background-color: @cream;
+	border-bottom: @border-thin solid @line;
+	position: sticky;
+	top: 3.75rem;
 	z-index: 900;
+	opacity: 1;
 }
 
 .notice-bars-sticky {
 	position: sticky;
-	top: 6.5rem;
+	top: 3.75rem;
 }
 
 .panel {
@@ -766,6 +767,7 @@ main {
 
 .page-section {
 	scroll-margin-top: @scroll-margin-sections;
+	scroll-padding-top: 100px;
 	scroll-snap-align: start;
 	display: flex;
 	flex-direction: column;
@@ -926,6 +928,12 @@ main {
 	box-shadow: @card-shadow;
 	display: inline-block;
 	margin: @spacing-sm @spacing-3xl @spacing-sm 0;
+	transition: transform @transition-smooth;
+	cursor: pointer;
+}
+
+.about-inline-image:hover {
+	transform: scale(1.15);
 }
 
 .about-inline-image--left {
