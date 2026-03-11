@@ -299,6 +299,11 @@ export const STRINGS = {
     },
     contact: {
       label: 'Contact',
+      phoneLabel: 'Phone:',
+      addressLabel: 'Address:',
+      emailLabel: 'Email:',
+      hoursLabel: 'Hours:',
+      mapTitle: 'Jun Jun Hotel map',
       phone: '647-349-9220',
       address: '374 College St. M5T 1S6 Toronto ON CANADA',
       email: 'junjunhotel@gmail.com',
@@ -306,6 +311,25 @@ export const STRINGS = {
     },
     roomReservation: {
       label: 'Room Reservation',
+      title: 'Reserve your room with no online fee',
+      description: 'Reservations can be made without a credit card. Cash deposit reservations are accepted in person.',
+      highlights: [
+        '4-hour temporary rooms currently from CAD $50 (cash price after tax)',
+        'Check-in from 1:00 PM and check-out by 12:00 PM (noon)',
+        'Optional parking available at CAD $10 per spot per night',
+      ],
+      form: {
+        checkInLabel: 'Check-in',
+        checkOutLabel: 'Check-out',
+        guestCountLabel: 'Guests',
+        emailLabel: 'Email',
+        emailPlaceholder: 'you@example.com',
+        submitLabel: 'Submit Reservation Request',
+      },
+    },
+    noticeBars: {
+      notice_welcome: 'Welcome! Special rates available for extended stays. Contact us for details.',
+      notice_faq_help: 'Need answers fast? Click this bar to jump to FAQ item #1.',
     },
     resourceLinks: ['About Us', 'Service', 'Photo', 'FAQ'],
     footer: {
@@ -376,6 +400,11 @@ export const STRINGS = {
     },
     contact: {
       label: 'Contact',
+      phoneLabel: 'Téléphone :',
+      addressLabel: 'Adresse :',
+      emailLabel: 'Courriel :',
+      hoursLabel: 'Heures :',
+      mapTitle: 'Carte de l\'Hôtel Jun Jun',
       phone: '647-349-9220',
       address: '374 College St. M5T 1S6 Toronto ON CANADA',
       email: 'junjunhotel@gmail.com',
@@ -383,6 +412,25 @@ export const STRINGS = {
     },
     roomReservation: {
       label: 'Réservation',
+      title: 'Réservez votre chambre sans frais en ligne',
+      description: 'Les réservations peuvent être faites sans carte de crédit. Les réservations avec dépôt en espèces sont acceptées en personne.',
+      highlights: [
+        'Chambres temporaires de 4 heures actuellement à partir de 50 CAD (prix comptant après taxes)',
+        'Arrivée à partir de 13 h 00 et départ au plus tard à 12 h 00 (midi)',
+        'Stationnement en option disponible à 10 CAD par place et par nuit',
+      ],
+      form: {
+        checkInLabel: 'Arrivée',
+        checkOutLabel: 'Départ',
+        guestCountLabel: 'Clients',
+        emailLabel: 'Courriel',
+        emailPlaceholder: 'vous@exemple.com',
+        submitLabel: 'Envoyer la demande de réservation',
+      },
+    },
+    noticeBars: {
+      notice_welcome: 'Bienvenue ! Des tarifs spéciaux sont offerts pour les séjours prolongés. Contactez-nous pour en savoir plus.',
+      notice_faq_help: 'Besoin d\'une réponse rapide ? Cliquez sur cette barre pour accéder à la FAQ no 1.',
     },
     resourceLinks: ['À Propos', 'Service', 'Photos', 'FAQ'],
     footer: {
@@ -453,6 +501,11 @@ export const STRINGS = {
     },
     contact: {
       label: '联系',
+      phoneLabel: '电话：',
+      addressLabel: '地址：',
+      emailLabel: '邮箱：',
+      hoursLabel: '营业时间：',
+      mapTitle: '君君酒店地图',
       phone: '647-349-9220',
       address: '374 College St. M5T 1S6 Toronto ON CANADA',
       email: 'junjunhotel@gmail.com',
@@ -460,6 +513,25 @@ export const STRINGS = {
     },
     roomReservation: {
       label: '预订',
+      title: '预订房间，无需在线手续费',
+      description: '无需信用卡即可预订。也接受到店现金押金预订。',
+      highlights: [
+        '4小时临时房目前现金含税价低至 50 加元',
+        '入住时间下午 1:00 起，退房时间中午 12:00 前',
+        '可选停车位，每晚每个车位 10 加元',
+      ],
+      form: {
+        checkInLabel: '入住日期',
+        checkOutLabel: '退房日期',
+        guestCountLabel: '人数',
+        emailLabel: '邮箱',
+        emailPlaceholder: 'you@example.com',
+        submitLabel: '提交预订请求',
+      },
+    },
+    noticeBars: {
+      notice_welcome: '欢迎入住！长住可享特别优惠，详情请联系我们。',
+      notice_faq_help: '想快速找到答案？点击此通知可跳转到常见问题第 1 项。',
     },
     resourceLinks: ['关于我们', '服务', '照片', '常见问题'],
     footer: {

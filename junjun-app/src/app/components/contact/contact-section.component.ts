@@ -9,6 +9,14 @@ interface ContactInfo {
   mapEmbedUrl: string;
 }
 
+interface ContactCardLabels {
+  phone: string;
+  address: string;
+  email: string;
+  hours: string;
+  mapTitle: string;
+}
+
 @Component({
   selector: 'app-contact-section',
   standalone: true,
@@ -18,19 +26,19 @@ interface ContactInfo {
         <h3 id="id_contactSection_contactTitle">{{ brand }}</h3>
         <div id="id_contactSection_contactList" class="contact-list">
           <div id="id_contactSection_contactPhoneWrapper" class="contact-item">
-            <span class="contact-label">Phone:</span>
+            <span class="contact-label">{{ labels.phone }}</span>
             <p id="id_contactSection_contactPhone">{{ contact.phone }}</p>
           </div>
           <div id="id_contactSection_contactAddressWrapper" class="contact-item">
-            <span class="contact-label">Address:</span>
+            <span class="contact-label">{{ labels.address }}</span>
             <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>
           </div>
           <div id="id_contactSection_contactEmailWrapper" class="contact-item">
-            <span class="contact-label">Email:</span>
+            <span class="contact-label">{{ labels.email }}</span>
             <p id="id_contactSection_contactEmail">{{ contact.email }}</p>
           </div>
           <div id="id_contactSection_contactHoursWrapper" class="contact-item">
-            <span class="contact-label">Hours:</span>
+            <span class="contact-label">{{ labels.hours }}</span>
             <p id="id_contactSection_contactHours">{{ contact.operationHours }}</p>
           </div>
         </div>
@@ -39,7 +47,7 @@ interface ContactInfo {
         <iframe
           id="id_contactSection_mapFrame"
           [src]="safeMapUrl"
-          title="Jun Jun Hotel map"
+          [title]="labels.mapTitle"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
@@ -110,6 +118,7 @@ interface ContactInfo {
 export class ContactSectionComponent implements OnInit {
   @Input({ required: true }) brand = '';
   @Input({ required: true }) contact!: ContactInfo;
+  @Input({ required: true }) labels!: ContactCardLabels;
   @Input({ required: true }) resourceLinks: string[] = [];
   @Output() linkClick = new EventEmitter<Event>();
 

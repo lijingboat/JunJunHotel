@@ -25,11 +25,11 @@
             <app-navigation-link [id]="'id_appComponent_navLink_' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
           }
           @if (currentViewport === 'xs' || currentViewport === 's') {
-            <app-navigation-cta id="id_appComponent_navigationCtaMobile" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+            <app-navigation-cta id="id_appComponent_navigationCtaMobile" [label]="translatedRoomReservationLabel" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
           }
         </nav>
         @if (currentViewport !== 'xs' && currentViewport !== 's') {
-          <app-navigation-cta id="id_appComponent_navigationCta" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+          <app-navigation-cta id="id_appComponent_navigationCta" [label]="translatedRoomReservationLabel" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
         }
       </div>
     </div>
@@ -118,8 +118,8 @@
 
     <!-- Room Reservation -->
     <section id="id_appComponent_roomReservationSection" class="panel room-reservation page-section">
-      <p id="id_appComponent_roomReservationLabel" class="section-label">{{ translatedNavLinks[0] ? translatedNavLinks[0].label : 'Room Reservation' }}</p>
-      <app-room-reservation-section id="id_appComponent_roomReservation" [config]="roomReservationConfig"></app-room-reservation-section>
+      <p id="id_appComponent_roomReservationLabel" class="section-label">{{ translatedRoomReservationLabel }}</p>
+      <app-room-reservation-section id="id_appComponent_roomReservation" [config]="roomReservationConfig" [copy]="translatedRoomReservationCopy"></app-room-reservation-section>
     </section>
 
     <!-- Gallery -->
@@ -157,8 +157,15 @@
 
     <!-- Contact -->
     <section id="id_appComponent_contactSection" class="panel contact page-section">
-      <p id="id_appComponent_contactLabel" class="section-label">Contact</p>
-      <app-contact-section id="id_appComponent_contactComponent" [brand]="brand" [contact]="contact" [resourceLinks]="resourceLinks" (linkClick)="stopNavigation($event)"></app-contact-section>
+      <p id="id_appComponent_contactLabel" class="section-label">{{ translatedContactLabel }}</p>
+      <app-contact-section
+        id="id_appComponent_contactComponent"
+        [brand]="brand"
+        [contact]="translatedContact"
+        [labels]="translatedContactCardLabels"
+        [resourceLinks]="translatedResourceLinks"
+        (linkClick)="stopNavigation($event)"
+      ></app-contact-section>
     </section>
   </main>
 

@@ -106,15 +106,21 @@ export class AppComponent {
 
   get activeNoticeBars() {
     const today = this.toIsoDate(new Date());
-    return this.noticeBars.filter((notice) => {
-      if (!notice.visible) {
-        return false;
-      }
+    const strings = this.getCurrentLanguageStrings();
+    return this.noticeBars
+      .filter((notice) => {
+        if (!notice.visible) {
+          return false;
+        }
 
-      const beginDate = notice.beginDate ?? (this.noticeBarConfig.defaultBeginDate === 'today' ? today : this.noticeBarConfig.defaultBeginDate);
-      const expireDate = notice.expireDate ?? this.noticeBarConfig.defaultExpireDate;
-      return beginDate <= today && today <= expireDate;
-    });
+        const beginDate = notice.beginDate ?? (this.noticeBarConfig.defaultBeginDate === 'today' ? today : this.noticeBarConfig.defaultBeginDate);
+        const expireDate = notice.expireDate ?? this.noticeBarConfig.defaultExpireDate;
+        return beginDate <= today && today <= expireDate;
+      })
+      .map((notice) => ({
+        ...notice,
+        message: strings.noticeBars?.[notice.id] ?? notice.message,
+      }));
   }
 
   getPricingValue(room: (typeof this.roomPricing)[number], key: RoomKey): string {
@@ -273,6 +279,48 @@ export class AppComponent {
 
   get translatedContactHours(): string {
     return this.getCurrentLanguageStrings().contact.operationHours;
+  }
+
+  get translatedContact() {
+    return {
+      ...this.contact,
+      phone: this.translatedContactPhone,
+      address: this.translatedContactAddress,
+      email: this.translatedContactEmail,
+      operationHours: this.translatedContactHours,
+    };
+  }
+
+  get translatedContactCardLabels() {
+    const strings = this.getCurrentLanguageStrings();
+    return {
+      phone: strings.contact.phoneLabel,
+      address: strings.contact.addressLabel,
+      email: strings.contact.emailLabel,
+      hours: strings.contact.hoursLabel,
+      mapTitle: strings.contact.mapTitle,
+    };
+  }
+
+  get translatedRoomReservationLabel(): string {
+    return this.getCurrentLanguageStrings().roomReservation.label;
+  }
+
+  get translatedRoomReservationCopy() {
+    const strings = this.getCurrentLanguageStrings();
+    return {
+      title: strings.roomReservation.title,
+      description: strings.roomReservation.description,
+      highlights: [...strings.roomReservation.highlights],
+      form: {
+        checkInLabel: strings.roomReservation.form.checkInLabel,
+        checkOutLabel: strings.roomReservation.form.checkOutLabel,
+        guestCountLabel: strings.roomReservation.form.guestCountLabel,
+        emailLabel: strings.roomReservation.form.emailLabel,
+        emailPlaceholder: strings.roomReservation.form.emailPlaceholder,
+        submitLabel: strings.roomReservation.form.submitLabel,
+      },
+    };
   }
 
   get translatedResourceLinks(): string[] {

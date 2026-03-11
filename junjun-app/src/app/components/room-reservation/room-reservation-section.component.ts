@@ -7,6 +7,20 @@ interface RoomReservationVisibility {
   showForm: boolean;
 }
 
+interface RoomReservationCopy {
+  title: string;
+  description: string;
+  highlights: string[];
+  form: {
+    checkInLabel: string;
+    checkOutLabel: string;
+    guestCountLabel: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    submitLabel: string;
+  };
+}
+
 @Component({
   selector: 'app-room-reservation-section',
   standalone: true,
@@ -15,14 +29,14 @@ interface RoomReservationVisibility {
       @if (config.showContent || config.showHighlights) {
         <div id="id_roomReservationSection_content" class="reservation-content">
           @if (config.showContent) {
-            <h3 id="id_roomReservationSection_title">Reserve your room with no online fee</h3>
+            <h3 id="id_roomReservationSection_title">{{ copy.title }}</h3>
             <p id="id_roomReservationSection_description">
-              Reservations can be made without a credit card. Cash deposit reservations are accepted in person.
+              {{ copy.description }}
             </p>
           }
           @if (config.showHighlights) {
             <ul id="id_roomReservationSection_highlightList" class="reservation-highlights">
-              @for (highlight of highlights; track highlight; let highlightIndex = $index) {
+              @for (highlight of copy.highlights; track highlight; let highlightIndex = $index) {
                 <li [attr.id]="'id_roomReservationSection_highlightItem_' + highlightIndex">{{ highlight }}</li>
               }
             </ul>
@@ -32,19 +46,19 @@ interface RoomReservationVisibility {
 
       @if (config.showForm) {
         <form id="id_roomReservationSection_form" class="reservation-form" (submit)="submitReservation($event)">
-          <label id="id_roomReservationSection_checkInLabel" for="id_roomReservationSection_checkInInput">Check-in</label>
+          <label id="id_roomReservationSection_checkInLabel" for="id_roomReservationSection_checkInInput">{{ copy.form.checkInLabel }}</label>
           <input id="id_roomReservationSection_checkInInput" type="date" required />
 
-          <label id="id_roomReservationSection_checkOutLabel" for="id_roomReservationSection_checkOutInput">Check-out</label>
+          <label id="id_roomReservationSection_checkOutLabel" for="id_roomReservationSection_checkOutInput">{{ copy.form.checkOutLabel }}</label>
           <input id="id_roomReservationSection_checkOutInput" type="date" required />
 
-          <label id="id_roomReservationSection_guestCountLabel" for="id_roomReservationSection_guestCountInput">Guests</label>
+          <label id="id_roomReservationSection_guestCountLabel" for="id_roomReservationSection_guestCountInput">{{ copy.form.guestCountLabel }}</label>
           <input id="id_roomReservationSection_guestCountInput" type="number" min="1" max="10" value="2" required />
 
-          <label id="id_roomReservationSection_emailLabel" for="id_roomReservationSection_emailInput">Email</label>
-          <input id="id_roomReservationSection_emailInput" type="email" placeholder="you@example.com" required />
+          <label id="id_roomReservationSection_emailLabel" for="id_roomReservationSection_emailInput">{{ copy.form.emailLabel }}</label>
+          <input id="id_roomReservationSection_emailInput" type="email" [placeholder]="copy.form.emailPlaceholder" required />
 
-          <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">Submit Reservation Request</button>
+          <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">{{ copy.form.submitLabel }}</button>
         </form>
       }
     </div>
@@ -111,13 +125,8 @@ interface RoomReservationVisibility {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomReservationSectionComponent {
-    @Input({ required: true }) config!: RoomReservationVisibility;
-
-  readonly highlights = [
-    '4-hour temporary rooms currently from CAD $50 (cash price after tax)',
-    'Check-in from 1:00 PM and check-out by 12:00 PM (noon)',
-    'Optional parking available at CAD $10 per spot per night',
-  ];
+  @Input({ required: true }) config!: RoomReservationVisibility;
+  @Input({ required: true }) copy!: RoomReservationCopy;
 
   submitReservation(event: Event): void {
     event.preventDefault();
