@@ -1,47 +1,54 @@
 <div id="id_appComponent_pageShell" class="page-shell">
   <!-- Site navigation -->
   <header id="id_appComponent_siteHeader" class="site-header" [class.menu-open]="isMenuOpen">
-    <app-navigation-brand id="id_appComponent_navigationBrand" [brand]="brand" [brandIcon]="brandIcon" (navigateHome)="scrollToTop()">
-      <app-navigation-toggle
-        id="id_appComponent_navigationToggle"
-        [isOpen]="isMenuOpen"
-        controlsId="id_appComponent_primaryNavigation"
-        (toggle)="toggleMenu()"
-      ></app-navigation-toggle>
-    </app-navigation-brand>
-    <div id="id_appComponent_navCluster" class="nav-cluster" [class.open]="isMenuOpen">
-      @if (navLanguageConfig.visible) {
-        <div id="id_appComponent_navLanguage" class="nav-language">
-          <select id="id_appComponent_navLanguageSelect" class="nav-language__select" [value]="selectedLanguage" (change)="onLanguageChange($event)">
-            @for (option of navLanguageConfig.options; track option.value) {
-              <option [value]="option.value">{{ option.label }}</option>
-            }
-          </select>
-        </div>
-      }
-      <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
-        @for (link of translatedNavLinks; track link.label; let linkIndex = $index) {
-          <app-navigation-link [id]="'id_appComponent_navLink_' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
+    <div class="site-header__navRow">
+      <app-navigation-brand id="id_appComponent_navigationBrand" [brand]="brand" [brandIcon]="brandIcon" (navigateHome)="scrollToTop()">
+        <app-navigation-toggle
+          id="id_appComponent_navigationToggle"
+          [isOpen]="isMenuOpen"
+          controlsId="id_appComponent_primaryNavigation"
+          (toggle)="toggleMenu()"
+        ></app-navigation-toggle>
+      </app-navigation-brand>
+      <div id="id_appComponent_navCluster" class="nav-cluster" [class.open]="isMenuOpen">
+        @if (navLanguageConfig.visible) {
+          <div id="id_appComponent_navLanguage" class="nav-language">
+            <select id="id_appComponent_navLanguageSelect" class="nav-language__select" [value]="selectedLanguage" (change)="onLanguageChange($event)">
+              @for (option of navLanguageConfig.options; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+          </div>
         }
-      </nav>
-      <app-navigation-cta id="id_appComponent_navigationCta" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+        <nav id="id_appComponent_primaryNavigation" class="primary-nav" aria-label="Primary">
+          @for (link of translatedNavLinks; track link.label; let linkIndex = $index) {
+            <app-navigation-link [id]="'id_appComponent_navLink_' + linkIndex" [label]="link.label" (navigate)="scrollTo(link.target, $event)"></app-navigation-link>
+          }
+          @if (currentViewport === 'xs' || currentViewport === 's') {
+            <app-navigation-cta id="id_appComponent_navigationCtaMobile" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+          }
+        </nav>
+        @if (currentViewport !== 'xs' && currentViewport !== 's') {
+          <app-navigation-cta id="id_appComponent_navigationCta" label="Room Reservation" (clicked)="scrollTo('#id_appComponent_roomReservationSection', $event)"></app-navigation-cta>
+        }
+      </div>
     </div>
+
+    <section id="id_appComponent_noticeBars" class="notice-bars-wrapper" [class.notice-bars-sticky]="noticeBarConfig.stickyBelowNav">
+      @for (notice of activeNoticeBars; track notice.id) {
+        <app-notice-bar
+          [id]="'id_appComponent_noticeBar_' + notice.id"
+          [config]="notice"
+          [textColor]="noticeBarConfig.defaultTextColor"
+          (navigateToFaq)="onNoticeNavigateToFaq($event)"
+        ></app-notice-bar>
+      }
+    </section>
   </header>
 
   @if (isMenuOpen) {
 	  <div id="id_appComponent_navOverlay" class="nav-overlay" (click)="closeMenu()"></div>
   }
-
-  <section id="id_appComponent_noticeBars" class="notice-bars-wrapper" [class.notice-bars-sticky]="noticeBarConfig.stickyBelowNav">
-    @for (notice of activeNoticeBars; track notice.id) {
-      <app-notice-bar
-        [id]="'id_appComponent_noticeBar_' + notice.id"
-        [config]="notice"
-        [textColor]="noticeBarConfig.defaultTextColor"
-        (navigateToFaq)="onNoticeNavigateToFaq($event)"
-      ></app-notice-bar>
-    }
-  </section>
 
   <main id="id_appComponent_main">
     <!-- About -->
