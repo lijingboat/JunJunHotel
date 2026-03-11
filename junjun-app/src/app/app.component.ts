@@ -187,7 +187,16 @@ export class AppComponent {
       return;
     }
 
-    document.querySelector(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const targetElement = document.querySelector(target) as HTMLElement | null;
+    if (!targetElement) {
+      return;
+    }
+
+    const headerElement = document.getElementById('id_appComponent_siteHeader');
+    const headerOffset = headerElement?.getBoundingClientRect().height ?? 0;
+    const targetTop = window.scrollY + targetElement.getBoundingClientRect().top - headerOffset - 16;
+
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
   }
 
   private toIsoDate(date: Date): string {

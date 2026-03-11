@@ -93,3 +93,36 @@ Completed requested nav/header layout updates for responsive behavior and correc
 - Initial bundle budget exceeded by `42.48 kB` (total `542.48 kB`)
 - `app.component.less` exceeded style budget by `3.38 kB` (total `13.38 kB`)
 - Existing selector warning remains: `.form-floating>~label`
+
+---
+
+## Follow-up Fix (Nav Spacing + Scroll Offset)
+
+### A) Language dropdown refinement
+- Shrunk `id_appComponent_navLanguageSelect` horizontal padding slightly.
+- Added a language SVG icon before the dropdown and sized it to align with the control text.
+- Added a small desktop gap between the language selector block and the first nav link (`ABOUT`).
+- File:
+  - `junjun-app/src/app/app.component.html`
+  - `junjun-app/src/app/app.component.less`
+
+### B) Notice-bar spacing refinement
+- Reduced vertical spacing between the notice bars.
+- Reduced the bottom spacing for `id_appComponent_noticeBar_notice_faq_help` further.
+- File:
+  - `junjun-app/src/app/app.component.less`
+
+### C) Click/scroll positioning fix after header notice-bar insertion
+- Replaced plain `scrollIntoView()` with a sticky-header-aware scroll calculation.
+- Scroll targets now subtract the current `id_appComponent_siteHeader` height so full section tops and FAQ content remain visible after nav/CTA/notice clicks.
+- File:
+  - `junjun-app/src/app/app.component.ts`
+
+## Latest Validation
+- Diagnostics (`get_errors`) on modified files: no errors
+- Build: `npm run build` in `junjun-app` succeeded
+
+## Latest Non-blocking warnings observed
+- Initial bundle budget exceeded by `43.85 kB` (total `543.85 kB`)
+- `app.component.less` exceeded style budget by `3.61 kB` (total `13.61 kB`)
+- Existing selector warning remains: `.form-floating>~label`
