@@ -304,7 +304,7 @@ app-contact-section {
 	top: 0;
 	left: 0;
 	background: @gradient-page-shell;
-	padding: @padding-responsive;
+	padding: 0 @padding-responsive @padding-responsive;
 }
 
 .site-header {
@@ -706,7 +706,7 @@ app-contact-section {
 
 @media (max-width: (@breakpoint-s - 1)) {
 	.page-shell {
-		padding: @padding-mobile;
+		padding: 0 @padding-mobile @padding-mobile;
 	}
 
 	.site-header {
@@ -1078,7 +1078,7 @@ main {
 	margin: 0;
 	border-radius: @gallery-border-radius;
 	overflow: hidden;
-	height: var(--gallery-item-height, @height-gallery-item);
+	aspect-ratio: var(--gallery-item-ratio, 1 / 0.168);
 	position: relative;
 }
 

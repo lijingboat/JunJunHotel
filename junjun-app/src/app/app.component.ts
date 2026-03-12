@@ -6,6 +6,7 @@ import { NavigationLinkComponent } from './components/navigation/navigation-link
 import { NavigationToggleComponent } from './components/navigation/navigation-toggle.component';
 import { RoomReservationSectionComponent } from './components/room-reservation/room-reservation-section.component';
 import { NoticeBarComponent } from './components/notice-bar/notice-bar.component';
+import { AdminPageComponent } from './components/admin/admin-page.component';
 import {
   ABOUT,
   ABOUT_IMAGES,
@@ -25,6 +26,7 @@ import {
   ROOM_PRICING,
   ROOM_RESERVATION_CONFIG,
   SITE_META,
+  STYLING,
   STRINGS,
 } from './app.content';
 
@@ -34,7 +36,7 @@ type RoomKey = 'roomType' | 'capacity' | 'duration' | 'priceAfterTax' | 'facilit
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ContactSectionComponent, NavigationBrandComponent, NavigationToggleComponent, NavigationLinkComponent, NavigationCtaComponent, RoomReservationSectionComponent, NoticeBarComponent],
+  imports: [ContactSectionComponent, NavigationBrandComponent, NavigationToggleComponent, NavigationLinkComponent, NavigationCtaComponent, RoomReservationSectionComponent, NoticeBarComponent, AdminPageComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.less',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,38 +44,213 @@ type RoomKey = 'roomType' | 'capacity' | 'duration' | 'priceAfterTax' | 'facilit
 })
 export class AppComponent {
   isMenuOpen = false;
-  readonly brand = SITE_META.brand;
-  readonly brandIcon = ASSETS.brandIcon;
+  isAdminRoute = false;
+  private readonly configStorageKey = 'junjun-hotel-config-overrides';
+  brand = SITE_META.brand;
+  brandIcon = ASSETS.brandIcon;
 
-  readonly navLinks = NAV_LINKS;
-  readonly noticeBars = NOTICE_BARS;
-  readonly noticeBarConfig = NOTICE_BAR_CONFIG;
-  readonly about = ABOUT;
-  readonly aboutParagraphs = ABOUT.paragraphs;
-  readonly aboutImages = ABOUT_IMAGES;
-  readonly roomPricing = ROOM_PRICING;
-  readonly pricingColumns = PRICING.columns;
-  readonly pricingDisplayConfig = PRICING_DISPLAY_CONFIG;
-  readonly galleryDisplayConfig = GALLERY_DISPLAY_CONFIG;
-  readonly galleryImages = GALLERY.images;
-  readonly faqs = FAQS;
-  readonly faqConfig = FAQ_CONFIG;
-  readonly contact = CONTACT;
-  readonly resourceLinks = [...RESOURCE_LINKS];
-  readonly navLanguageConfig = NAV_LANGUAGE_CONFIG;
-  readonly strings = STRINGS;
+  navLinks: Array<{ label: string; target: string }> = [];
+  noticeBars: Array<any> = [];
+  noticeBarConfig: any = {};
+  about = this.clone(ABOUT);
+  aboutParagraphs: string[] = [];
+  aboutImages: Array<any> = [];
+  roomPricing: Array<any> = [];
+  pricingColumns: Array<any> = [];
+  pricingDisplayConfig: any = {};
+  galleryDisplayConfig: any = {};
+  galleryImages: Array<any> = [];
+  faqs: Array<any> = [];
+  faqConfig: any = {};
+  contact: any = {};
+  resourceLinks: string[] = [];
+  navLanguageConfig: any = {};
+  strings: any = {};
+  styling: any = {};
   selectedLanguage: string = NAV_LANGUAGE_CONFIG.defaultValue;
   readonly currentYear = SITE_META.year;
-  readonly roomReservationConfig = ROOM_RESERVATION_CONFIG;
+  roomReservationConfig: any = {};
   currentViewport: ViewportTier = 'l';
 
   constructor() {
+    this.resetToDefaults();
+    this.applyPersistedConfig();
+    this.detectRoute();
     this.updateViewportTier();
   }
 
   @HostListener('window:resize')
   onResize(): void {
     this.updateViewportTier();
+  }
+
+  private detectRoute(): void {
+    if (typeof window === 'undefined') {
+      this.isAdminRoute = false;
+      return;
+    }
+
+    const path = window.location.pathname.replace(/\/+$/, '') || '/';
+    this.isAdminRoute = path === '/admin';
+  }
+
+  private clone<T>(value: T): T {
+    return JSON.parse(JSON.stringify(value)) as T;
+  }
+
+  private isPlainObject(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null && !Array.isArray(value);
+  }
+
+  private deepMerge<T>(base: T, override: unknown): T {
+    if (Array.isArray(base)) {
+      return (Array.isArray(override) ? override : base) as T;
+    }
+
+    if (!this.isPlainObject(base)) {
+      return (override ?? base) as T;
+    }
+
+    const baseObj = base as Record<string, unknown>;
+    const overrideObj = this.isPlainObject(override) ? override : {};
+    const result: Record<string, unknown> = { ...baseObj };
+
+    for (const key of Object.keys(overrideObj)) {
+      const baseValue = baseObj[key];
+      const overrideValue = overrideObj[key];
+
+      if (this.isPlainObject(baseValue) && this.isPlainObject(overrideValue)) {
+        result[key] = this.deepMerge(baseValue, overrideValue);
+      } else if (Array.isArray(baseValue)) {
+        result[key] = Array.isArray(overrideValue) ? overrideValue : baseValue;
+      } else {
+        result[key] = overrideValue;
+      }
+    }
+
+    return result as T;
+  }
+
+  private resetToDefaults(): void {
+    this.navLinks = this.clone(NAV_LINKS) as unknown as Array<{ label: string; target: string }>;
+    this.noticeBars = this.clone(NOTICE_BARS) as unknown as Array<any>;
+    this.noticeBarConfig = this.clone(NOTICE_BAR_CONFIG);
+    this.about = this.clone(ABOUT);
+    this.aboutParagraphs = this.clone(ABOUT.paragraphs) as unknown as string[];
+    this.aboutImages = this.clone(ABOUT_IMAGES) as unknown as Array<any>;
+    this.roomPricing = this.clone(ROOM_PRICING) as unknown as Array<any>;
+    this.pricingColumns = this.clone(PRICING.columns) as unknown as Array<any>;
+    this.pricingDisplayConfig = this.clone(PRICING_DISPLAY_CONFIG);
+    this.galleryDisplayConfig = this.clone(GALLERY_DISPLAY_CONFIG);
+    this.galleryImages = this.clone(GALLERY.images) as unknown as Array<any>;
+    this.faqs = this.clone(FAQS) as unknown as Array<any>;
+    this.faqConfig = this.clone(FAQ_CONFIG);
+    this.contact = this.clone(CONTACT);
+    this.resourceLinks = this.clone(RESOURCE_LINKS) as unknown as string[];
+    this.navLanguageConfig = this.clone(NAV_LANGUAGE_CONFIG);
+    this.roomReservationConfig = this.clone(ROOM_RESERVATION_CONFIG);
+    this.strings = this.clone(STRINGS);
+    this.styling = this.clone(STYLING);
+    this.selectedLanguage = this.navLanguageConfig.defaultValue ?? 'en';
+  }
+
+  private applyPersistedConfig(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const raw = window.localStorage.getItem(this.configStorageKey);
+    if (!raw) {
+      return;
+    }
+
+    try {
+      const parsed = JSON.parse(raw) as { layout?: unknown; settings?: unknown };
+      this.applyAdminConfig(parsed.layout, parsed.settings);
+    } catch {
+      // Ignore invalid persisted data.
+    }
+  }
+
+  get adminInitialConfig(): { layout: unknown; settings: unknown } {
+    return {
+      layout: {
+        noticeBarConfig: this.noticeBarConfig,
+        navLanguageConfig: this.navLanguageConfig,
+        pricingDisplayConfig: this.pricingDisplayConfig,
+        galleryDisplayConfig: this.galleryDisplayConfig,
+        roomReservationConfig: this.roomReservationConfig,
+        styling: this.styling,
+      },
+      settings: {
+        navLinks: this.navLinks,
+        noticeBars: this.noticeBars,
+        faqs: this.faqs,
+        faqConfig: this.faqConfig,
+        gallery: { images: this.galleryImages },
+        contact: this.contact,
+        strings: this.strings,
+      },
+    };
+  }
+
+  onAdminSaveOverrides(payload: { layout: unknown; settings: unknown }): void {
+    this.applyAdminConfig(payload.layout, payload.settings);
+
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(this.configStorageKey, JSON.stringify(payload));
+    }
+  }
+
+  onAdminResetOverrides(): void {
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem(this.configStorageKey);
+    }
+    this.resetToDefaults();
+  }
+
+  private applyAdminConfig(layoutOverride: unknown, settingsOverride: unknown): void {
+    const layoutDefault = {
+      noticeBarConfig: this.clone(NOTICE_BAR_CONFIG),
+      navLanguageConfig: this.clone(NAV_LANGUAGE_CONFIG),
+      pricingDisplayConfig: this.clone(PRICING_DISPLAY_CONFIG),
+      galleryDisplayConfig: this.clone(GALLERY_DISPLAY_CONFIG),
+      roomReservationConfig: this.clone(ROOM_RESERVATION_CONFIG),
+      styling: this.clone(STYLING),
+    };
+
+    const settingsDefault = {
+      navLinks: this.clone(NAV_LINKS),
+      noticeBars: this.clone(NOTICE_BARS),
+      faqs: this.clone(FAQS),
+      faqConfig: this.clone(FAQ_CONFIG),
+      gallery: { images: this.clone(GALLERY.images) },
+      contact: this.clone(CONTACT),
+      strings: this.clone(STRINGS),
+    };
+
+    const mergedLayout = this.deepMerge(layoutDefault, layoutOverride) as any;
+    const mergedSettings = this.deepMerge(settingsDefault, settingsOverride) as any;
+
+    this.noticeBarConfig = mergedLayout.noticeBarConfig;
+    this.navLanguageConfig = mergedLayout.navLanguageConfig;
+    this.pricingDisplayConfig = mergedLayout.pricingDisplayConfig;
+    this.galleryDisplayConfig = mergedLayout.galleryDisplayConfig;
+    this.roomReservationConfig = mergedLayout.roomReservationConfig;
+    this.styling = mergedLayout.styling;
+
+    this.navLinks = mergedSettings.navLinks;
+    this.noticeBars = mergedSettings.noticeBars;
+    this.faqs = mergedSettings.faqs;
+    this.faqConfig = mergedSettings.faqConfig;
+    this.galleryImages = mergedSettings.gallery.images;
+    this.contact = mergedSettings.contact;
+    this.strings = mergedSettings.strings;
+
+    const supportedValues = new Set((this.navLanguageConfig.options ?? []).map((option: { value: string }) => option.value));
+    if (!supportedValues.has(this.selectedLanguage)) {
+      this.selectedLanguage = this.navLanguageConfig.defaultValue ?? 'en';
+    }
   }
 
   private updateViewportTier(): void {
@@ -211,19 +388,26 @@ export class AppComponent {
 
   // ===== TRANSLATION GETTERS =====
   private getCurrentLanguageStrings(): any {
-    const lang = this.selectedLanguage as any;
-    return (this.strings as any)[lang] || (this.strings as any).en;
+    const allStrings = this.strings as Record<string, unknown>;
+    const english = this.clone((allStrings['en'] ?? {}) as Record<string, unknown>);
+    const selected = (allStrings[this.selectedLanguage] ?? {}) as Record<string, unknown>;
+    return this.deepMerge(english, selected);
   }
 
   get translatedNavLinks(): Array<{ label: string; target: string }> {
     const strings = this.getCurrentLanguageStrings();
-    return [
-      { label: strings.nav.about, target: '#id_appComponent_aboutSection' },
-      { label: strings.nav.pricing, target: '#id_appComponent_pricingSection' },
-      { label: strings.nav.gallery, target: '#id_appComponent_gallerySection' },
-      { label: strings.nav.faq, target: '#id_appComponent_faqSection' },
-      { label: strings.nav.contact, target: '#id_appComponent_contactSection' },
+    const translatedLabels = [
+      strings.nav.about,
+      strings.nav.pricing,
+      strings.nav.gallery,
+      strings.nav.faq,
+      strings.nav.contact,
     ];
+
+    return this.navLinks.map((link, idx) => ({
+      label: translatedLabels[idx] ?? link.label,
+      target: link.target,
+    }));
   }
 
   get translatedAboutTitle(): string {
@@ -257,7 +441,7 @@ export class AppComponent {
 
   get translatedGalleryImages(): any[] {
     const strings = this.getCurrentLanguageStrings();
-    return GALLERY.images.map((img, idx) => ({
+    return this.galleryImages.map((img, idx) => ({
       ...img,
       label: strings.gallery.images[idx]?.label || img.label,
     }));
