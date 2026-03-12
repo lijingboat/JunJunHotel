@@ -14,6 +14,7 @@ import {
   FAQ_CONFIG,
   FAQS,
   GALLERY,
+  GALLERY_DISPLAY_CONFIG,
   NAV_LANGUAGE_CONFIG,
   NAV_LINKS,
   NOTICE_BARS,
@@ -53,6 +54,7 @@ export class AppComponent {
   readonly roomPricing = ROOM_PRICING;
   readonly pricingColumns = PRICING.columns;
   readonly pricingDisplayConfig = PRICING_DISPLAY_CONFIG;
+  readonly galleryDisplayConfig = GALLERY_DISPLAY_CONFIG;
   readonly galleryImages = GALLERY.images;
   readonly faqs = FAQS;
   readonly faqConfig = FAQ_CONFIG;

@@ -123,14 +123,20 @@ export const PRICING = {
 export const GALLERY = {
   description: 'The following are the picked images showcasing our rooms and amenities.',
   images: [
-    { src: 'assets/image/Hotel_Room_01.jpg', alt: 'Hotel room view 1', label: 'Standard Room' },
-    { src: 'assets/image/Hotel_Room_02.jpg', alt: 'Hotel room view 2', label: 'Deluxe Suite' },
-    { src: 'assets/image/Hotel_Room_03.jpg', alt: 'Hotel room view 3', label: 'Queen Bed' },
-    { src: 'assets/image/Hotel_Room_04.jpg', alt: 'Hotel room view 4', label: 'Bathroom' },
-    { src: 'assets/image/Hotel_Room_05.jpg', alt: 'Hotel room view 5', label: 'Living Area' },
-    { src: 'assets/image/Hotel_Room_06.jpg', alt: 'Hotel room view 6', label: 'Amenities' },
-    { src: 'assets/image/Hotel_Room_07.jpg', alt: 'Hotel room view 7', label: 'Room Details' },
-    { src: 'assets/image/Hotel_Room_08.jpg', alt: 'Hotel room view 8', label: 'Comfort Space' },
+    { src: 'assets/image/Hotel_Room_01.jpg', alt: 'Standard room view', label: 'Standard Room' },
+    { src: 'assets/image/Hotel_Room_02.jpg', alt: 'Deluxe suite view', label: 'Deluxe Suite' },
+    { src: 'assets/image/Hotel_Room_03.jpg', alt: 'Queen-size bed setup', label: 'Queen Bed' },
+    { src: 'assets/image/Hotel_Room_04.jpg', alt: 'Private bathroom', label: 'Bathroom' },
+    { src: 'assets/image/Hotel_Room_05.jpg', alt: 'Living and seating area', label: 'Living Area' },
+    { src: 'assets/image/Hotel_Room_06.jpg', alt: 'Room amenities and features', label: 'Amenities' },
+    { src: 'assets/image/Hotel_Room_07.jpg', alt: 'Room details and decor', label: 'Room Details' },
+    { src: 'assets/image/Hotel_Room_08.jpg', alt: 'Comfortable room layout', label: 'Comfort Space' },
+    { src: 'assets/image/Hotel_Room_09.jpg', alt: 'Room with warm natural lighting', label: 'Warm Atmosphere' },
+    { src: 'assets/image/Hotel_Room_10.jpg', alt: 'Essential amenities provided', label: 'Daily Essentials' },
+    { src: 'assets/image/Hotel_Room_11.jpg', alt: 'Well-decorated room interior', label: 'Interior View' },
+    { src: 'assets/image/Hotel_Room_12.jpg', alt: 'Comfortable relaxation corner', label: 'Relaxation Area' },
+    { src: 'assets/image/Hotel_Room_13.jpg', alt: 'Spacious corner of the suite', label: 'Corner Space' },
+    { src: 'assets/image/Hotel_Room_14.jpg', alt: 'Cozy and welcoming setup', label: 'Cozy Setup' },
   ],
 } as const;
 
@@ -209,6 +215,7 @@ export const NOTICE_BAR_CONFIG = {
   defaultTextColor: '#f8f6ef',
   stickyBelowNav: true,
   scrollPaddingTopPx: 100,
+  barGapRem: '0.25rem',
 } as const;
 
 
@@ -231,6 +238,7 @@ export const NAV_LANGUAGE_CONFIG = {
     { value: 'zh', label: '中文' },
   ],
   defaultValue: 'en',
+  iconSizeRem: '1.3rem',
 } as const;
 
 // ===== TRANSLATIONS (INTERNATIONALIZATION) =====
@@ -286,6 +294,12 @@ export const STRINGS = {
         { label: 'Amenities' },
         { label: 'Room Details' },
         { label: 'Comfort Space' },
+        { label: 'Warm Atmosphere' },
+        { label: 'Daily Essentials' },
+        { label: 'Interior View' },
+        { label: 'Relaxation Area' },
+        { label: 'Corner Space' },
+        { label: 'Cozy Setup' },
       ],
     },
     faq: {
@@ -387,6 +401,12 @@ export const STRINGS = {
         { label: 'Équipements' },
         { label: 'Détails de Chambre' },
         { label: 'Espace Confort' },
+        { label: 'Atmosphère Chaleureuse' },
+        { label: 'Essentiels du Quotidien' },
+        { label: 'Vue Intérieure' },
+        { label: 'Espace de Détente' },
+        { label: 'Coin Tranquille' },
+        { label: 'Configuration Confortable' },
       ],
     },
     faq: {
@@ -488,6 +508,12 @@ export const STRINGS = {
         { label: '便利设施' },
         { label: '房间细节' },
         { label: '舒适空间' },
+        { label: '温馨氛围' },
+        { label: '日常必需品' },
+        { label: '室内一角' },
+        { label: '休闲区域' },
+        { label: '角落空间' },
+        { label: '温馨布置' },
       ],
     },
     faq: {
@@ -545,6 +571,11 @@ export const PRICING_DISPLAY_CONFIG = {
   enableRowContrast: true,
   oddRowBackground: '#fff9f5',
   evenRowBackground: '#f7f1ea',
+} as const;
+
+// ===== GALLERY DISPLAY =====
+export const GALLERY_DISPLAY_CONFIG = {
+  itemHeight: '13.75rem',
 } as const;
 
 // ===== STYLING VARIABLES =====

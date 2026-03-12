@@ -431,8 +431,8 @@ app-contact-section {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 1rem;
-	height: 1rem;
+	width: var(--nav-language-icon-size, 1.3rem);
+	height: var(--nav-language-icon-size, 1.3rem);
 	color: @dusk;
 	flex-shrink: 0;
 }
@@ -767,7 +767,7 @@ main {
 	z-index: auto;
 	opacity: 1;
 	display: grid;
-	gap: @spacing-sm;
+	gap: var(--notice-bar-gap, 0.25rem);
 }
 
 .notice-bars-sticky {
@@ -1078,7 +1078,7 @@ main {
 	margin: 0;
 	border-radius: @gallery-border-radius;
 	overflow: hidden;
-	aspect-ratio: 1.618 / 1;
+	height: var(--gallery-item-height, @height-gallery-item);
 	position: relative;
 }
 
@@ -1250,11 +1250,6 @@ blockquote footer {
 }
 
 @media (max-width: (@breakpoint-s - 1)) {
-	.site-header {
-		flex-direction: row;
-		align-items: center;
-	}
-
 	.pricing-table th,
 	.pricing-table td {
 		padding: @spacing-lg @spacing-xl;

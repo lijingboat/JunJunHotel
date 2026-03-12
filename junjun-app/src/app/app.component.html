@@ -12,7 +12,7 @@
       </app-navigation-brand>
       <div id="id_appComponent_navCluster" class="nav-cluster" [class.open]="isMenuOpen">
         @if (navLanguageConfig.visible) {
-          <div id="id_appComponent_navLanguage" class="nav-language">
+          <div id="id_appComponent_navLanguage" class="nav-language" [style.--nav-language-icon-size]="navLanguageConfig.iconSizeRem">
             <span class="nav-language__icon" aria-hidden="true">
               <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" focusable="false">
                 <path d="M478.33,433.6l-90-218a22,22,0,0,0-40.67,0l-90,218a22,22,0,1,0,40.67,16.79L316.66,406H419.33l18.33,44.39A22,22,0,0,0,458,464a22,22,0,0,0,20.32-30.4ZM334.83,362,368,281.65,401.17,362Z"/>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <section id="id_appComponent_noticeBars" class="notice-bars-wrapper" [class.notice-bars-sticky]="noticeBarConfig.stickyBelowNav">
+    <section id="id_appComponent_noticeBars" class="notice-bars-wrapper" [class.notice-bars-sticky]="noticeBarConfig.stickyBelowNav" [style.--notice-bar-gap]="noticeBarConfig.barGapRem">
       @for (notice of activeNoticeBars; track notice.id) {
         <app-notice-bar
           [id]="'id_appComponent_noticeBar_' + notice.id"
@@ -131,7 +131,7 @@
     <!-- Gallery -->
     <section id="id_appComponent_gallerySection" class="panel gallery page-section">
       <p id="id_appComponent_galleryLabel" class="section-label">{{ translatedGalleryLabel }}</p>
-      <div id="id_appComponent_galleryGrid" class="gallery-grid">
+      <div id="id_appComponent_galleryGrid" class="gallery-grid" [style.--gallery-item-height]="galleryDisplayConfig.itemHeight">
         @for (image of translatedGalleryImages; track image.src; let galleryIndex = $index) {
           <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex" class="gallery-item">
             <img [attr.id]="'id_appComponent_galleryImage_' + galleryIndex" [src]="image.src" alt="{{ image.alt }}" title="{{ image.alt }}" />
