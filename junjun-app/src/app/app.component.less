@@ -323,6 +323,7 @@ app-contact-section {
 	-webkit-backdrop-filter: none;
 	backdrop-filter: none;
 	box-shadow: @shadow-site-header;
+	border-radius: @radius-sm;
 }
 
 .site-header__navRow {
@@ -785,9 +786,16 @@ main {
 
 .panel {
 	background: @cream;
-	border-radius: @radius-lg;
+	border-radius: @radius-sm;
 	padding: @padding-responsive-sm;
 	box-shadow: @card-shadow;
+}
+
+.panel.gallery {
+	background-color: #fff8f1;
+	background-image:
+		repeating-linear-gradient(0deg, rgba(193, 138, 95, 0.08) 0, rgba(193, 138, 95, 0.08) 1px, transparent 1px, transparent 24px),
+		repeating-linear-gradient(90deg, rgba(193, 138, 95, 0.07) 0, rgba(193, 138, 95, 0.07) 1px, transparent 1px, transparent 24px);
 }
 
 .section-label {
@@ -1078,7 +1086,7 @@ main {
 	margin: 0;
 	border-radius: @gallery-border-radius;
 	overflow: hidden;
-	aspect-ratio: var(--gallery-item-ratio, 1 / 0.168);
+	aspect-ratio: var(--gallery-item-ratio, 1 / 0.618);
 	position: relative;
 }
 

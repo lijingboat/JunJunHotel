@@ -148,3 +148,47 @@ Six UI/config improvements: nav language icon sizing, notice bar spacing, galler
 
 - `npm run build` completed successfully.
 - Non-blocking warning remains unchanged: selector parse skip (`.form-floating>~label`).
+
+## Update 4 - Requested by user (2026-03-12)
+
+### Implemented
+
+1. Refined config/admin page layout into one unified page (no split tabs).
+2. Added oneTheme dropdown with only one option: `sand`.
+3. Admin fields now grouped by sections (Nav link, Notice bar, About, Pricing, Gallery, FAQ, Contact, Room reservation, Theme Colors).
+4. Admin now shows only English language string config (`settings.strings.en`) and hides other language configs.
+5. Language dropdown labels updated:
+   - Japanese: `日本語`
+   - Simplified Chinese: `简体中文`
+6. Applied light rounded corners to main containers:
+   - Header (`.site-header`)
+   - Section mother containers (`.panel`)
+7. Gallery config expanded with new images up to `Hotel_Room_22.jpg` and meaningful descriptions/labels.
+8. Gallery background now has subtle highlighted grid styling for better visibility.
+9. Admin controls/buttons moved to one top row.
+10. Admin table column widths expanded for better label/content readability.
+11. Removed in-page scroll behavior in admin listing (natural full table flow).
+12. Removed success wording `Unlocked.` on login.
+13. Removed wording:
+  - `One field maps to one config line (one-to-one). Changes save to local browser storage.`
+  - `Layout / Visual Config`
+  - `Color options, dimensions, display and visibility`
+14. Added typed editors in admin table:
+  - Color picker for color fields
+  - Number input with unit column for unitized numeric values
+  - Date picker for ISO date fields
+  - Checkbox for booleans
+15. Converted admin content display to full `<table>` based layout.
+
+### Files Updated
+
+- [junjun-app/src/app/components/admin/admin-page.component.ts](junjun-app/src/app/components/admin/admin-page.component.ts)
+- [junjun-app/src/app/app.settings.ts](junjun-app/src/app/app.settings.ts)
+- [junjun-app/src/app/app.component.ts](junjun-app/src/app/app.component.ts)
+- [junjun-app/src/app/app.component.less](junjun-app/src/app/app.component.less)
+- [junjun-app/angular.json](junjun-app/angular.json)
+
+### Validation
+
+- `npm run build` completed successfully after changes.
+- Remaining warning is existing CSS selector parse skip: `.form-floating>~label`.

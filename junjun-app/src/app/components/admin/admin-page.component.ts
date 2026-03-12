@@ -2,12 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-type FieldType = 'text' | 'number' | 'boolean';
+type FieldType = 'text' | 'number' | 'boolean' | 'color' | 'date';
 
-interface ConfigField {
+interface AdminField {
+  root: 'layout' | 'settings';
   path: string;
+  section: string;
   label: string;
   type: FieldType;
+  unit?: string;
   value: string | number | boolean;
 }
 
@@ -18,7 +21,6 @@ interface ConfigField {
   template: `
     <div class="admin-shell" id="id_admin_shell">
       <h1 id="id_admin_title">Jun Jun Hotel Admin</h1>
-      <p class="admin-note">One field maps to one config line (one-to-one). Changes save to local browser storage.</p>
 
       @if (!isUnlocked) {
         <form class="admin-login" (submit)="unlock($event)">
@@ -31,63 +33,49 @@ interface ConfigField {
         </form>
       } @else {
         <div class="admin-toolbar">
-          <button type="button" [class.active]="activeTab === 'layout'" (click)="activeTab = 'layout'">Layout Config</button>
-          <button type="button" [class.active]="activeTab === 'settings'" (click)="activeTab = 'settings'">Settings Config</button>
-          <button type="button" class="secondary" (click)="refreshFromInput()">Reload From Current</button>
-        </div>
-
-        @if (activeTab === 'layout') {
-          <section class="admin-section">
-            <h2>Layout / Visual Config</h2>
-            <p>Color options, dimensions, display and visibility.</p>
-            <div class="field-grid">
-              @for (field of layoutFields; track field.path) {
-                <label class="field-row" [attr.for]="'id_admin_layout_' + $index">
-                  <span>{{ field.label }}</span>
-                  @if (field.type === 'boolean') {
-                    <input [id]="'id_admin_layout_' + $index" type="checkbox" [(ngModel)]="field.value" [name]="'layout_' + $index" />
-                  } @else {
-                    <input
-                      [id]="'id_admin_layout_' + $index"
-                      [type]="field.type === 'number' ? 'number' : 'text'"
-                      [(ngModel)]="field.value"
-                      [name]="'layout_' + $index"
-                    />
-                  }
-                </label>
-              }
-            </div>
-          </section>
-        }
-
-        @if (activeTab === 'settings') {
-          <section class="admin-section">
-            <h2>Text / Content Config</h2>
-            <p>All content strings and settings fields, one input per config line.</p>
-            <div class="field-grid">
-              @for (field of settingsFields; track field.path) {
-                <label class="field-row" [attr.for]="'id_admin_settings_' + $index">
-                  <span>{{ field.label }}</span>
-                  @if (field.type === 'boolean') {
-                    <input [id]="'id_admin_settings_' + $index" type="checkbox" [(ngModel)]="field.value" [name]="'settings_' + $index" />
-                  } @else {
-                    <input
-                      [id]="'id_admin_settings_' + $index"
-                      [type]="field.type === 'number' ? 'number' : 'text'"
-                      [(ngModel)]="field.value"
-                      [name]="'settings_' + $index"
-                    />
-                  }
-                </label>
-              }
-            </div>
-          </section>
-        }
-
-        <div class="admin-actions">
+          <label for="id_admin_theme" class="theme-label">Theme</label>
+          <select id="id_admin_theme" [(ngModel)]="selectedTheme" name="selectedTheme">
+            <option value="sand">sand</option>
+          </select>
           <button type="button" (click)="applyChanges()">Save & Apply</button>
+          <button type="button" class="secondary" (click)="refreshFromInput()">Reload From Current</button>
           <button type="button" class="secondary" (click)="clearOverrides()">Clear Overrides</button>
         </div>
+
+        <section class="admin-section">
+          <table class="admin-table" id="id_admin_configTable">
+            <thead>
+              <tr>
+                <th>Section</th>
+                <th>Field</th>
+                <th>Value</th>
+                <th>Unit</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (field of fields; track field.root + '.' + field.path) {
+                <tr>
+                  <td>{{ field.section }}</td>
+                  <td>{{ field.label }}</td>
+                  <td>
+                    @if (field.type === 'boolean') {
+                      <input type="checkbox" [(ngModel)]="field.value" [name]="'f_' + $index" />
+                    } @else if (field.type === 'color') {
+                      <input type="color" [(ngModel)]="field.value" [name]="'f_' + $index" />
+                    } @else if (field.type === 'date') {
+                      <input type="date" [(ngModel)]="field.value" [name]="'f_' + $index" />
+                    } @else if (field.type === 'number') {
+                      <input type="number" [(ngModel)]="field.value" [name]="'f_' + $index" />
+                    } @else {
+                      <input type="text" [(ngModel)]="field.value" [name]="'f_' + $index" />
+                    }
+                  </td>
+                  <td>{{ field.unit ?? '' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </section>
 
         @if (statusMessage) {
           <p class="admin-status">{{ statusMessage }}</p>
@@ -118,9 +106,21 @@ interface ConfigField {
 
       .admin-toolbar {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        align-items: center;
         gap: 0.5rem;
         margin-bottom: 1rem;
+      }
+
+      .theme-label {
+        font-weight: 600;
+      }
+
+      select {
+        border: 1px solid rgba(31, 26, 23, 0.2);
+        border-radius: 0.6rem;
+        padding: 0.4rem 0.55rem;
+        min-width: 8rem;
       }
 
       .admin-section {
@@ -128,29 +128,41 @@ interface ConfigField {
         gap: 0.5rem;
       }
 
-      .field-grid {
-        display: grid;
-        gap: 0.5rem;
-        max-height: 62vh;
-        overflow: auto;
-        padding-right: 0.25rem;
-      }
-
-      .field-row {
-        display: grid;
-        grid-template-columns: minmax(18rem, 1fr) minmax(14rem, 1fr);
-        align-items: center;
-        gap: 0.75rem;
-        border: 1px solid rgba(31, 26, 23, 0.08);
-        border-radius: 0.6rem;
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
         background: #fff;
-        padding: 0.55rem 0.65rem;
+        border: 1px solid rgba(31, 26, 23, 0.12);
       }
 
-      .field-row span {
-        font: 0.78rem/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      .admin-table th,
+      .admin-table td {
+        border: 1px solid rgba(31, 26, 23, 0.08);
+        padding: 0.5rem 0.6rem;
+        vertical-align: middle;
+      }
+
+      .admin-table th {
+        background: #f8eee4;
+        text-align: left;
+      }
+
+      .admin-table td:nth-child(1) {
+        width: 14%;
+      }
+
+      .admin-table td:nth-child(2) {
+        width: 46%;
+        font: 0.78rem/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         color: #4d4035;
-        word-break: break-word;
+      }
+
+      .admin-table td:nth-child(3) {
+        width: 34%;
+      }
+
+      .admin-table td:nth-child(4) {
+        width: 6%;
       }
 
       input {
@@ -159,13 +171,6 @@ interface ConfigField {
         border-radius: 0.6rem;
         padding: 0.6rem 0.75rem;
         font: inherit;
-      }
-
-      .admin-actions {
-        margin-top: 0.75rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
       }
 
       button {
@@ -201,13 +206,12 @@ export class AdminPageComponent {
   @Output() resetOverrides = new EventEmitter<void>();
 
   isUnlocked = false;
-  activeTab: 'layout' | 'settings' = 'layout';
+  selectedTheme = 'sand';
   passwordInput = '';
   statusMessage = '';
-  layoutFields: ConfigField[] = [];
-  settingsFields: ConfigField[] = [];
-  private layoutBase: unknown = {};
-  private settingsBase: unknown = {};
+  fields: AdminField[] = [];
+  private layoutBase: Record<string, unknown> = {};
+  private settingsBase: Record<string, unknown> = {};
 
   readonly defaultPassword = 'lijingboat';
 
@@ -216,18 +220,17 @@ export class AdminPageComponent {
   }
 
   refreshFromInput(): void {
-    this.layoutBase = this.deepClone(this.initialConfig?.layout ?? {});
-    this.settingsBase = this.deepClone(this.initialConfig?.settings ?? {});
-    this.layoutFields = this.flattenFields(this.layoutBase);
-    this.settingsFields = this.flattenFields(this.settingsBase);
-    this.statusMessage = 'Editors loaded from current runtime config.';
+    this.layoutBase = this.deepClone((this.initialConfig?.layout ?? {}) as Record<string, unknown>);
+    this.settingsBase = this.deepClone((this.initialConfig?.settings ?? {}) as Record<string, unknown>);
+    this.fields = this.buildFields();
+    this.statusMessage = 'Loaded.';
   }
 
   unlock(event: Event): void {
     event.preventDefault();
     if (this.passwordInput === this.defaultPassword) {
       this.isUnlocked = true;
-      this.statusMessage = 'Unlocked.';
+      this.statusMessage = '';
       return;
     }
 
@@ -236,10 +239,19 @@ export class AdminPageComponent {
 
   applyChanges(): void {
     try {
-      const layout = this.applyFieldValues(this.layoutBase, this.layoutFields);
-      const settings = this.applyFieldValues(this.settingsBase, this.settingsFields);
+      const layout = this.deepClone(this.layoutBase);
+      const settings = this.deepClone(this.settingsBase);
+
+      for (const field of this.fields) {
+        if (field.root === 'layout') {
+          this.setByPath(layout, field.path, field.value, field.unit);
+        } else {
+          this.setByPath(settings, field.path, field.value, field.unit);
+        }
+      }
+
       this.saveOverrides.emit({ layout, settings });
-      this.statusMessage = 'Saved. Open / to verify changes.';
+      this.statusMessage = 'Saved.';
     } catch {
       this.statusMessage = 'Save failed. Please review field values.';
     }
@@ -255,50 +267,117 @@ export class AdminPageComponent {
     return JSON.parse(JSON.stringify(value)) as T;
   }
 
-  private flattenFields(source: unknown, pathPrefix = ''): ConfigField[] {
-    if (source === null || source === undefined) {
-      return [{ path: pathPrefix, label: pathPrefix, type: 'text', value: '' }];
-    }
+  private buildFields(): AdminField[] {
+    const fields: AdminField[] = [];
+    const layout = this.layoutBase as any;
+    const settings = this.settingsBase as any;
+    const en = settings?.strings?.en ?? {};
 
-    if (typeof source === 'string') {
-      return [{ path: pathPrefix, label: pathPrefix, type: 'text', value: source }];
-    }
+    const add = (root: 'layout' | 'settings', section: string, path: string, value: unknown): void => {
+      if (value === undefined) {
+        return;
+      }
 
-    if (typeof source === 'number') {
-      return [{ path: pathPrefix, label: pathPrefix, type: 'number', value: source }];
-    }
-
-    if (typeof source === 'boolean') {
-      return [{ path: pathPrefix, label: pathPrefix, type: 'boolean', value: source }];
-    }
-
-    if (Array.isArray(source)) {
-      const fields: ConfigField[] = [];
-      source.forEach((item, index) => {
-        const nextPath = pathPrefix ? `${pathPrefix}.${index}` : `${index}`;
-        fields.push(...this.flattenFields(item, nextPath));
+      const detected = this.detectFieldType(path, value);
+      fields.push({
+        root,
+        section,
+        path,
+        label: path,
+        type: detected.type,
+        unit: detected.unit,
+        value: detected.value,
       });
-      return fields;
-    }
+    };
 
-    const obj = source as Record<string, unknown>;
-    const fields: ConfigField[] = [];
-    Object.keys(obj).forEach((key) => {
-      const nextPath = pathPrefix ? `${pathPrefix}.${key}` : key;
-      fields.push(...this.flattenFields(obj[key], nextPath));
+    Object.keys(layout?.styling?.colors ?? {}).forEach((key) => {
+      add('layout', 'Theme Colors', `styling.colors.${key}`, layout.styling.colors[key]);
     });
+
+    (settings?.navLinks ?? []).forEach((item: any, idx: number) => {
+      add('settings', 'Nav Link', `navLinks.${idx}.label`, item.label);
+      add('settings', 'Nav Link', `navLinks.${idx}.target`, item.target);
+    });
+
+    (settings?.noticeBars ?? []).forEach((item: any, idx: number) => {
+      Object.keys(item).forEach((k) => add('settings', 'Notice bar', `noticeBars.${idx}.${k}`, item[k]));
+    });
+
+    add('settings', 'About section', 'strings.en.about.title', en?.about?.title);
+    (en?.about?.paragraphs ?? []).forEach((p: string, idx: number) => add('settings', 'About section', `strings.en.about.paragraphs.${idx}`, p));
+
+    add('settings', 'Pricing', 'strings.en.pricing.label', en?.pricing?.label);
+    (en?.pricing?.columns ?? []).forEach((col: any, idx: number) => {
+      add('settings', 'Pricing', `strings.en.pricing.columns.${idx}.title.xs`, col?.title?.xs);
+      add('settings', 'Pricing', `strings.en.pricing.columns.${idx}.title.s`, col?.title?.s);
+      add('settings', 'Pricing', `strings.en.pricing.columns.${idx}.title.m`, col?.title?.m);
+      add('settings', 'Pricing', `strings.en.pricing.columns.${idx}.title.l`, col?.title?.l);
+    });
+    (en?.pricing?.rooms ?? []).forEach((room: any, idx: number) => {
+      Object.keys(room).forEach((k) => add('settings', 'Pricing', `strings.en.pricing.rooms.${idx}.${k}`, room[k]));
+    });
+
+    add('settings', 'Gallery', 'strings.en.gallery.label', en?.gallery?.label);
+    add('settings', 'Gallery', 'strings.en.gallery.description', en?.gallery?.description);
+    (en?.gallery?.images ?? []).forEach((img: any, idx: number) => add('settings', 'Gallery', `strings.en.gallery.images.${idx}.label`, img?.label));
+    (settings?.gallery?.images ?? []).forEach((img: any, idx: number) => {
+      add('settings', 'Gallery', `gallery.images.${idx}.src`, img?.src);
+      add('settings', 'Gallery', `gallery.images.${idx}.alt`, img?.alt);
+      add('settings', 'Gallery', `gallery.images.${idx}.label`, img?.label);
+    });
+
+    add('settings', 'FAQ', 'strings.en.faq.label', en?.faq?.label);
+    add('settings', 'FAQ', 'strings.en.faq.prefix.question', en?.faq?.prefix?.question);
+    add('settings', 'FAQ', 'strings.en.faq.prefix.answer', en?.faq?.prefix?.answer);
+    add('settings', 'FAQ', 'strings.en.faq.prefix.index', en?.faq?.prefix?.index);
+    (en?.faq?.items ?? []).forEach((item: any, idx: number) => {
+      add('settings', 'FAQ', `strings.en.faq.items.${idx}.title`, item?.title);
+      add('settings', 'FAQ', `strings.en.faq.items.${idx}.body`, item?.body);
+    });
+    (settings?.faqs ?? []).forEach((item: any, idx: number) => add('settings', 'FAQ', `faqs.${idx}.highlightColor`, item?.highlightColor));
+    Object.keys(settings?.faqConfig ?? {}).forEach((k) => add('settings', 'FAQ', `faqConfig.${k}`, settings.faqConfig[k]));
+
+    Object.keys(settings?.contact ?? {}).forEach((k) => add('settings', 'Contact', `contact.${k}`, settings.contact[k]));
+    Object.keys(en?.contact ?? {}).forEach((k) => add('settings', 'Contact', `strings.en.contact.${k}`, en.contact[k]));
+
+    Object.keys(layout?.roomReservationConfig ?? {}).forEach((k) => add('layout', 'Room reservation', `roomReservationConfig.${k}`, layout.roomReservationConfig[k]));
+    add('settings', 'Room reservation', 'strings.en.roomReservation.label', en?.roomReservation?.label);
+    add('settings', 'Room reservation', 'strings.en.roomReservation.title', en?.roomReservation?.title);
+    add('settings', 'Room reservation', 'strings.en.roomReservation.description', en?.roomReservation?.description);
+    (en?.roomReservation?.highlights ?? []).forEach((item: string, idx: number) => add('settings', 'Room reservation', `strings.en.roomReservation.highlights.${idx}`, item));
+    Object.keys(en?.roomReservation?.form ?? {}).forEach((k) => add('settings', 'Room reservation', `strings.en.roomReservation.form.${k}`, en.roomReservation.form[k]));
+
     return fields;
   }
 
-  private applyFieldValues(base: unknown, fields: ConfigField[]): unknown {
-    const result = this.deepClone(base as object);
-    for (const field of fields) {
-      this.setByPath(result as Record<string, unknown>, field.path, field.value);
+  private detectFieldType(path: string, value: unknown): { type: FieldType; unit?: string; value: string | number | boolean } {
+    if (typeof value === 'boolean') {
+      return { type: 'boolean', value };
     }
-    return result;
+
+    if (typeof value === 'number') {
+      return { type: 'number', value };
+    }
+
+    const raw = String(value ?? '');
+    const unitMatch = raw.match(/^(-?\d+(?:\.\d+)?)(px|rem|em|%)$/i);
+    if (unitMatch) {
+      return { type: 'number', value: Number(unitMatch[1]), unit: unitMatch[2] };
+    }
+
+    const isHexColor = /^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(raw);
+    if (isHexColor || /color/i.test(path)) {
+      return { type: 'color', value: isHexColor ? raw : '#000000' };
+    }
+
+    if (/date/i.test(path) && /^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+      return { type: 'date', value: raw };
+    }
+
+    return { type: 'text', value: raw };
   }
 
-  private setByPath(root: Record<string, unknown> | unknown[], path: string, value: string | number | boolean): void {
+  private setByPath(root: Record<string, unknown> | unknown[], path: string, value: string | number | boolean, unit?: string): void {
     const parts = path.split('.');
     let current: any = root;
 
@@ -329,11 +408,11 @@ export class AdminPageComponent {
     if (/^\d+$/.test(last)) {
       const idx = Number(last);
       if (Array.isArray(current)) {
-        current[idx] = value;
+        current[idx] = typeof value === 'number' && unit ? `${value}${unit}` : value;
       }
       return;
     }
 
-    current[last] = value;
+    current[last] = typeof value === 'number' && unit ? `${value}${unit}` : value;
   }
 }

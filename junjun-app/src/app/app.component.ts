@@ -189,7 +189,7 @@ export class AppComponent {
         faqConfig: this.faqConfig,
         gallery: { images: this.galleryImages },
         contact: this.contact,
-        strings: this.strings,
+        strings: { en: (this.strings as any).en ?? (STRINGS as any).en },
       },
     };
   }
