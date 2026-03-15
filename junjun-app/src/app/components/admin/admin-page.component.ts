@@ -55,6 +55,9 @@ interface AdminSectionGroup {
           <button id="id_admin_reloadBtn" type="button" class="secondary" (click)="reloadFromCurrent()">Reload</button>
           <button id="id_admin_resetBtn" type="button" class="secondary" (click)="clearOverrides()">Reset</button>
           <button id="id_admin_backHomeBtn" type="button" class="secondary" (click)="openHomeInNewTab()">Back To Home</button>
+          <button id="id_admin_exportBtn" type="button" class="secondary" (click)="exportJson()">Export JSON</button>
+          <button id="id_admin_importBtn" type="button" class="secondary" (click)="triggerImport()">Import JSON</button>
+          <input id="id_admin_importFile" type="file" accept=".json,application/json" style="display:none" (change)="importJson($event)" />
         </div>
 
         @if (statusMessage) {
@@ -328,6 +331,104 @@ export class AdminPageComponent implements OnInit {
     this.statusKind = 'info';
     this.statusMessage = 'Home page opened in a new tab.';
     this.statusItems = [];
+  }
+
+  exportJson(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    try {
+      const layout = this.deepClone(this.layoutBase);
+      const settings = this.deepClone(this.settingsBase);
+
+      for (const field of this.fields) {
+        if (field.root === 'layout') {
+          this.setByPath(layout, field.path, field.value, field.unit);
+        } else {
+          this.setByPath(settings, field.path, field.value, field.unit);
+        }
+      }
+
+      const payload = { layout, settings };
+      const json = JSON.stringify(payload, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'junjun-hotel-config.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      this.statusKind = 'success';
+      this.statusMessage = 'Config exported successfully.';
+      this.statusItems = [
+        'Downloaded: junjun-hotel-config.json',
+        'Use "Import JSON" to restore this config on any device.',
+      ];
+    } catch {
+      this.statusKind = 'danger';
+      this.statusMessage = 'Export failed.';
+      this.statusItems = [];
+    }
+  }
+
+  triggerImport(): void {
+    if (typeof document === 'undefined') {
+      return;
+    }
+    const input = document.getElementById('id_admin_importFile') as HTMLInputElement | null;
+    input?.click();
+  }
+
+  importJson(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input?.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const raw = e.target?.result as string;
+        const parsed = JSON.parse(raw) as { layout?: unknown; settings?: unknown };
+
+        if (!parsed.layout && !parsed.settings) {
+          this.statusKind = 'danger';
+          this.statusMessage = 'Import failed: JSON must contain "layout" or "settings" keys.';
+          this.statusItems = [];
+          return;
+        }
+
+        const payload = {
+          layout: parsed.layout ?? {},
+          settings: parsed.settings ?? {},
+        } as { layout: unknown; settings: unknown };
+
+        this.saveOverrides.emit(payload);
+
+        this.layoutBase = this.deepClone((parsed.layout ?? {}) as Record<string, unknown>);
+        this.settingsBase = this.deepClone((parsed.settings ?? {}) as Record<string, unknown>);
+        this.fields = this.buildFields();
+        this.groupedSections = this.groupBySection(this.fields);
+
+        this.statusKind = 'success';
+        this.statusMessage = 'Config imported and saved to localStorage.';
+        this.statusItems = [
+          `Loaded from: ${file.name}`,
+          'All fields refreshed. Reload the home page to see live changes.',
+        ];
+      } catch {
+        this.statusKind = 'danger';
+        this.statusMessage = 'Import failed: invalid or unreadable JSON file.';
+        this.statusItems = [];
+      }
+      input.value = '';
+    };
+    reader.readAsText(file);
   }
 
   unlock(event: Event): void {

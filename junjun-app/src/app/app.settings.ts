@@ -40,17 +40,18 @@ export const ABOUT = {
 
 export const ABOUT_IMAGES = [
   {
-    src: 'assets/image/Hotel_Room_01.jpg',
-    alt: 'Hotel room type 1',
+    src: 'assets/image/Hotel_Room_22.jpg',
+    alt: 'Hotel Front Door View',
   },
   {
     src: 'assets/image/Hotel_Room_02.jpg',
-    alt: 'Hotel room type 2',
+    alt: 'Hotel Room Interior View',
   },
   {
-    src: 'assets/image/Hotel_Room_03.jpg',
-    alt: 'Hotel room type 3',
+    src: 'assets/image/Hotel_Room_07.jpg',
+    alt: 'Hotel Room Bedroom View',
   },
+  
 ] as const;
 
 // ===== PRICING SECTION =====
@@ -92,28 +93,35 @@ export const PRICING = {
       roomType: 'Standard Room',
       capacity: '1-2 persons',
       duration: '24 Hours',
-      priceAfterTax: 'CAD$120',
+      priceAfterTax: 'CAD $130',
       facility: 'Clean Bedding and Free Toilet Paper',
     },
     {
       roomType: 'Extend Room',
       capacity: '1-3 persons',
       duration: '24 Hours',
-      priceAfterTax: 'CAD$150',
+      priceAfterTax: 'CAD $150',
+      facility: 'Clean Bedding and Free Toilet Paper',
+    },
+    {
+      roomType: 'VIP Room',
+      capacity: '1-3 persons',
+      duration: '24 Hours',
+      priceAfterTax: 'CAD $150',
       facility: 'Clean Bedding and Free Toilet Paper',
     },
     {
       roomType: 'Basement Room',
       capacity: '1-2 persons',
       duration: '24 Hours',
-      priceAfterTax: 'CAD$100',
+      priceAfterTax: 'CAD $100',
       facility: 'Clean Bedding and Free Toilet Paper',
     },
     {
       roomType: 'Temporary Room',
       capacity: '1-2 persons',
       duration: '4 Hours',
-      priceAfterTax: 'CAD$80',
+      priceAfterTax: 'CAD $80',
       facility: 'Clean Bedding and Free Toilet Paper',
     },
   ],
