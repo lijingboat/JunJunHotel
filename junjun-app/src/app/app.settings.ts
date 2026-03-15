@@ -359,12 +359,12 @@ export const STRINGS = {
     },
     roomReservation: {
       label: 'Room Reservation',
-      title: 'Reserve your room with no online fee',
-      description: 'Reservations can be made without a credit card. Cash deposit reservations are accepted in person.',
+      title: 'Word Cup Season, We accept Call only to book rooms for quick availability confirmation to catch the games with friends. For inquiries and reservations, call us at 647-297-8384.',
+      description: 'Please see following highlights for details and policies regarding our room reservation service.',
       highlights: [
-        '4-hour temporary rooms currently from CAD $50 (cash price after tax)',
-        'Check-in from 1:00 PM and check-out by 12:00 PM (noon)',
-        'Optional parking available at CAD $10 per spot per night',
+        'We accept credit card, debit card, Email Money Transfer and cash for reservation payment and deposit',
+        'We need everyone to follow the check-in and check-out time policy to ensure smooth room turnover and availability',
+        'Cancellation is allowed up to 24 hours before check-in time. Late cancellation or no-show will result in a charge of one night\'s stay.',
       ],
       form: {
         checkInLabel: 'Check-in',
@@ -381,7 +381,7 @@ export const STRINGS = {
     },
     resourceLinks: ['About Us', 'Service', 'Photo', 'FAQ'],
     footer: {
-      copyright: '© 2026 Jun Jun Hotel',
+      copyright: '© 2026 Jun Jun Hotel March All rights reserved.',
     },
   },
   fr: {
