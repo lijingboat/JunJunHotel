@@ -359,7 +359,7 @@ export const STRINGS = {
     },
     roomReservation: {
       label: 'Room Reservation',
-      title: 'Word Cup Season, We accept Call only to book rooms for quick availability confirmation to catch the games with friends. For inquiries and reservations, call us at 647-297-8384.',
+      title: 'Word Cup Season, Please call us at 647-297-8384 ONLY to inquiries and reservations.',
       description: 'Please see following highlights for details and policies regarding our room reservation service.',
       highlights: [
         'We accept credit card, debit card, Email Money Transfer and cash for reservation payment and deposit',
