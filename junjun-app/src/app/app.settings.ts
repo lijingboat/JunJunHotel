@@ -207,7 +207,7 @@ export const NOTICE_BARS = [
     id: 'notice_welcome',
     message: 'Welcome! Special rates available for extended stays. Contact us for details.',
     level: 'red' as const,
-    visible: true,
+    visible: false,
     beginDate: undefined,
     expireDate: undefined,
     faqTargetIndex: null,
@@ -215,12 +215,12 @@ export const NOTICE_BARS = [
   },
   {
     id: 'notice_faq_help',
-    message: 'Need answers fast? Click this bar to jump to FAQ item #1.',
+    message: 'World cup season is here! Call us for quick room availability to catch the games with friends !!!',
     level: 'blue' as const,
     visible: true,
     beginDate: undefined,
     expireDate: undefined,
-    faqTargetIndex: 0,
+    faqTargetIndex: null,
     isInfoNotice: false,
   },
 ] as const;

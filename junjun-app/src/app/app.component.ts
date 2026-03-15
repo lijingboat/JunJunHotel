@@ -349,7 +349,7 @@ export class AppComponent {
       })
       .map((notice) => ({
         ...notice,
-        message: strings.noticeBars?.[notice.id] ?? notice.message,
+        message: this.isEnglishSelected ? notice.message : (strings.noticeBars?.[notice.id] ?? notice.message),
       }));
   }
 
@@ -439,6 +439,10 @@ export class AppComponent {
   }
 
   // ===== TRANSLATION GETTERS =====
+  private get isEnglishSelected(): boolean {
+    return this.selectedLanguage === 'en';
+  }
+
   private getCurrentLanguageStrings(): any {
     const allStrings = this.strings as Record<string, unknown>;
     const english = this.clone((allStrings['en'] ?? {}) as Record<string, unknown>);
@@ -447,6 +451,10 @@ export class AppComponent {
   }
 
   get translatedNavLinks(): Array<{ label: string; target: string }> {
+    if (this.isEnglishSelected) {
+      return this.navLinks.map((link) => ({ ...link }));
+    }
+
     const strings = this.getCurrentLanguageStrings();
     const translatedLabels = [
       strings.nav.about,
@@ -463,14 +471,26 @@ export class AppComponent {
   }
 
   get translatedAboutTitle(): string {
+    if (this.isEnglishSelected) {
+      return this.about.title;
+    }
+
     return this.getCurrentLanguageStrings().about.title;
   }
 
   get translatedAboutParagraphs(): string[] {
+    if (this.isEnglishSelected) {
+      return [...this.aboutParagraphs];
+    }
+
     return [...(this.getCurrentLanguageStrings().about.paragraphs as string[])];
   }
 
   get translatedPricingLabel(): string {
+    if (this.isEnglishSelected) {
+      return this.navLinks[1]?.label ?? this.getCurrentLanguageStrings().pricing.label;
+    }
+
     return this.getCurrentLanguageStrings().pricing.label;
   }
 
@@ -480,7 +500,15 @@ export class AppComponent {
   }
 
   get translatedPricingRooms(): Array<any> {
+    if (this.isEnglishSelected) {
+      return this.roomPricing.map((room) => ({ ...room }));
+    }
+
     const translatedRooms = this.getCurrentLanguageStrings().pricing.rooms ?? [];
+
+    if (!Array.isArray(translatedRooms) || translatedRooms.length !== this.roomPricing.length) {
+      return this.roomPricing.map((room) => ({ ...room }));
+    }
 
     return this.roomPricing.map((room, index) => ({
       ...room,
@@ -489,15 +517,22 @@ export class AppComponent {
   }
 
   get translatedGalleryLabel(): string {
+    if (this.isEnglishSelected) {
+      return this.navLinks[2]?.label ?? this.getCurrentLanguageStrings().gallery.label;
+    }
+
     return this.getCurrentLanguageStrings().gallery.label;
   }
 
   get translatedGalleryDescription(): string {
+    if (this.isEnglishSelected) {
+      return GALLERY.description;
+    }
+
     return this.getCurrentLanguageStrings().gallery.description;
   }
 
   get translatedGalleryImages(): any[] {
-    const strings = this.getCurrentLanguageStrings();
     const ranked = this.galleryImages
       .map((img, originalIndex) => ({
         ...img,
@@ -506,6 +541,17 @@ export class AppComponent {
       }))
       .sort((a, b) => a.rank - b.rank || a.originalIndex - b.originalIndex);
 
+    if (this.isEnglishSelected) {
+      return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
+    }
+
+    const strings = this.getCurrentLanguageStrings();
+    const translatedImages = strings.gallery.images ?? [];
+
+    if (!Array.isArray(translatedImages) || translatedImages.length !== this.galleryImages.length) {
+      return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
+    }
+
     return ranked.map((img) => ({
       ...img,
       label: strings.gallery.images[img.originalIndex]?.label || img.label,
@@ -513,31 +559,68 @@ export class AppComponent {
   }
 
   get translatedFaqLabel(): string {
+    if (this.isEnglishSelected) {
+      return this.navLinks[3]?.label ?? this.getCurrentLanguageStrings().faq.label;
+    }
+
     return this.getCurrentLanguageStrings().faq.label;
   }
 
   get translatedFaqs(): any[] {
+    if (this.isEnglishSelected) {
+      return this.faqs.map((item) => ({ ...item }));
+    }
+
     const strings = this.getCurrentLanguageStrings();
-    return [...strings.faq.items] as any[];
+    const translatedFaqs = strings.faq.items ?? [];
+
+    if (!Array.isArray(translatedFaqs) || translatedFaqs.length !== this.faqs.length) {
+      return this.faqs.map((item) => ({ ...item }));
+    }
+
+    return this.faqs.map((item, index) => ({
+      ...item,
+      ...(translatedFaqs[index] ?? {}),
+    }));
   }
 
   get translatedContactLabel(): string {
+    if (this.isEnglishSelected) {
+      return this.navLinks[4]?.label ?? this.getCurrentLanguageStrings().contact.label;
+    }
+
     return this.getCurrentLanguageStrings().contact.label;
   }
 
   get translatedContactPhone(): string {
+    if (this.isEnglishSelected) {
+      return this.contact.phone;
+    }
+
     return this.getCurrentLanguageStrings().contact.phone;
   }
 
   get translatedContactAddress(): string {
+    if (this.isEnglishSelected) {
+      return this.contact.address;
+    }
+
     return this.getCurrentLanguageStrings().contact.address;
   }
 
   get translatedContactEmail(): string {
+    if (this.isEnglishSelected) {
+      return this.contact.email;
+    }
+
     return this.getCurrentLanguageStrings().contact.email;
   }
 
   get translatedContactHours(): string {
+    if (this.isEnglishSelected) {
+      return this.contact.operationHours;
+    }
+
     return this.getCurrentLanguageStrings().contact.operationHours;
   }
 
@@ -584,10 +667,18 @@ export class AppComponent {
   }
 
   get translatedResourceLinks(): string[] {
+    if (this.isEnglishSelected) {
+      return [...this.resourceLinks];
+    }
+
     return [...(this.getCurrentLanguageStrings().resourceLinks as string[])];
   }
 
   get translatedFooter(): string {
+    if (this.isEnglishSelected) {
+      return `© ${this.currentYear} ${this.brand}`;
+    }
+
     return this.getCurrentLanguageStrings().footer.copyright;
   }
 
@@ -597,7 +688,17 @@ export class AppComponent {
   }
 
   getTranslatedPricingColumnTitle(columnKey: string): string {
+    if (this.isEnglishSelected) {
+      const column = this.pricingColumns.find((item) => item.key === columnKey);
+      return column?.title?.[this.currentViewport] || column?.title?.l || '';
+    }
+
     const strings = this.getCurrentLanguageStrings();
+    if (!Array.isArray(strings.pricing?.columns) || strings.pricing.columns.length !== this.pricingColumns.length) {
+      const column = this.pricingColumns.find((item) => item.key === columnKey);
+      return column?.title?.[this.currentViewport] || column?.title?.l || '';
+    }
+
     const numColumns = strings.pricing.columns.length;
     let idx = 0;
     for (let i = 0; i < numColumns; i++) {
