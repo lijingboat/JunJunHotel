@@ -25,6 +25,7 @@ import {
   RESOURCE_LINKS,
   ROOM_PRICING,
   ROOM_RESERVATION_CONFIG,
+  ROOM_RESERVATION,
   SITE_META,
   STYLING,
   STRINGS,
@@ -62,6 +63,7 @@ export class AppComponent {
   pricingDisplayConfig: any = {};
   galleryDisplayConfig: any = {};
   galleryImages: Array<any> = [];
+  selectedGalleryImage: any = null;
   faqs: Array<any> = [];
   faqConfig: any = {};
   contact: any = {};
@@ -72,6 +74,7 @@ export class AppComponent {
   selectedLanguage: string = NAV_LANGUAGE_CONFIG.defaultValue;
   readonly currentYear = SITE_META.year;
   roomReservationConfig: any = {};
+  roomReservation: any = {};
   currentViewport: ViewportTier = 'l';
 
   constructor() {
@@ -200,6 +203,7 @@ export class AppComponent {
     this.resourceLinks = this.clone(RESOURCE_LINKS) as unknown as string[];
     this.navLanguageConfig = this.clone(NAV_LANGUAGE_CONFIG);
     this.roomReservationConfig = this.clone(ROOM_RESERVATION_CONFIG);
+    this.roomReservation = this.clone(ROOM_RESERVATION);
     this.strings = this.clone(STRINGS);
     this.styling = this.clone(STYLING);
     this.selectedLanguage = this.navLanguageConfig.defaultValue ?? 'en';
@@ -223,6 +227,71 @@ export class AppComponent {
     }
   }
 
+  private getEnglishBaseStrings(): any {
+    return {
+      siteMeta: {
+        title: SITE_META.title,
+        description: SITE_META.description,
+        brand: SITE_META.brand,
+      },
+      nav: {
+        about: this.navLinks[0]?.label ?? 'About',
+        pricing: this.navLinks[1]?.label ?? 'Pricing',
+        gallery: this.navLinks[2]?.label ?? 'Gallery',
+        faq: this.navLinks[3]?.label ?? 'FAQ',
+        contact: this.navLinks[4]?.label ?? 'Contact',
+        roomReservation: this.roomReservation?.label ?? 'Room Reservation',
+      },
+      about: {
+        title: this.about?.title ?? ABOUT.title,
+        paragraphs: [...(this.aboutParagraphs ?? [])],
+      },
+      pricing: {
+        label: this.navLinks[1]?.label ?? 'Pricing',
+        columns: this.pricingColumns.map((column) => ({ key: column.key, title: { ...column.title } })),
+        rooms: this.roomPricing.map((room) => ({ ...room })),
+      },
+      gallery: {
+        label: this.navLinks[2]?.label ?? 'Gallery',
+        description: GALLERY.description,
+        images: this.galleryImages.map((image) => ({ label: image.label })),
+      },
+      faq: {
+        label: this.navLinks[3]?.label ?? 'FAQ',
+        prefix: {
+          question: this.faqConfig?.questionPrefix ?? 'Q',
+          answer: this.faqConfig?.answerPrefix ?? 'A',
+          index: this.faqConfig?.indexPrefix ?? '#',
+        },
+        items: this.faqs.map((item) => ({ title: item.title, body: item.body })),
+      },
+      contact: {
+        label: this.navLinks[4]?.label ?? 'Contact',
+        phoneLabel: 'Phone:',
+        addressLabel: 'Address:',
+        emailLabel: 'Email:',
+        hoursLabel: 'Hours:',
+        mapTitle: 'Jun Jun Hotel Map',
+        phone: this.contact?.phone ?? CONTACT.phone,
+        address: this.contact?.address ?? CONTACT.address,
+        email: this.contact?.email ?? CONTACT.email,
+        operationHours: this.contact?.operationHours ?? CONTACT.operationHours,
+      },
+      roomReservation: {
+        label: this.roomReservation?.label ?? 'Room Reservation',
+        title: this.roomReservation?.title ?? '',
+        description: this.roomReservation?.description ?? '',
+        highlights: [...(this.roomReservation?.highlights ?? [])],
+        form: { ...(this.roomReservation?.form ?? {}) },
+      },
+      noticeBars: Object.fromEntries((this.noticeBars ?? []).map((notice) => [notice.id, notice.message])),
+      resourceLinks: [...(this.resourceLinks ?? [])],
+      footer: {
+        copyright: `© ${this.currentYear} ${this.brand}`,
+      },
+    };
+  }
+
   get adminInitialConfig(): { layout: unknown; settings: unknown } {
     return {
       layout: {
@@ -240,7 +309,8 @@ export class AppComponent {
         faqConfig: this.faqConfig,
         gallery: { images: this.galleryImages },
         contact: this.contact,
-        strings: { en: (this.strings as any).en ?? (STRINGS as any).en },
+        roomReservation: this.roomReservation,
+        strings: { en: this.getEnglishBaseStrings(), ...this.strings },
       },
     };
   }
@@ -277,11 +347,19 @@ export class AppComponent {
       faqConfig: this.clone(FAQ_CONFIG),
       gallery: { images: this.clone(GALLERY.images) },
       contact: this.clone(CONTACT),
+      roomReservation: this.clone(ROOM_RESERVATION),
       strings: this.clone(STRINGS),
     };
 
+    const normalizedSettingsOverride = this.isPlainObject(settingsOverride) ? this.clone(settingsOverride) as Record<string, unknown> : {};
+    const stringsOverride = normalizedSettingsOverride['strings'] as { en?: { roomReservation?: Record<string, unknown> } } | undefined;
+    const englishRoomReservation = stringsOverride?.en?.roomReservation ?? null;
+    if (!normalizedSettingsOverride['roomReservation'] && englishRoomReservation) {
+      normalizedSettingsOverride['roomReservation'] = englishRoomReservation;
+    }
+
     const mergedLayout = this.deepMerge(layoutDefault, layoutOverride) as any;
-    const mergedSettings = this.deepMerge(settingsDefault, settingsOverride) as any;
+    const mergedSettings = this.deepMerge(settingsDefault, normalizedSettingsOverride) as any;
 
     this.noticeBarConfig = mergedLayout.noticeBarConfig;
     this.navLanguageConfig = mergedLayout.navLanguageConfig;
@@ -296,6 +374,7 @@ export class AppComponent {
     this.faqConfig = mergedSettings.faqConfig;
     this.galleryImages = mergedSettings.gallery.images;
     this.contact = mergedSettings.contact;
+    this.roomReservation = mergedSettings.roomReservation;
     this.strings = mergedSettings.strings;
 
     const supportedValues = new Set((this.navLanguageConfig.options ?? []).map((option: { value: string }) => option.value));
@@ -438,6 +517,23 @@ export class AppComponent {
     event.preventDefault();
   }
 
+  openGalleryLightbox(image: any): void {
+    if (this.currentViewport !== 'm' && this.currentViewport !== 'l') {
+      return;
+    }
+
+    this.selectedGalleryImage = image;
+  }
+
+  closeGalleryLightbox(): void {
+    this.selectedGalleryImage = null;
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    this.closeGalleryLightbox();
+  }
+
   // ===== TRANSLATION GETTERS =====
   private get isEnglishSelected(): boolean {
     return this.selectedLanguage === 'en';
@@ -445,7 +541,7 @@ export class AppComponent {
 
   private getCurrentLanguageStrings(): any {
     const allStrings = this.strings as Record<string, unknown>;
-    const english = this.clone((allStrings['en'] ?? {}) as Record<string, unknown>);
+    const english = this.clone(this.getEnglishBaseStrings() as Record<string, unknown>);
     const selected = (allStrings[this.selectedLanguage] ?? {}) as Record<string, unknown>;
     return this.deepMerge(english, selected);
   }
@@ -488,14 +584,13 @@ export class AppComponent {
 
   get translatedPricingLabel(): string {
     if (this.isEnglishSelected) {
-      return this.navLinks[1]?.label ?? this.getCurrentLanguageStrings().pricing.label;
+      return this.navLinks[1]?.label ?? 'Pricing';
     }
 
     return this.getCurrentLanguageStrings().pricing.label;
   }
 
   get translatedPricingColumns(): typeof this.pricingColumns {
-    // Return original columns with translated titles via helper method
     return this.pricingColumns;
   }
 
@@ -518,7 +613,7 @@ export class AppComponent {
 
   get translatedGalleryLabel(): string {
     if (this.isEnglishSelected) {
-      return this.navLinks[2]?.label ?? this.getCurrentLanguageStrings().gallery.label;
+      return this.navLinks[2]?.label ?? 'Gallery';
     }
 
     return this.getCurrentLanguageStrings().gallery.label;
@@ -560,7 +655,7 @@ export class AppComponent {
 
   get translatedFaqLabel(): string {
     if (this.isEnglishSelected) {
-      return this.navLinks[3]?.label ?? this.getCurrentLanguageStrings().faq.label;
+      return this.navLinks[3]?.label ?? 'FAQ';
     }
 
     return this.getCurrentLanguageStrings().faq.label;
@@ -586,7 +681,7 @@ export class AppComponent {
 
   get translatedContactLabel(): string {
     if (this.isEnglishSelected) {
-      return this.navLinks[4]?.label ?? this.getCurrentLanguageStrings().contact.label;
+      return this.navLinks[4]?.label ?? 'Contact';
     }
 
     return this.getCurrentLanguageStrings().contact.label;
@@ -636,32 +731,44 @@ export class AppComponent {
 
   get translatedContactCardLabels() {
     const strings = this.getCurrentLanguageStrings();
+    const contactStrings = strings.contact ?? {};
     return {
-      phone: strings.contact.phoneLabel,
-      address: strings.contact.addressLabel,
-      email: strings.contact.emailLabel,
-      hours: strings.contact.hoursLabel,
-      mapTitle: strings.contact.mapTitle,
+      phone: contactStrings.phoneLabel ?? 'Phone:',
+      address: contactStrings.addressLabel ?? 'Address:',
+      email: contactStrings.emailLabel ?? 'Email:',
+      hours: contactStrings.hoursLabel ?? 'Hours:',
+      mapTitle: contactStrings.mapTitle ?? 'Jun Jun Hotel Map',
     };
   }
 
   get translatedRoomReservationLabel(): string {
+    if (this.isEnglishSelected) {
+      return this.roomReservation?.label ?? 'Room Reservation';
+    }
+
     return this.getCurrentLanguageStrings().roomReservation.label;
   }
 
   get translatedRoomReservationCopy() {
     const strings = this.getCurrentLanguageStrings();
+    const roomReservationStrings = strings.roomReservation ?? {};
+    const roomReservationForm = roomReservationStrings.form ?? {};
     return {
-      title: strings.roomReservation.title,
-      description: strings.roomReservation.description,
-      highlights: [...strings.roomReservation.highlights],
+      title: roomReservationStrings.title ?? this.roomReservation?.title ?? '',
+      description: roomReservationStrings.description ?? this.roomReservation?.description ?? '',
+      highlights: [...(roomReservationStrings.highlights ?? this.roomReservation?.highlights ?? [])],
       form: {
-        checkInLabel: strings.roomReservation.form.checkInLabel,
-        checkOutLabel: strings.roomReservation.form.checkOutLabel,
-        guestCountLabel: strings.roomReservation.form.guestCountLabel,
-        emailLabel: strings.roomReservation.form.emailLabel,
-        emailPlaceholder: strings.roomReservation.form.emailPlaceholder,
-        submitLabel: strings.roomReservation.form.submitLabel,
+        nameLabel: roomReservationForm.nameLabel ?? this.roomReservation?.form?.nameLabel ?? 'Name',
+        namePlaceholder: roomReservationForm.namePlaceholder ?? this.roomReservation?.form?.namePlaceholder ?? 'Your full name',
+        phoneLabel: roomReservationForm.phoneLabel ?? this.roomReservation?.form?.phoneLabel ?? 'Phone Number',
+        phonePlaceholder: roomReservationForm.phonePlaceholder ?? this.roomReservation?.form?.phonePlaceholder ?? '+1 (___) ___-____',
+        emailLabel: roomReservationForm.emailLabel ?? this.roomReservation?.form?.emailLabel ?? 'Email',
+        emailPlaceholder: roomReservationForm.emailPlaceholder ?? this.roomReservation?.form?.emailPlaceholder ?? 'you@example.com',
+        personCountLabel: roomReservationForm.personCountLabel ?? this.roomReservation?.form?.personCountLabel ?? 'Number of Persons',
+        personCountPlaceholder: roomReservationForm.personCountPlaceholder ?? this.roomReservation?.form?.personCountPlaceholder ?? '1',
+        checkInLabel: roomReservationForm.checkInLabel ?? this.roomReservation?.form?.checkInLabel ?? 'Check-in Date',
+        checkOutLabel: roomReservationForm.checkOutLabel ?? this.roomReservation?.form?.checkOutLabel ?? 'Check-out Date',
+        submitLabel: roomReservationForm.submitLabel ?? this.roomReservation?.form?.submitLabel ?? 'Submit Reservation Request',
       },
     };
   }
@@ -683,8 +790,15 @@ export class AppComponent {
   }
 
   get translatedFaqPrefix(): any {
-    const strings = this.getCurrentLanguageStrings();
-    return strings.faq.prefix;
+    if (this.isEnglishSelected) {
+      return {
+        question: this.faqConfig?.questionPrefix ?? 'Q',
+        answer: this.faqConfig?.answerPrefix ?? 'A',
+        index: this.faqConfig?.indexPrefix ?? '#',
+      };
+    }
+
+    return this.getCurrentLanguageStrings().faq.prefix;
   }
 
   getTranslatedPricingColumnTitle(columnKey: string): string {

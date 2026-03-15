@@ -107,6 +107,7 @@
               @for (column of visiblePricingColumns; track column.key) {
                 <th
                   [attr.id]="'id_appComponent_pricingHeader_' + column.key"
+                  [attr.data-key]="column.key"
                   scope="col"
                   [style.width.%]="column.width[currentViewport]"
                 >
@@ -119,7 +120,7 @@
             @for (room of translatedPricingRooms; track room.roomType; let roomIndex = $index) {
               <tr [attr.id]="'id_appComponent_pricingRow_' + roomIndex">
                 @for (column of visiblePricingColumns; track column.key) {
-                  <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex">
+                  <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex" [attr.data-key]="column.key">
                     {{ getPricingValue(room, column.key) }}
                   </td>
                 }
@@ -141,12 +142,31 @@
       <p id="id_appComponent_galleryLabel" class="section-label">{{ translatedGalleryLabel }}</p>
       <div id="id_appComponent_galleryGrid" class="gallery-grid" [style.--gallery-item-ratio]="galleryDisplayConfig.itemAspectRatio">
         @for (image of translatedGalleryImages; track image.src; let galleryIndex = $index) {
-          <figure [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex" class="gallery-item">
+          <figure
+            [attr.id]="'id_appComponent_galleryFigure_' + galleryIndex"
+            class="gallery-item"
+            [class.gallery-item--interactive]="currentViewport === 'm' || currentViewport === 'l'"
+            [attr.role]="(currentViewport === 'm' || currentViewport === 'l') ? 'button' : null"
+            [attr.tabindex]="(currentViewport === 'm' || currentViewport === 'l') ? '0' : null"
+            (click)="openGalleryLightbox(image)"
+            (keydown.enter)="openGalleryLightbox(image)"
+            (keydown.space)="openGalleryLightbox(image); $event.preventDefault()"
+          >
             <img [attr.id]="'id_appComponent_galleryImage_' + galleryIndex" [src]="image.src" alt="{{ image.alt }}" title="{{ image.alt }}" />
             <figcaption [attr.id]="'id_appComponent_galleryLabel_' + galleryIndex" class="gallery-label">{{ image.label }}</figcaption>
           </figure>
         }
       </div>
+
+      @if (selectedGalleryImage) {
+        <div id="id_appComponent_galleryLightbox" class="gallery-lightbox" (click)="closeGalleryLightbox()">
+          <div id="id_appComponent_galleryLightboxDialog" class="gallery-lightbox__dialog" (click)="$event.stopPropagation()">
+            <button id="id_appComponent_galleryLightboxClose" class="gallery-lightbox__close" type="button" aria-label="Close image" (click)="closeGalleryLightbox()">×</button>
+            <img id="id_appComponent_galleryLightboxImage" class="gallery-lightbox__image" [src]="selectedGalleryImage.src" [alt]="selectedGalleryImage.alt || selectedGalleryImage.label" title="Expanded gallery image" />
+            <p id="id_appComponent_galleryLightboxLabel" class="gallery-lightbox__label">{{ selectedGalleryImage.label }}</p>
+          </div>
+        </div>
+      }
     </section>
 
     <!-- FAQ -->

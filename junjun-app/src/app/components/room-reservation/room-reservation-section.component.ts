@@ -12,9 +12,14 @@ interface RoomReservationCopy {
   description: string;
   highlights: string[];
   form: {
+    nameLabel: string;
+    namePlaceholder: string;
+    phoneLabel: string;
+    phonePlaceholder: string;
+    personCountLabel: string;
+    personCountPlaceholder: string;
     checkInLabel: string;
     checkOutLabel: string;
-    guestCountLabel: string;
     emailLabel: string;
     emailPlaceholder: string;
     submitLabel: string;
@@ -46,17 +51,23 @@ interface RoomReservationCopy {
 
       @if (config.showForm) {
         <form id="id_roomReservationSection_form" class="reservation-form" (submit)="submitReservation($event)">
-          <label id="id_roomReservationSection_checkInLabel" for="id_roomReservationSection_checkInInput">{{ copy.form.checkInLabel }}</label>
-          <input id="id_roomReservationSection_checkInInput" type="date" required />
+          <label id="id_roomReservationSection_nameLabel" for="id_roomReservationSection_nameInput">{{ copy.form.nameLabel }} *</label>
+          <input id="id_roomReservationSection_nameInput" type="text" [placeholder]="copy.form.namePlaceholder" required />
 
-          <label id="id_roomReservationSection_checkOutLabel" for="id_roomReservationSection_checkOutInput">{{ copy.form.checkOutLabel }}</label>
-          <input id="id_roomReservationSection_checkOutInput" type="date" required />
-
-          <label id="id_roomReservationSection_guestCountLabel" for="id_roomReservationSection_guestCountInput">{{ copy.form.guestCountLabel }}</label>
-          <input id="id_roomReservationSection_guestCountInput" type="number" min="1" max="10" value="2" required />
+          <label id="id_roomReservationSection_phoneLabel" for="id_roomReservationSection_phoneInput">{{ copy.form.phoneLabel }} *</label>
+          <input id="id_roomReservationSection_phoneInput" type="tel" [placeholder]="copy.form.phonePlaceholder" required />
 
           <label id="id_roomReservationSection_emailLabel" for="id_roomReservationSection_emailInput">{{ copy.form.emailLabel }}</label>
-          <input id="id_roomReservationSection_emailInput" type="email" [placeholder]="copy.form.emailPlaceholder" required />
+          <input id="id_roomReservationSection_emailInput" type="email" [placeholder]="copy.form.emailPlaceholder" />
+
+          <label id="id_roomReservationSection_personCountLabel" for="id_roomReservationSection_personCountInput">{{ copy.form.personCountLabel }} *</label>
+          <input id="id_roomReservationSection_personCountInput" type="number" min="1" max="10" [placeholder]="copy.form.personCountPlaceholder" required />
+
+          <label id="id_roomReservationSection_checkInLabel" for="id_roomReservationSection_checkInInput">{{ copy.form.checkInLabel }} *</label>
+          <input id="id_roomReservationSection_checkInInput" type="date" required />
+
+          <label id="id_roomReservationSection_checkOutLabel" for="id_roomReservationSection_checkOutInput">{{ copy.form.checkOutLabel }} *</label>
+          <input id="id_roomReservationSection_checkOutInput" type="date" required />
 
           <button id="id_roomReservationSection_submitButton" type="submit" class="book-button">{{ copy.form.submitLabel }}</button>
         </form>
@@ -75,6 +86,10 @@ interface RoomReservationCopy {
         margin-top: 0;
         color: #4d4035;
         line-height: 1.6;
+      }
+
+      #id_roomReservationSection_title {
+        padding-bottom: 0.75rem;
       }
 
       .reservation-highlights {

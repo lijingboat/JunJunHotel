@@ -1049,11 +1049,31 @@ main {
 	padding: @spacing-2xl @spacing-3xl;
 	text-align: left;
 	border-bottom: 0.0625rem solid @line;
+	vertical-align: middle;
 }
 
 .pricing-table th {
 	background: #f2e4d7;
 	font-weight: 700;
+}
+
+.pricing-table th[data-key='roomType'],
+.pricing-table td[data-key='roomType'] {
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+.pricing-table th[data-key='facility'],
+.pricing-table td[data-key='facility'] {
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+.pricing-table th[data-key='duration'],
+.pricing-table td[data-key='duration'],
+.pricing-table th[data-key='priceAfterTax'],
+.pricing-table td[data-key='priceAfterTax'] {
+	text-align: center;
 }
 
 .pricing-table tbody tr:last-child td {
@@ -1090,6 +1110,15 @@ main {
 	position: relative;
 }
 
+.gallery-item--interactive {
+	cursor: zoom-in;
+}
+
+.gallery-item--interactive:focus-visible {
+	outline: 0.1875rem solid @clay;
+	outline-offset: 0.1875rem;
+}
+
 .gallery-grid img {
 	width: 100%;
 	height: 100%;
@@ -1113,6 +1142,57 @@ main {
 	opacity: 0;
 	transform: translateY(@spacing-2xl);
 	transition: opacity @transition-smooth, transform @transition-smooth;
+}
+
+.gallery-lightbox {
+	position: fixed;
+	inset: 0;
+	z-index: 1200;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: @spacing-6xl;
+	background: rgba(17, 12, 8, 0.82);
+}
+
+.gallery-lightbox__dialog {
+	position: relative;
+	max-width: min(90vw, 70rem);
+	max-height: 90vh;
+	padding: @spacing-6xl @spacing-6xl @spacing-4xl;
+	border-radius: @radius-md;
+	background: @white;
+	box-shadow: @shadow-card;
+}
+
+.gallery-lightbox__close {
+	position: absolute;
+	top: @spacing-lg;
+	right: @spacing-lg;
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 0;
+	border-radius: 50%;
+	background: rgba(31, 26, 23, 0.08);
+	color: @ink;
+	font-size: 1.75rem;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.gallery-lightbox__image {
+	display: block;
+	max-width: 100%;
+	max-height: calc(90vh - 6rem);
+	border-radius: @gallery-border-radius;
+	object-fit: contain;
+}
+
+.gallery-lightbox__label {
+	margin: @spacing-3xl 0 0;
+	text-align: center;
+	font-weight: 600;
+	color: @ink;
 }
 
 @media (min-width: @breakpoint-l) and (hover: hover) {
