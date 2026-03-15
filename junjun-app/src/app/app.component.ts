@@ -46,6 +46,8 @@ export class AppComponent {
   isMenuOpen = false;
   isAdminRoute = false;
   private readonly configStorageKey = 'junjun-hotel-config-overrides';
+  private readonly languageCookieKey = 'junjun-hotel-lang';
+  private readonly languageQueryKey = 'lan';
   brand = SITE_META.brand;
   brandIcon = ASSETS.brandIcon;
 
@@ -75,6 +77,7 @@ export class AppComponent {
   constructor() {
     this.resetToDefaults();
     this.applyPersistedConfig();
+    this.initializeLanguagePreference();
     this.detectRoute();
     this.updateViewportTier();
   }
@@ -92,6 +95,54 @@ export class AppComponent {
 
     const path = window.location.pathname.replace(/\/+$/, '') || '/';
     this.isAdminRoute = path === '/admin';
+  }
+
+  private initializeLanguagePreference(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const supportedValues = new Set((this.navLanguageConfig.options ?? []).map((option: { value: string }) => option.value));
+    const params = new URLSearchParams(window.location.search);
+    const queryValue = params.get(this.languageQueryKey);
+    const cookieValue = this.getCookie(this.languageCookieKey);
+
+    const normalizeLanguage = (value: string | null): string | null => {
+      if (!value) {
+        return null;
+      }
+      const normalized = value === 'zh2' ? 'zhHant' : value;
+      return supportedValues.has(normalized) ? normalized : null;
+    };
+
+    const resolved = normalizeLanguage(queryValue) ?? normalizeLanguage(cookieValue) ?? 'en';
+    this.selectedLanguage = resolved;
+    this.persistLanguagePreference(this.selectedLanguage);
+  }
+
+  private persistLanguagePreference(language: string): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const alias = language === 'zhHant' ? 'zh2' : language;
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 365);
+    document.cookie = `${this.languageCookieKey}=${encodeURIComponent(alias)}; expires=${expiresAt.toUTCString()}; path=/; SameSite=Lax`;
+
+    const url = new URL(window.location.href);
+    url.searchParams.set(this.languageQueryKey, alias);
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  }
+
+  private getCookie(name: string): string | null {
+    if (typeof document === 'undefined') {
+      return null;
+    }
+
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const match = document.cookie.match(new RegExp(`(?:^|; )${escapedName}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : null;
   }
 
   private clone<T>(value: T): T {
@@ -331,6 +382,7 @@ export class AppComponent {
     }
 
     this.selectedLanguage = selectElement.value;
+    this.persistLanguagePreference(this.selectedLanguage);
   }
 
   toggleMenu(): void {
@@ -441,9 +493,17 @@ export class AppComponent {
 
   get translatedGalleryImages(): any[] {
     const strings = this.getCurrentLanguageStrings();
-    return this.galleryImages.map((img, idx) => ({
+    const ranked = this.galleryImages
+      .map((img, originalIndex) => ({
+        ...img,
+        originalIndex,
+        rank: Number.isFinite(Number(img?.rank)) ? Number(img.rank) : originalIndex + 1,
+      }))
+      .sort((a, b) => a.rank - b.rank || a.originalIndex - b.originalIndex);
+
+    return ranked.map((img) => ({
       ...img,
-      label: strings.gallery.images[idx]?.label || img.label,
+      label: strings.gallery.images[img.originalIndex]?.label || img.label,
     }));
   }
 
