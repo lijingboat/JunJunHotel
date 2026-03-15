@@ -479,8 +479,13 @@ export class AppComponent {
     return this.pricingColumns;
   }
 
-  get translatedPricingRooms(): typeof ROOM_PRICING {
-    return this.getCurrentLanguageStrings().pricing.rooms;
+  get translatedPricingRooms(): Array<any> {
+    const translatedRooms = this.getCurrentLanguageStrings().pricing.rooms ?? [];
+
+    return this.roomPricing.map((room, index) => ({
+      ...room,
+      ...(translatedRooms[index] ?? {}),
+    }));
   }
 
   get translatedGalleryLabel(): string {
@@ -605,4 +610,3 @@ export class AppComponent {
     return col?.title?.[this.currentViewport] || col?.title?.l || '';
   }
 }
-
