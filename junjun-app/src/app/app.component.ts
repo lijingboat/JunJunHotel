@@ -63,7 +63,7 @@ export class AppComponent {
   pricingDisplayConfig: any = {};
   galleryDisplayConfig: any = {};
   galleryImages: Array<any> = [];
-  selectedGalleryImage: any = null;
+  selectedGalleryIndex: number | null = null;
   faqs: Array<any> = [];
   faqConfig: any = {};
   contact: any = {};
@@ -432,6 +432,27 @@ export class AppComponent {
       }));
   }
 
+  get selectedGalleryImage(): any | null {
+    if (this.selectedGalleryIndex === null) {
+      return null;
+    }
+
+    const images = this.translatedGalleryImages;
+    if (this.selectedGalleryIndex < 0 || this.selectedGalleryIndex >= images.length) {
+      return null;
+    }
+
+    return images[this.selectedGalleryIndex];
+  }
+
+  get canNavigateGalleryLeft(): boolean {
+    return this.selectedGalleryIndex !== null && this.selectedGalleryIndex > 0;
+  }
+
+  get canNavigateGalleryRight(): boolean {
+    return this.selectedGalleryIndex !== null && this.selectedGalleryIndex < this.translatedGalleryImages.length - 1;
+  }
+
   getPricingValue(room: (typeof this.roomPricing)[number], key: RoomKey): string {
     return room[key];
   }
@@ -517,21 +538,47 @@ export class AppComponent {
     event.preventDefault();
   }
 
-  openGalleryLightbox(image: any): void {
+  openGalleryLightbox(index: number): void {
     if (this.currentViewport !== 'm' && this.currentViewport !== 'l') {
       return;
     }
 
-    this.selectedGalleryImage = image;
+    this.selectedGalleryIndex = index;
+  }
+
+  showPreviousGalleryImage(): void {
+    if (!this.canNavigateGalleryLeft || this.selectedGalleryIndex === null) {
+      return;
+    }
+
+    this.selectedGalleryIndex -= 1;
+  }
+
+  showNextGalleryImage(): void {
+    if (!this.canNavigateGalleryRight || this.selectedGalleryIndex === null) {
+      return;
+    }
+
+    this.selectedGalleryIndex += 1;
   }
 
   closeGalleryLightbox(): void {
-    this.selectedGalleryImage = null;
+    this.selectedGalleryIndex = null;
   }
 
   @HostListener('document:keydown.escape')
   onEscapeKey(): void {
     this.closeGalleryLightbox();
+  }
+
+  @HostListener('document:keydown.arrowleft')
+  onArrowLeftKey(): void {
+    this.showPreviousGalleryImage();
+  }
+
+  @HostListener('document:keydown.arrowright')
+  onArrowRightKey(): void {
+    this.showNextGalleryImage();
   }
 
   // ===== TRANSLATION GETTERS =====
@@ -601,7 +648,7 @@ export class AppComponent {
 
     const translatedRooms = this.getCurrentLanguageStrings().pricing.rooms ?? [];
 
-    if (!Array.isArray(translatedRooms) || translatedRooms.length !== this.roomPricing.length) {
+    if (!Array.isArray(translatedRooms)) {
       return this.roomPricing.map((room) => ({ ...room }));
     }
 
@@ -636,21 +683,7 @@ export class AppComponent {
       }))
       .sort((a, b) => a.rank - b.rank || a.originalIndex - b.originalIndex);
 
-    if (this.isEnglishSelected) {
-      return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
-    }
-
-    const strings = this.getCurrentLanguageStrings();
-    const translatedImages = strings.gallery.images ?? [];
-
-    if (!Array.isArray(translatedImages) || translatedImages.length !== this.galleryImages.length) {
-      return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
-    }
-
-    return ranked.map((img) => ({
-      ...img,
-      label: strings.gallery.images[img.originalIndex]?.label || img.label,
-    }));
+    return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
   }
 
   get translatedFaqLabel(): string {
@@ -787,6 +820,18 @@ export class AppComponent {
     }
 
     return this.getCurrentLanguageStrings().footer.copyright;
+  }
+
+  get translatedBrand(): string {
+    if (this.selectedLanguage === 'zh' || this.selectedLanguage === 'zhHant') {
+      return '君君旅店';
+    }
+
+    if (this.isEnglishSelected) {
+      return this.brand;
+    }
+
+    return this.getCurrentLanguageStrings().siteMeta?.brand ?? this.brand;
   }
 
   get translatedFaqPrefix(): any {

@@ -1,3 +1,4 @@
 {
-    "chat.agent.maxRequests": 800
+    "chat.agent.maxRequests": 800,
+    "chatgpt.openOnStartup": true
 }

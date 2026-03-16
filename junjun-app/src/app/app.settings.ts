@@ -138,28 +138,28 @@ export const PRICING = {
 export const GALLERY = {
   description: 'The following are the picked images showcasing our rooms and amenities.',
   images: [
-    { src: 'assets/image/Hotel_Room_21.jpg', alt: '', label: 'Front View', rank: 1 },
-    { src: 'assets/image/Hotel_Room_22.jpg', alt: '', label: 'Front View', rank: 2 },
-    { src: 'assets/image/Hotel_Room_02.jpg', alt: '', label: 'Hotel Hallway', rank: 22 },
-    { src: 'assets/image/Hotel_Room_03.jpg', alt: '', label: 'Standard Room Inner View', rank: 3 },
-    { src: 'assets/image/Hotel_Room_04.jpg', alt: '', label: 'Queen Size Bed', rank: 4 },
-    { src: 'assets/image/Hotel_Room_05.jpg', alt: '', label: '3 Persons Double Beds Room', rank: 5 },
-    { src: 'assets/image/Hotel_Room_06.jpg', alt: '', label: '4 Persons Double Queen Beds Room', rank: 6 },
-    { src: 'assets/image/Hotel_Room_07.jpg', alt: '', label: '4 Persons Double Queen Beds Room', rank: 7 },
-    { src: 'assets/image/Hotel_Room_08.jpg', alt: '', label: 'Hotel Hallway', rank: 8 },
-    { src: 'assets/image/Hotel_Room_09.jpg', alt: '', label: 'Standard Room Inner View', rank: 9 },
-    { src: 'assets/image/Hotel_Room_10.jpg', alt: '', label: '3 Persons Double Beds Room', rank: 10 },
-    { src: 'assets/image/Hotel_Room_11.jpg', alt: '', label: '4 Persons Double Queen Beds Room', rank: 11 },
-    { src: 'assets/image/Hotel_Room_12.jpg', alt: '', label: '4 Persons Double Queen Beds Room', rank: 12 },
-    { src: 'assets/image/Hotel_Room_13.jpg', alt: '', label: '4 Persons Double Queen Beds Room', rank: 13 },
-    { src: 'assets/image/Hotel_Room_14.jpg', alt: '', label: 'Hotel Hallway', rank: 14 },
-    { src: 'assets/image/Hotel_Room_15.jpg', alt: '', label: 'Basement Bathroom', rank: 15 },
-    { src: 'assets/image/Hotel_Room_16.jpg', alt: '', label: 'Bathroom Double Beds', rank: 16 },
-    { src: 'assets/image/Hotel_Room_17.jpg', alt: '', label: 'Basement Bathroom', rank: 17 },
-    { src: 'assets/image/Hotel_Room_18.jpg', alt: '', label: 'Basement Interior View', rank: 18 },
-    { src: 'assets/image/Hotel_Room_19.jpg', alt: '', label: 'Front View', rank: 19 },
-    { src: 'assets/image/Hotel_Room_20.jpg', alt: '', label: 'Front View', rank: 20 },
-    { src: 'assets/image/Hotel_Room_01.jpg', alt: '', label: 'Standard Room', rank: 21 },
+    { src: 'assets/image/Hotel_Room_21.jpg', label: 'Front View', rank: 1 },
+    { src: 'assets/image/Hotel_Room_22.jpg', label: 'Front View', rank: 2 },
+    { src: 'assets/image/Hotel_Room_02.jpg', label: 'Hotel Hallway', rank: 22 },
+    { src: 'assets/image/Hotel_Room_03.jpg', label: 'Standard Room Inner View', rank: 3 },
+    { src: 'assets/image/Hotel_Room_04.jpg', label: 'Queen Size Bed', rank: 4 },
+    { src: 'assets/image/Hotel_Room_05.jpg', label: '3 Persons Double Beds Room', rank: 5 },
+    { src: 'assets/image/Hotel_Room_06.jpg', label: '4 Persons Double Queen Beds Room', rank: 6 },
+    { src: 'assets/image/Hotel_Room_07.jpg', label: '4 Persons Double Queen Beds Room', rank: 7 },
+    { src: 'assets/image/Hotel_Room_08.jpg', label: 'Hotel Hallway', rank: 8 },
+    { src: 'assets/image/Hotel_Room_09.jpg', label: 'Standard Room Inner View', rank: 9 },
+    { src: 'assets/image/Hotel_Room_10.jpg', label: '3 Persons Double Beds Room', rank: 10 },
+    { src: 'assets/image/Hotel_Room_11.jpg', label: '4 Persons Double Queen Beds Room', rank: 11 },
+    { src: 'assets/image/Hotel_Room_12.jpg', label: '4 Persons Double Queen Beds Room', rank: 12 },
+    { src: 'assets/image/Hotel_Room_13.jpg', label: '4 Persons Double Queen Beds Room', rank: 13 },
+    { src: 'assets/image/Hotel_Room_14.jpg', label: 'Hotel Hallway', rank: 14 },
+    { src: 'assets/image/Hotel_Room_15.jpg', label: 'Basement Bathroom', rank: 15 },
+    { src: 'assets/image/Hotel_Room_16.jpg', label: 'Bathroom Double Beds', rank: 16 },
+    { src: 'assets/image/Hotel_Room_17.jpg', label: 'Basement Bathroom', rank: 17 },
+    { src: 'assets/image/Hotel_Room_18.jpg', label: 'Basement Interior View', rank: 18 },
+    { src: 'assets/image/Hotel_Room_19.jpg', label: 'Front View', rank: 19 },
+    { src: 'assets/image/Hotel_Room_20.jpg', label: 'Front View', rank: 20 },
+    { src: 'assets/image/Hotel_Room_01.jpg', label: 'Standard Room', rank: 21 },
   ],
 } as const;
 
@@ -190,6 +190,9 @@ export const FAQ_CONFIG = {
   useHashIndexStyle: true,
   indexHighlightTextColor: '#8a5d37',
 } as const;
+
+export const TRANSLATION_SYNC_PROMPT =
+  'Use export const FAQS (English) as the only source of meaning, then update all language entries consistently for nav, pricing, gallery labels, notice bars, contact, room reservation, and footer while preserving ids and data structure.';
 
 // ===== CONTACT SECTION =====
 export const CONTACT = {
@@ -222,7 +225,7 @@ export const NOTICE_BARS = [
   },
   {
     id: 'notice_faq_help',
-    message: 'World cup season is here! Call us for quick room availability to catch the games with friends !!!',
+    message: 'Need a quick answer? Click this notice to jump to FAQ #1.',
     level: 'blue' as const,
     visible: true,
     beginDate: undefined,
@@ -328,8 +331,10 @@ export const STRINGS = {
       rooms: [
         { roomType: 'Chambre Standard', capacity: '1-2 personnes', duration: '24 Heures', priceAfterTax: 'CAD$120', facility: 'Literie propre et papier hygiénique gratuit' },
         { roomType: 'Chambre Spacieuse', capacity: '1-3 personnes', duration: '24 Heures', priceAfterTax: 'CAD$150', facility: 'Literie propre et papier hygiénique gratuit' },
+        { roomType: 'Chambre 4 Personnes', capacity: '1-3 personnes', duration: '24 Heures', priceAfterTax: 'CAD$180', facility: 'Deux lits queen, douche privée, TV et internet rapide' },
         { roomType: 'Chambre Sous-sol', capacity: '1-2 personnes', duration: '24 Heures', priceAfterTax: 'CAD$100', facility: 'Literie propre et papier hygiénique gratuit' },
-        { roomType: 'Chambre Temporaire', capacity: '1-2 personnes', duration: '4 Heures', priceAfterTax: 'CAD$80', facility: 'Literie propre et papier hygiénique gratuit' },
+        { roomType: 'Chambre Sous-sol 3 Personnes', capacity: '1-2 personnes', duration: '24 Heures', priceAfterTax: 'CAD$100', facility: 'Chambre au sous-sol avec un lit queen et un lit simple, douche privée, TV et internet rapide' },
+        { roomType: 'Chambre Temporaire', capacity: '1-2 personnes', duration: '4 Heures', priceAfterTax: 'CAD$80', facility: 'Un lit queen, douche privée, TV et internet rapide' },
       ],
     },
     gallery: {
@@ -406,7 +411,7 @@ export const STRINGS = {
     },
     noticeBars: {
       notice_welcome: 'Bienvenue ! Des tarifs spéciaux sont offerts pour les séjours prolongés. Contactez-nous pour en savoir plus.',
-      notice_faq_help: 'Besoin d\'une réponse rapide ? Cliquez sur cette barre pour accéder à la FAQ no 1.',
+      notice_faq_help: 'Besoin d\'une réponse rapide ? Cliquez sur cet avis pour accéder à la FAQ no 1.',
     },
     resourceLinks: ['À Propos', 'Service', 'Photos', 'FAQ'],
     footer: {
@@ -415,9 +420,9 @@ export const STRINGS = {
   },
   zh: {
     siteMeta: {
-      title: '君君酒店',
+      title: '君君旅店',
       description: '位于多伦多市中心的经济型住宿',
-      brand: '君君酒店',
+      brand: '君君旅店',
     },
     nav: {
       about: '关于',
@@ -428,12 +433,12 @@ export const STRINGS = {
       roomReservation: '预订',
     },
     about: {
-      title: '欢迎来到君君酒店',
+      title: '欢迎来到君君旅店',
       paragraphs: [
-        '欢迎了解君君酒店，这是一间舒适且地理位置优越的私人套房，为重视便利、经济实惠和在多伦多市中心舒适住宿的客人而设计。位于该市最实用和文化活跃的社区之一，这间套房使游客靠近日常生活必需品、主要目的地和充满活力的城市地区。这种平衡使其特别适合学生、专业人士、长期住客和希望拥有一个易于生活的中心住宿基地的旅行者。',
+        '欢迎了解君君旅店，这是一间舒适且地理位置优越的私人套房，为重视便利、经济实惠和在多伦多市中心舒适住宿的客人而设计。位于该市最实用和文化活跃的社区之一，这间套房使游客靠近日常生活必需品、主要目的地和充满活力的城市地区。这种平衡使其特别适合学生、专业人士、长期住客和希望拥有一个易于生活的中心住宿基地的旅行者。',
         '🌆 位置和日常便利\n该套房提供卓越的便利性。T&T超市仅几步之遥，可轻松采购新鲜杂货、熟食和亚洲特色食品，无需长距离步行或乘坐公共交通。这对于长期住宿和喜欢经常烹饪的客人来说是一个重大优势。肯辛顿市场也在步行距离内，提供各种全球美食、独立商店和当地创意文化。多伦多大学圣乔治校区也在附近，使这间套房成为学生、访问学者和会议参与者的实用选择。唐人街就在不远处，拥有深夜餐饮和特色商场，为日常生活增加了能量和便利。',
         '🛏️ 内部舒适和实用功能\n在内部，该套房设计具有舒适性和功能性。加州大床提供宽敞的卧铺空间，私人淋浴房提供便利而无需共享设施。木地板增添了简洁现代的美感，40英寸大电视支持室内放松娱乐。快速稳定的互联网使远程工作、在线学习、流媒体和视频通话变得轻松。这些功能共同创造了一个可靠、独立的环境，适合短期访问和长期住宿。',
-        '💰 灵活且经济实惠的住宿\n经济实惠仍然是君君酒店最强的优势之一。灵活的价格和可适应的服务时长允许客人选择符合他们真实需求的住宿模式，而不是固定的酒店结构。这使其成为旅行者、学生和长期居住者的聪明而可靠的选择，他们希望在位置优越的多伦多拥有一个住宿基地，而无需承担传统住宿的高成本。',
+        '💰 灵活且经济实惠的住宿\n经济实惠仍然是君君旅店最强的优势之一。灵活的价格和可适应的服务时长允许客人选择符合他们真实需求的住宿模式，而不是固定的酒店结构。这使其成为旅行者、学生和长期居住者的聪明而可靠的选择，他们希望在位置优越的多伦多拥有一个住宿基地，而无需承担传统住宿的高成本。',
       ],
     },
     pricing: {
@@ -448,8 +453,10 @@ export const STRINGS = {
       rooms: [
         { roomType: '标准间', capacity: '1-2人', duration: '24小时', priceAfterTax: 'CAD$120', facility: '清洁床铺和免费卫生纸' },
         { roomType: '豪华间', capacity: '1-3人', duration: '24小时', priceAfterTax: 'CAD$150', facility: '清洁床铺和免费卫生纸' },
+        { roomType: '四人间', capacity: '1-3人', duration: '24小时', priceAfterTax: 'CAD$180', facility: '两张大床、独立淋浴、电视和高速网络' },
         { roomType: '地下室间', capacity: '1-2人', duration: '24小时', priceAfterTax: 'CAD$100', facility: '清洁床铺和免费卫生纸' },
-        { roomType: '临时间', capacity: '1-2人', duration: '4小时', priceAfterTax: 'CAD$80', facility: '清洁床铺和免费卫生纸' },
+        { roomType: '地下室三人间', capacity: '1-2人', duration: '24小时', priceAfterTax: 'CAD$100', facility: '地下室房间，配有一张大床和一张单人床、独立淋浴、电视和高速网络' },
+        { roomType: '临时间', capacity: '1-2人', duration: '4小时', priceAfterTax: 'CAD$80', facility: '一张大床、独立淋浴、电视和高速网络' },
       ],
     },
     gallery: {
@@ -495,7 +502,7 @@ export const STRINGS = {
       addressLabel: '地址：',
       emailLabel: '邮箱：',
       hoursLabel: '营业时间：',
-      mapTitle: '君君酒店地图',
+      mapTitle: '君君旅店地图',
       phone: '647-349-9220',
       address: '374 College St. M5T 1S6 Toronto ON CANADA',
       email: 'junjunhotel@gmail.com',
@@ -526,11 +533,11 @@ export const STRINGS = {
     },
     noticeBars: {
       notice_welcome: '欢迎入住！长住可享特别优惠，详情请联系我们。',
-      notice_faq_help: '想快速找到答案？点击此通知可跳转到常见问题第 1 项。',
+      notice_faq_help: '需要快速答案吗？点击此通知可跳转到常见问题第 1 项。',
     },
     resourceLinks: ['关于我们', '服务', '照片', '常见问题'],
     footer: {
-      copyright: '© 2026 君君酒店',
+      copyright: '© 2026 君君旅店',
     },
   },
   es: {
@@ -648,7 +655,7 @@ export const STRINGS = {
     },
     noticeBars: {
       notice_welcome: '¡Bienvenido! Hay tarifas especiales para estancias largas. Contáctenos para más detalles.',
-      notice_faq_help: '¿Necesita respuestas rápidas? Haga clic en esta barra para ir al FAQ #1.',
+      notice_faq_help: '¿Necesita una respuesta rápida? Haga clic en este aviso para ir al FAQ #1.',
     },
     resourceLinks: ['Acerca de', 'Servicio', 'Fotos', 'FAQ'],
     footer: {
@@ -657,9 +664,9 @@ export const STRINGS = {
   },
   zhHant: {
     siteMeta: {
-      title: '君君酒店',
+      title: '君君旅店',
       description: '位於多倫多市中心的經濟型住宿',
-      brand: '君君酒店',
+      brand: '君君旅店',
     },
     nav: {
       about: '關於',
@@ -670,12 +677,12 @@ export const STRINGS = {
       roomReservation: '預訂',
     },
     about: {
-      title: '歡迎來到君君酒店',
+      title: '歡迎來到君君旅店',
       paragraphs: [
-        '歡迎認識君君酒店。我們提供舒適且地點便利的私人套房，適合重視交通便利、價格合理與住宿品質的旅客。位於多倫多市中心實用且富有文化活力的區域，鄰近日常生活所需與主要目的地，特別適合學生、專業人士、長住旅客與需要市中心據點的訪客。',
+        '歡迎認識君君旅店。我們提供舒適且地點便利的私人套房，適合重視交通便利、價格合理與住宿品質的旅客。位於多倫多市中心實用且富有文化活力的區域，鄰近日常生活所需與主要目的地，特別適合學生、專業人士、長住旅客與需要市中心據點的訪客。',
         '🌆 地點與日常便利\n套房交通便利。T&T 超市近在咫尺，購買新鮮食材、即食餐點與亞洲特色商品非常方便，對長住與常下廚旅客很實用。Kensington Market 步行可達，擁有多元美食、獨立商店與在地創意文化。多倫多大學 St. George 校區也在附近，對學生、訪問學者與會議參加者都很方便。唐人街同樣鄰近，夜間餐飲與特色市場齊全。',
         '🛏️ 室內舒適與實用功能\n室內設計兼顧舒適與功能。Queen-size 床提供寬敞睡眠空間，私人淋浴間更具私密性。木質地板呈現整潔現代風格，40 吋電視適合晚間放鬆。高速穩定網路可支援遠端工作、線上學習、影音串流與視訊通話。',
-        '💰 彈性且實惠的住宿\n價格彈性是君君酒店的重要優勢。可依需求選擇不同住宿時長與方案，不必受制於傳統旅館固定規則。對旅客、學生與長住人士而言，是在多倫多市中心兼具位置與成本效益的可靠選擇。',
+        '💰 彈性且實惠的住宿\n價格彈性是君君旅店的重要優勢。可依需求選擇不同住宿時長與方案，不必受制於傳統旅館固定規則。對旅客、學生與長住人士而言，是在多倫多市中心兼具位置與成本效益的可靠選擇。',
       ],
     },
     pricing: {
@@ -739,7 +746,7 @@ export const STRINGS = {
       addressLabel: '地址：',
       emailLabel: '電子郵件：',
       hoursLabel: '營業時間：',
-      mapTitle: '君君酒店地圖',
+      mapTitle: '君君旅店地圖',
       phone: '647-349-9220',
       address: '374 College St. M5T 1S6 Toronto ON CANADA',
       email: 'junjunhotel@gmail.com',
@@ -770,11 +777,11 @@ export const STRINGS = {
     },
     noticeBars: {
       notice_welcome: '歡迎入住！長住可享特別優惠，詳情請聯絡我們。',
-      notice_faq_help: '想快速找到答案？點擊此通知可跳轉到常見問題第 1 項。',
+      notice_faq_help: '需要快速答案嗎？點擊此通知可跳轉到常見問題第 1 項。',
     },
     resourceLinks: ['關於我們', '服務', '照片', '常見問題'],
     footer: {
-      copyright: '© 2026 君君酒店',
+      copyright: '© 2026 君君旅店',
     },
   },
   ja: {
@@ -892,7 +899,7 @@ export const STRINGS = {
     },
     noticeBars: {
       notice_welcome: 'ようこそ！長期滞在向けの特別料金があります。詳細はお問い合わせください。',
-      notice_faq_help: 'すぐに回答が必要ですか？このバーをクリックしてFAQ #1へ移動します。',
+      notice_faq_help: 'すぐに回答が必要ですか？このお知らせをクリックしてFAQ #1へ移動します。',
     },
     resourceLinks: ['会社情報', 'サービス', '写真', 'FAQ'],
     footer: {

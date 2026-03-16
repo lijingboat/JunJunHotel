@@ -24,6 +24,12 @@ interface AdminSectionGroup {
   fields: AdminField[];
 }
 
+interface DeploymentStep {
+  title: string;
+  detail: string;
+  image: string;
+}
+
 @Component({
   selector: 'app-admin-page',
   standalone: true,
@@ -55,10 +61,26 @@ interface AdminSectionGroup {
           <button id="id_admin_reloadBtn" type="button" class="secondary" (click)="reloadFromCurrent()">Reload</button>
           <button id="id_admin_resetBtn" type="button" class="secondary" (click)="clearOverrides()">Reset</button>
           <button id="id_admin_backHomeBtn" type="button" class="secondary" (click)="openHomeInNewTab()">Back To Home</button>
+          <button id="id_admin_openDeployHelperBtn" type="button" class="secondary" (click)="openDeploymentHelperPage()">Deployment Helper</button>
+          <button
+            id="id_admin_openMainConfigBtn"
+            type="button"
+            class="secondary"
+            [disabled]="!isDeploymentGuideView"
+            (click)="openAdminConfigPage()"
+          >
+            Main Admin
+          </button>
           <button id="id_admin_exportBtn" type="button" class="secondary" (click)="exportJson()">Export JSON</button>
           <button id="id_admin_importBtn" type="button" class="secondary" (click)="triggerImport()">Import JSON</button>
           <input id="id_admin_importFile" type="file" accept=".json,application/json" style="display:none" (change)="importJson($event)" />
         </div>
+
+        @if (!isDeploymentGuideView) {
+          <p id="id_admin_deployHelperLinkHint" class="admin-url-hint">
+            Deployment helper URL: /admin?view=deploy
+          </p>
+        }
 
         @if (statusMessage) {
           <div id="id_admin_status" class="alert admin-alert" [ngClass]="statusClass" role="status" aria-live="polite">
@@ -73,40 +95,58 @@ interface AdminSectionGroup {
           </div>
         }
 
-        @for (group of groupedSections; track group.key) {
-          <section class="admin-section" [attr.id]="'id_admin_section_' + group.key">
-            <h2 class="admin-section-title" [attr.id]="'id_admin_sectionTitle_' + group.key">{{ group.title }}</h2>
-            <table class="admin-table" [attr.id]="'id_admin_table_' + group.key">
-              <thead [attr.id]="'id_admin_thead_' + group.key">
-                <tr [attr.id]="'id_admin_theadRow_' + group.key">
-                  <th [attr.id]="'id_admin_th_field_' + group.key">Field</th>
-                  <th [attr.id]="'id_admin_th_value_' + group.key">Value</th>
-                  <th [attr.id]="'id_admin_th_unit_' + group.key">Unit</th>
-                </tr>
-              </thead>
-              <tbody [attr.id]="'id_admin_tbody_' + group.key">
-                @for (field of group.fields; track field.id) {
-                  <tr [attr.id]="'id_admin_row_' + field.id" [class.row-dirty]="field.isDirty">
-                    <td [attr.id]="'id_admin_label_' + field.id">{{ field.label }}</td>
-                    <td [attr.id]="'id_admin_value_' + field.id">
-                      @if (field.type === 'boolean') {
-                        <input [attr.id]="'id_admin_input_' + field.id" type="checkbox" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
-                      } @else if (field.type === 'color') {
-                        <input [attr.id]="'id_admin_input_' + field.id" type="color" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
-                      } @else if (field.type === 'date') {
-                        <input [attr.id]="'id_admin_input_' + field.id" type="date" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
-                      } @else if (field.type === 'number') {
-                        <input [attr.id]="'id_admin_input_' + field.id" type="number" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
-                      } @else {
-                        <input [attr.id]="'id_admin_input_' + field.id" type="text" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
-                      }
-                    </td>
-                    <td [attr.id]="'id_admin_unit_' + field.id">{{ field.unit ?? '' }}</td>
-                  </tr>
-                }
-              </tbody>
-            </table>
+        @if (isDeploymentGuideView) {
+          <section id="id_admin_deployGuide" class="deploy-guide">
+            <h2 id="id_admin_deployGuideTitle" class="admin-section-title">GoDaddy Deployment Helper</h2>
+            <p id="id_admin_deployGuideSummary" class="deploy-guide__summary">
+              Follow these steps in order to deploy the current build safely. This page is admin-only and does not change the public site.
+            </p>
+            <ol id="id_admin_deployGuideSteps" class="deploy-guide__steps">
+              @for (step of deploymentSteps; track step.title; let stepIndex = $index) {
+                <li [attr.id]="'id_admin_deployStep_' + stepIndex" class="deploy-step">
+                  <h3 [attr.id]="'id_admin_deployStepTitle_' + stepIndex">Step {{ stepIndex + 1 }}: {{ step.title }}</h3>
+                  <p [attr.id]="'id_admin_deployStepDetail_' + stepIndex">{{ step.detail }}</p>
+                  <img [attr.id]="'id_admin_deployStepImage_' + stepIndex" [src]="step.image" [alt]="step.title + ' illustration'" loading="lazy" />
+                </li>
+              }
+            </ol>
           </section>
+        } @else {
+          @for (group of groupedSections; track group.key) {
+            <section class="admin-section" [attr.id]="'id_admin_section_' + group.key">
+              <h2 class="admin-section-title" [attr.id]="'id_admin_sectionTitle_' + group.key">{{ group.title }}</h2>
+              <table class="admin-table" [attr.id]="'id_admin_table_' + group.key">
+                <thead [attr.id]="'id_admin_thead_' + group.key">
+                  <tr [attr.id]="'id_admin_theadRow_' + group.key">
+                    <th [attr.id]="'id_admin_th_field_' + group.key">Field</th>
+                    <th [attr.id]="'id_admin_th_value_' + group.key">Value</th>
+                    <th [attr.id]="'id_admin_th_unit_' + group.key">Unit</th>
+                  </tr>
+                </thead>
+                <tbody [attr.id]="'id_admin_tbody_' + group.key">
+                  @for (field of group.fields; track field.id) {
+                    <tr [attr.id]="'id_admin_row_' + field.id" [class.row-dirty]="field.isDirty">
+                      <td [attr.id]="'id_admin_label_' + field.id">{{ field.label }}</td>
+                      <td [attr.id]="'id_admin_value_' + field.id">
+                        @if (field.type === 'boolean') {
+                          <input [attr.id]="'id_admin_input_' + field.id" type="checkbox" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
+                        } @else if (field.type === 'color') {
+                          <input [attr.id]="'id_admin_input_' + field.id" type="color" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
+                        } @else if (field.type === 'date') {
+                          <input [attr.id]="'id_admin_input_' + field.id" type="date" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
+                        } @else if (field.type === 'number') {
+                          <input [attr.id]="'id_admin_input_' + field.id" type="number" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
+                        } @else {
+                          <input [attr.id]="'id_admin_input_' + field.id" type="text" [(ngModel)]="field.value" [name]="field.id" (ngModelChange)="onFieldValueChange(field, $event)" />
+                        }
+                      </td>
+                      <td [attr.id]="'id_admin_unit_' + field.id">{{ field.unit ?? '' }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </section>
+          }
         }
 
       }
@@ -253,6 +293,48 @@ interface AdminSectionGroup {
         padding-left: 1.25rem;
       }
 
+      .deploy-guide {
+        border: 1px solid rgba(31, 26, 23, 0.12);
+        border-radius: 0.75rem;
+        background: #fff;
+        padding: 1rem;
+      }
+
+      .deploy-guide__summary {
+        margin: 0 0 0.75rem;
+      }
+
+      .deploy-guide__steps {
+        margin: 0;
+        padding-left: 1.25rem;
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .deploy-step {
+        background: #fdf8f1;
+        border: 1px solid rgba(31, 26, 23, 0.1);
+        border-radius: 0.6rem;
+        padding: 0.75rem;
+      }
+
+      .deploy-step h3 {
+        margin: 0 0 0.35rem;
+      }
+
+      .deploy-step p {
+        margin: 0 0 0.6rem;
+      }
+
+      .deploy-step img {
+        width: 100%;
+        max-width: 36rem;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(31, 26, 23, 0.12);
+        display: block;
+        background: #fff;
+      }
+
       .bg-success,
       .bg-danger,
       .bg-secondary {
@@ -267,6 +349,7 @@ export class AdminPageComponent implements OnInit {
   @Output() resetOverrides = new EventEmitter<void>();
 
   isUnlocked = false;
+  isDeploymentGuideView = false;
   selectedTheme = 'sand';
   passwordInput = '';
   currentUrl = '/admin';
@@ -277,6 +360,7 @@ export class AdminPageComponent implements OnInit {
 
   fields: AdminField[] = [];
   groupedSections: AdminSectionGroup[] = [];
+  deploymentSteps: DeploymentStep[] = [];
   private layoutBase: Record<string, unknown> = {};
   private settingsBase: Record<string, unknown> = {};
 
@@ -295,8 +379,24 @@ export class AdminPageComponent implements OnInit {
   ngOnInit(): void {
     if (typeof window !== 'undefined') {
       this.currentUrl = `${window.location.pathname}${window.location.search}`;
+      this.isDeploymentGuideView = new URLSearchParams(window.location.search).get('view') === 'deploy';
+      this.deploymentSteps = this.buildDeploymentSteps();
     }
     this.refreshFromInput(false);
+  }
+
+  openDeploymentHelperPage(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.location.href = '/admin?view=deploy';
+  }
+
+  openAdminConfigPage(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    window.location.href = '/admin';
   }
 
   refreshFromInput(clearStatus: boolean = true): void {
@@ -661,6 +761,46 @@ export class AdminPageComponent implements OnInit {
     }
 
     return { type: 'text', value: raw };
+  }
+
+  private buildDeploymentSteps(): DeploymentStep[] {
+    return [
+      {
+        title: 'Prepare server folder',
+        detail: 'In GoDaddy cPanel, open File Manager, create an app folder, and ensure Node.js app support is enabled for your domain/subdomain.',
+        image: this.buildStepImage('Prepare Folder', 'Create deployment directory and map domain', '#c18a5f'),
+      },
+      {
+        title: 'Build production bundle',
+        detail: 'Run npm install then npm run build in junjun-app. Confirm dist/junjun-app/browser and dist/junjun-app/server are generated.',
+        image: this.buildStepImage('Build App', 'Generate browser and server outputs', '#8a5d37'),
+      },
+      {
+        title: 'Upload dist files',
+        detail: 'Upload the browser and server folders to the GoDaddy app directory. Keep folder names unchanged so server.mjs paths still match.',
+        image: this.buildStepImage('Upload Artifacts', 'Upload dist/junjun-app/* to server', '#4d4035'),
+      },
+      {
+        title: 'Install production dependencies',
+        detail: 'On the server terminal, run npm ci --omit=dev in the app directory where package.json is uploaded.',
+        image: this.buildStepImage('Install Dependencies', 'Run npm ci --omit=dev', '#1f1a17'),
+      },
+      {
+        title: 'Set startup command',
+        detail: 'In GoDaddy Node.js app settings, set startup file to dist/junjun-app/server/server.mjs and choose the Node version used by Angular 17.',
+        image: this.buildStepImage('Configure Startup', 'Use dist/junjun-app/server/server.mjs', '#7b6048'),
+      },
+      {
+        title: 'Restart and verify',
+        detail: 'Restart the app from GoDaddy panel, open your domain, and verify language switching, pricing translation, gallery popup, and admin access.',
+        image: this.buildStepImage('Verify Release', 'Restart app and smoke-test site', '#5c4633'),
+      },
+    ];
+  }
+
+  private buildStepImage(title: string, subtitle: string, accentColor: string): string {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fff9f2"/><stop offset="100%" stop-color="#f3e7da"/></linearGradient></defs><rect width="1200" height="520" fill="url(#g)"/><rect x="42" y="42" width="1116" height="436" rx="24" fill="#ffffff" stroke="${accentColor}" stroke-width="4"/><rect x="72" y="96" width="420" height="290" rx="18" fill="#f8eee4"/><rect x="96" y="130" width="372" height="34" rx="8" fill="#e7d7c6"/><rect x="96" y="188" width="298" height="26" rx="8" fill="#e7d7c6"/><rect x="96" y="230" width="338" height="26" rx="8" fill="#e7d7c6"/><rect x="96" y="272" width="260" height="26" rx="8" fill="#e7d7c6"/><circle cx="1000" cy="160" r="64" fill="${accentColor}" opacity="0.18"/><circle cx="1026" cy="250" r="44" fill="${accentColor}" opacity="0.3"/><text x="540" y="188" fill="#1f1a17" font-size="52" font-family="Segoe UI, Arial, sans-serif" font-weight="700">${title}</text><text x="540" y="248" fill="#4d4035" font-size="30" font-family="Segoe UI, Arial, sans-serif">${subtitle}</text><text x="540" y="326" fill="#8a5d37" font-size="24" font-family="Segoe UI, Arial, sans-serif">Jun Jun Hotel Admin Deployment Guide</text></svg>`;
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
   }
 
   private setByPath(root: Record<string, unknown> | unknown[], path: string, value: string | number | boolean, unit?: string): void {
