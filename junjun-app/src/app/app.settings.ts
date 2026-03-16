@@ -227,7 +227,7 @@ export const NOTICE_BARS = [
     id: 'notice_faq_help',
     message: 'Need a quick answer? Click this notice to jump to FAQ #1.',
     level: 'blue' as const,
-    visible: true,
+    visible: false,
     beginDate: undefined,
     expireDate: undefined,
     faqTargetIndex: null,
