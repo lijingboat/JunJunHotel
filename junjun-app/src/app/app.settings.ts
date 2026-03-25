@@ -26,10 +26,10 @@ export const NAV_LINKS = [
 export const ABOUT = {
   title: 'Welcome to Jun Jun Hotel',
   paragraphs: [
-    'Welcome to Jun Jun Hotel, a comfortable and practical place to stay in downtown Toronto.',
-    '🌆 Location and Everyday Convenience\nThe suite is close to T&T Supermarket, Kensington Market, the University of Toronto, and Chinatown.',
-    '🛏️ Interior Comfort and Practical Features\nEach room offers essential comfort including a queen-size bed, private shower, TV, and fast internet.',
-    '💰 Flexible and Affordable Stays\nFlexible pricing and stay durations make this a dependable option for short and long stays.',
+    'Welcome to a closer look at Jun Jun Hotel, a comfortable and well-located private suite designed for guests who value convenience, affordability, and a smooth stay in the heart of downtown Toronto. Set in one of the city\'s most practical and culturally active neighbourhoods, the suite places visitors near daily essentials, major destinations, and vibrant urban districts. This balance makes it especially suitable for students, professionals, long-term guests, and travellers who want a central home base that feels easy to live in.',
+    '🌆 Location and Everyday Convenience\nThe suite offers exceptional accessibility to Toronto\'s most vibrant neighborhoods. Located close to Little Italy, Western Hospital, Chinatown, and the University of Toronto\'s St. George campus, the area perfectly balances cultural immersion with practical necessities. Guests will appreciate the proximity to the TTC subway and streetcar stops right downstairs, making transit seamless. The building features a Vietnamese restaurant on the first floor—perfect for quick meals and local flavours. Within walking distance you\'ll find Tim Hortons, T&T Supermarket with fresh groceries and Asian specialty items, McDonald\'s, Subway, Freshco for budget-friendly shopping, and local beer stores. Kensington Market is also nearby, offering independent shops and global cuisine. Whether you\'re in Toronto for business, study, or leisure, you\'ll find everything you need just steps away.',
+    '🛏️ Interior Comfort and Practical Features\nInside, the suite is designed for both comfort and function. A queen-size bed provides generous sleeping space, while a private shower offers convenience without shared facilities. Wooden flooring adds a clean, modern aesthetic, and a large 40-inch TV supports relaxing evenings indoors. Fast, stable internet enables remote work, online study, streaming, and video calls with ease. Together, these features create a dependable, self-contained environment suitable for both short visits and longer stays.',
+    '💰 Flexible and Affordable Stays\nAffordability remains one of Jun Jun Hotel\'s strongest advantages. Flexible pricing and adaptable service durations allow guests to select a stay pattern that fits their real needs instead of rigid hotel structures. This makes the suite a smart and dependable option for travellers, students, and long-term residents who want a well-located Toronto base without the high cost of traditional accommodations.',
   ],
 } as const;
 
@@ -48,12 +48,12 @@ export const PRICING = {
     { key: 'facility', title: { xs: 'Facility', s: 'Facility', m: 'Facility', l: 'Facility' }, width: { xs: 0, s: 0, m: 20, l: 20 }, visible: { xs: false, s: false, m: true, l: true } },
   ],
   rooms: [
-    { roomType: 'Two Person Room', capacity: '1-2 persons', duration: '24 Hours', priceAfterTax: 'CAD $130|CAD $120', facility: 'One Queen Size Bed, Private Shower, TV and Fast Internet' },
-    { roomType: 'Three Person Room', capacity: '1-3 persons', duration: '24 Hours', priceAfterTax: 'CAD $150|CAD $135', facility: 'One Queen Size Bed, One Single Bed, Private Shower, TV and Fast Internet' },
-    { roomType: 'Four Person Bed Room', capacity: '1-3 persons', duration: '24 Hours', priceAfterTax: 'CAD $180|CAD $165', facility: 'Two Queen Size Beds, Private Shower, TV and Fast Internet' },
-    { roomType: 'Basement Two Person Bed Room', capacity: '1-2 persons', duration: '24 Hours', priceAfterTax: 'CAD $100|CAD $105', facility: 'Basement Single Room with One Queen Size Bed, Private Shower, TV and Fast Internet' },
-    { roomType: 'Basement Three Persons Bed Room', capacity: '1-2 persons', duration: '24 Hours', priceAfterTax: 'CAD $100|CAD $120', facility: 'Basement Room with One Queen Size Bed and One Single Bed, Private Shower, TV and Fast Internet' },
-    { roomType: 'Temporary Room', capacity: '1-2 persons', duration: '4 Hours', priceAfterTax: 'CAD $80', facility: 'One Queen Size Bed, Private Shower, TV and Fast Internet' },
+    { roomType: 'Two Person Room', capacity: '1-2 persons', duration: '24 Hours', priceAfterTax: 'CAD $150|CAD $120', facility: 'One Queen Size Bed, Private Shower, TV and Fast Internet' },
+    { roomType: 'Three Person Room', capacity: '1-3 persons', duration: '24 Hours', priceAfterTax: 'CAD $165|CAD $135', facility: 'One Queen Size Bed, One Single Bed, Private Shower, TV and Fast Internet' },
+    { roomType: 'Four Person Bed Room', capacity: '1-3 persons', duration: '24 Hours', priceAfterTax: 'CAD $195|CAD $165', facility: 'Two Queen Size Beds, Private Shower, TV and Fast Internet' },
+    { roomType: 'Basement Two Person Bed Room', capacity: '1-2 persons', duration: '24 Hours', priceAfterTax: 'CAD $135|CAD $120', facility: 'Basement Single Room with One Queen Size Bed, Private Shower, TV and Fast Internet' },
+    { roomType: 'Basement Three Persons Bed Room', capacity: '1-2 persons', duration: '24 Hours', priceAfterTax: 'CAD $140|CAD $120', facility: 'Basement Room with One Queen Size Bed and One Single Bed, Private Shower, TV and Fast Internet' },
+    { roomType: 'Temporary Room', capacity: '1-2 persons', duration: '4 Hours', priceAfterTax: 'CAD $95|CAD $80', facility: 'One Queen Size Bed, Private Shower, TV and Fast Internet' },
   ],
 } as const;
 
@@ -102,8 +102,8 @@ export const CONTACT = {
 export const RESOURCE_LINKS = ['About Us', 'Service', 'Photo', 'FAQ'] as const;
 
 export const NOTICE_BARS = [
-  { id: 'notice_welcome', message: 'Welcome! Special rates available for extended stays. Contact us for details.', level: 'red' as const, visible: true, beginDate: undefined, expireDate: undefined, faqTargetIndex: null, isInfoNotice: true },
-  { id: 'notice_faq_help', message: 'Need a quick answer? Click this notice to jump to FAQ #1.', level: 'blue' as const, visible: true, beginDate: undefined, expireDate: undefined, faqTargetIndex: 0, isInfoNotice: false },
+  { id: 'notice_welcome', message: 'Welcome! Special rates available for extended stays. Contact us for details.', level: 'red' as const, visible: false, beginDate: undefined, expireDate: undefined, faqTargetIndex: null, isInfoNotice: true },
+  { id: 'notice_faq_help', message: 'Need a quick answer? Click this notice to jump to FAQ #1.', level: 'blue' as const, visible: false, beginDate: undefined, expireDate: undefined, faqTargetIndex: 0, isInfoNotice: false },
 ] as const;
 
 export const NOTICE_BAR_CONFIG = {
