@@ -1,6 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Jun Jun Hotel favicon">
-  <circle cx="128" cy="128" r="124" fill="#111111"/>
-  <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="0" y="0" width="256" height="256" rx="28" fill="#000000"/>
+  <circle cx="128" cy="128" r="112" fill="#ffffff"/>
+  <g fill="none" stroke="#111111" stroke-linecap="round" stroke-linejoin="round">
     <line x1="58" y1="84" x2="58" y2="182" stroke-width="13"/>
     <line x1="198" y1="112" x2="198" y2="182" stroke-width="13"/>
     <line x1="58" y1="145" x2="198" y2="145" stroke-width="12"/>
@@ -8,5 +9,5 @@
     <path d="M76 132h34v-14c0-8-6-14-14-14H90c-8 0-14 6-14 14z" stroke-width="11"/>
     <rect x="110" y="104" width="72" height="28" rx="12" stroke-width="11"/>
   </g>
-  <circle cx="87" cy="106" r="14" fill="#ffffff"/>
+  <circle cx="87" cy="106" r="14" fill="#111111"/>
 </svg>
