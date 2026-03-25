@@ -121,7 +121,15 @@
               <tr [attr.id]="'id_appComponent_pricingRow_' + roomIndex">
                 @for (column of visiblePricingColumns; track column.key) {
                   <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex" [attr.data-key]="column.key">
-                    {{ getPricingValue(room, column.key) }}
+                    @if (column.key === 'priceAfterTax') {
+                      <span>{{ getPricingPrimaryValue(room) }}</span>
+                      @if (getPricingSecondaryValue(room)) {
+                        <br />
+                        <span class="pricing-price-new">{{ getPricingSecondaryValue(room) }}</span>
+                      }
+                    } @else {
+                      {{ getPricingValue(room, column.key) }}
+                    }
                   </td>
                 }
               </tr>

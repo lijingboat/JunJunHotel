@@ -1060,7 +1060,7 @@ main {
 .pricing-table th[data-key='roomType'],
 .pricing-table td[data-key='roomType'] {
 	white-space: normal;
-	overflow-wrap: anywhere;
+	overflow-wrap: break-word;
 }
 
 .pricing-table th[data-key='facility'],
@@ -1074,6 +1074,11 @@ main {
 .pricing-table th[data-key='priceAfterTax'],
 .pricing-table td[data-key='priceAfterTax'] {
 	text-align: center;
+	font-weight: 700;
+}
+
+.pricing-price-new {
+	color: #e33;
 }
 
 .pricing-table tbody tr:last-child td {
@@ -1389,8 +1394,20 @@ blockquote footer {
 }
 
 @media (max-width: (@breakpoint-s - 1)) {
+	.pricing-table {
+		table-layout: fixed;
+	}
+
 	.pricing-table th,
 	.pricing-table td {
 		padding: @spacing-lg @spacing-xl;
+		font-size: 0.92rem;
+		line-height: 1.32;
+		white-space: normal;
+		overflow-wrap: anywhere;
+	}
+
+	.pricing-table td[data-key='roomType'] {
+		word-break: break-word;
 	}
 }

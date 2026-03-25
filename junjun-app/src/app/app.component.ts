@@ -457,6 +457,17 @@ export class AppComponent {
     return room[key];
   }
 
+  getPricingPrimaryValue(room: (typeof this.roomPricing)[number]): string {
+    const [primary] = `${room.priceAfterTax ?? ''}`.split('|');
+    return primary?.trim() ?? '';
+  }
+
+  getPricingSecondaryValue(room: (typeof this.roomPricing)[number]): string | null {
+    const [, secondary] = `${room.priceAfterTax ?? ''}`.split('|');
+    const normalized = secondary?.trim();
+    return normalized ? normalized : null;
+  }
+
   getFaqIndexLabel(faqIndex: number): string {
     if (!this.faqConfig.showIndex) {
       return '';
