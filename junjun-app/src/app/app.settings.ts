@@ -11,8 +11,8 @@ export const SITE_META = {
 } as const;
 
 export const ASSETS = {
-  brandIcon: 'assets/image/Icon/icon_06_T.png',
-  favicon: 'assets/image/Icon/icon_06_T.png',
+  brandIcon: 'assets/image/Icon/logo-brand.svg',
+  favicon: 'assets/image/Icon/logo-favicon.svg',
 } as const;
 
 export const NAV_LINKS = [
