@@ -21,7 +21,6 @@ interface QrCardLabels {
   title: string;
   hint: string;
   copyQrButton: string;
-  openWebsiteButton: string;
   copySuccess: string;
   copyFallback: string;
   copyError: string;
@@ -68,9 +67,6 @@ interface QrCardLabels {
         <div id="id_contactSection_qrActions" class="qr-card__actions">
           <button id="id_contactSection_copyQrButton" class="qr-btn qr-btn--outline" type="button" (click)="copyQrImageData()">
             {{ qrLabels.copyQrButton }}
-          </button>
-          <button id="id_contactSection_openWebsiteButton" class="qr-btn qr-btn--solid" type="button" (click)="openWebsite()">
-            {{ qrLabels.openWebsiteButton }}
           </button>
         </div>
         <p id="id_contactSection_qrStatus" class="qr-card__status" aria-live="polite">{{ qrStatusMessage }}</p>
@@ -306,13 +302,6 @@ export class ContactSectionComponent implements OnInit {
     } catch {
       this.qrStatusMessage = this.qrLabels.copyError;
     }
-  }
-
-  openWebsite(): void {
-    if (typeof window === 'undefined') {
-      return;
-    }
-    window.open(this.websiteUrl, '_blank', 'noopener,noreferrer');
   }
 
   private blobToDataUrl(blob: Blob): Promise<string> {
