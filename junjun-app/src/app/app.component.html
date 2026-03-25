@@ -6,7 +6,7 @@
     (resetOverrides)="onAdminResetOverrides()"
   ></app-admin-page>
 } @else {
-<div id="id_appComponent_pageShell" class="page-shell">
+<div id="id_appComponent_pageShell" class="page-shell" [attr.dir]="isRtlLanguage ? 'rtl' : 'ltr'" [class.is-rtl]="isRtlLanguage">
   <!-- Site navigation -->
   <header id="id_appComponent_siteHeader" class="site-header" [class.menu-open]="isMenuOpen">
     <div class="site-header__navRow">
@@ -80,7 +80,7 @@
                   [class.about-inline-image--left]="paragraphIndex % 2 === 0"
                   [class.about-inline-image--right]="paragraphIndex % 2 !== 0"
                   [src]="aboutImages[paragraphIndex].src"
-                  [alt]="aboutImages[paragraphIndex].alt"
+                  [alt]="translatedAboutImages[paragraphIndex].alt"
                   title="Hotel room image"
                 />
               }
@@ -122,7 +122,7 @@
                 @for (column of visiblePricingColumns; track column.key) {
                   <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex" [attr.data-key]="column.key">
                     @if (column.key === 'priceAfterTax') {
-                      <span>{{ getPricingPrimaryValue(room) }}</span>
+                      <span class="pricing-price-old">{{ getPricingPrimaryValue(room) }}</span>
                       @if (getPricingSecondaryValue(room)) {
                         <br />
                         <span class="pricing-price-new">{{ getPricingSecondaryValue(room) }}</span>

@@ -597,6 +597,10 @@ export class AppComponent {
     return this.selectedLanguage === 'en';
   }
 
+  get isRtlLanguage(): boolean {
+    return this.selectedLanguage === 'ar';
+  }
+
   private getCurrentLanguageStrings(): any {
     const allStrings = this.strings as Record<string, unknown>;
     const english = this.clone(this.getEnglishBaseStrings() as Record<string, unknown>);
@@ -694,7 +698,28 @@ export class AppComponent {
       }))
       .sort((a, b) => a.rank - b.rank || a.originalIndex - b.originalIndex);
 
-    return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
+    if (this.isEnglishSelected) {
+      return ranked.map(({ originalIndex, ...img }) => ({ ...img }));
+    }
+
+    const strings = this.getCurrentLanguageStrings();
+    const translatedImages = Array.isArray(strings.gallery?.images) ? strings.gallery.images as Array<{ label?: string }> : [];
+    return ranked.map(({ originalIndex, ...img }) => ({
+      ...img,
+      label: translatedImages[originalIndex]?.label ?? img.label,
+    }));
+  }
+
+  get translatedAboutImages(): Array<{ src: string; alt: string }> {
+    if (this.isEnglishSelected) {
+      return this.aboutImages.map((img: any) => ({ ...img }));
+    }
+    const strings = this.getCurrentLanguageStrings();
+    const translatedImgs: any[] = strings.about?.images ?? [];
+    return this.aboutImages.map((img: any, i: number) => ({
+      ...img,
+      alt: translatedImgs[i]?.alt ?? img.alt,
+    }));
   }
 
   get translatedFaqLabel(): string {

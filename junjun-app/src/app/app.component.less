@@ -307,6 +307,18 @@ app-contact-section {
 	padding: 0 @padding-responsive @padding-responsive;
 }
 
+.page-shell.is-rtl {
+	direction: rtl;
+}
+
+.page-shell.is-rtl .about-copy p,
+.page-shell.is-rtl .faq-line,
+.page-shell.is-rtl .contact-list,
+.page-shell.is-rtl .resource-links,
+.page-shell.is-rtl .site-footer {
+	text-align: right;
+}
+
 .site-header {
 	display: flex;
 	flex-direction: column;
@@ -1079,6 +1091,13 @@ main {
 
 .pricing-price-new {
 	color: #e33;
+	font-weight: 700;
+}
+
+.pricing-price-old {
+	color: @ink;
+	font-weight: 400;
+	text-decoration: line-through;
 }
 
 .pricing-table tbody tr:last-child td {
@@ -1400,14 +1419,29 @@ blockquote footer {
 
 	.pricing-table th,
 	.pricing-table td {
-		padding: @spacing-lg @spacing-xl;
-		font-size: 0.92rem;
-		line-height: 1.32;
+		padding: 0.28rem 0.35rem;
+		font-size: 0.78rem;
+		line-height: 1.35;
 		white-space: normal;
-		overflow-wrap: anywhere;
+		overflow-wrap: break-word;
+		word-break: normal;
 	}
 
-	.pricing-table td[data-key='roomType'] {
+	.pricing-table td[data-key='roomType'],
+	.pricing-table th[data-key='roomType'] {
 		word-break: break-word;
+	}
+
+	.pricing-table td[data-key='duration'],
+	.pricing-table th[data-key='duration'] {
+		word-break: keep-all;
+		overflow-wrap: normal;
+		white-space: normal;
+	}
+
+	.pricing-table td[data-key='capacity'],
+	.pricing-table th[data-key='capacity'] {
+		word-break: keep-all;
+		overflow-wrap: normal;
 	}
 }
