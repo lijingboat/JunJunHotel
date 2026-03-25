@@ -12,7 +12,7 @@ export const SITE_META = {
 
 export const ASSETS = {
   brandIcon: 'assets/image/Icon/icon_06_T.png',
-  favicon: 'assets/image/Icon/icon_01.png',
+  favicon: 'assets/image/Icon/icon_06_T.png',
 } as const;
 
 export const NAV_LINKS = [

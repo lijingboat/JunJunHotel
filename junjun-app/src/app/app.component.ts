@@ -76,6 +76,137 @@ export class AppComponent {
   roomReservationConfig: any = {};
   roomReservation: any = {};
   currentViewport: ViewportTier = 'l';
+  private readonly translatedUiTextByLanguage: Record<string, {
+    paymentMethods: string;
+    qrTitle: string;
+    qrHint: string;
+    copyQrButton: string;
+    openWebsiteButton: string;
+    copySuccess: string;
+    copyFallback: string;
+    copyError: string;
+  }> = {
+    en: {
+      paymentMethods: 'We accept Cash, Visa, Master Card, Interac and EMT (Email Money Transfer).',
+      qrTitle: 'Scan QR for Official Website',
+      qrHint: 'Point your camera at this code to open www.junjunhotel.com instantly.',
+      copyQrButton: 'Copy QR Image Data',
+      openWebsiteButton: 'Open Website',
+      copySuccess: 'QR image data copied to clipboard.',
+      copyFallback: 'Image clipboard is unavailable. Data URL copied instead.',
+      copyError: 'Unable to copy now. Please try again.',
+    },
+    fr: {
+      paymentMethods: 'Nous acceptons les espèces, Visa, MasterCard, Interac et EMT (transfert d\'argent par e-mail).',
+      qrTitle: 'Scannez le QR vers le site officiel',
+      qrHint: 'Pointez votre caméra sur ce code pour ouvrir immédiatement www.junjunhotel.com.',
+      copyQrButton: 'Copier les données image QR',
+      openWebsiteButton: 'Ouvrir le site',
+      copySuccess: 'Les données de l\'image QR ont été copiées.',
+      copyFallback: 'Presse-papiers image indisponible. URL de données copiée.',
+      copyError: 'Impossible de copier maintenant. Veuillez réessayer.',
+    },
+    es: {
+      paymentMethods: 'Aceptamos efectivo, Visa, MasterCard, Interac y EMT (transferencia de dinero por correo electrónico).',
+      qrTitle: 'Escanee el QR del sitio oficial',
+      qrHint: 'Apunte la cámara a este código para abrir www.junjunhotel.com al instante.',
+      copyQrButton: 'Copiar datos de imagen QR',
+      openWebsiteButton: 'Abrir sitio web',
+      copySuccess: 'Se copiaron los datos de la imagen QR.',
+      copyFallback: 'No hay portapapeles de imagen. Se copió URL de datos.',
+      copyError: 'No se pudo copiar ahora. Inténtelo de nuevo.',
+    },
+    de: {
+      paymentMethods: 'Wir akzeptieren Bargeld, Visa, MasterCard, Interac und EMT (E-Mail-Geldtransfer).',
+      qrTitle: 'QR zur offiziellen Website scannen',
+      qrHint: 'Richten Sie Ihre Kamera auf diesen Code, um www.junjunhotel.com sofort zu öffnen.',
+      copyQrButton: 'QR-Bilddaten kopieren',
+      openWebsiteButton: 'Website öffnen',
+      copySuccess: 'QR-Bilddaten wurden in die Zwischenablage kopiert.',
+      copyFallback: 'Bild-Zwischenablage nicht verfügbar. Daten-URL kopiert.',
+      copyError: 'Kopieren derzeit nicht möglich. Bitte erneut versuchen.',
+    },
+    ja: {
+      paymentMethods: 'お支払いは現金、Visa、MasterCard、Interac、EMT（Eメール送金）に対応しています。',
+      qrTitle: '公式サイト用QRコード',
+      qrHint: 'このコードをカメラで読み取ると、www.junjunhotel.com をすぐ開けます。',
+      copyQrButton: 'QR画像データをコピー',
+      openWebsiteButton: 'サイトを開く',
+      copySuccess: 'QR画像データをクリップボードにコピーしました。',
+      copyFallback: '画像コピーは非対応のため、データURLをコピーしました。',
+      copyError: '現在コピーできません。もう一度お試しください。',
+    },
+    ko: {
+      paymentMethods: '현금, Visa, MasterCard, Interac 및 EMT(이메일 송금) 결제가 가능합니다.',
+      qrTitle: '공식 웹사이트 QR 스캔',
+      qrHint: '카메라로 이 코드를 스캔하면 www.junjunhotel.com 이 바로 열립니다.',
+      copyQrButton: 'QR 이미지 데이터 복사',
+      openWebsiteButton: '웹사이트 열기',
+      copySuccess: 'QR 이미지 데이터가 클립보드에 복사되었습니다.',
+      copyFallback: '이미지 클립보드 미지원으로 데이터 URL을 복사했습니다.',
+      copyError: '지금은 복사할 수 없습니다. 다시 시도해 주세요.',
+    },
+    ar: {
+      paymentMethods: 'نقبل الدفع نقداً وVisa وMasterCard وInterac وEMT (تحويل الأموال عبر البريد الإلكتروني).',
+      qrTitle: 'امسح رمز QR للموقع الرسمي',
+      qrHint: 'وجّه كاميرا هاتفك إلى هذا الرمز لفتح www.junjunhotel.com فوراً.',
+      copyQrButton: 'نسخ بيانات صورة QR',
+      openWebsiteButton: 'فتح الموقع',
+      copySuccess: 'تم نسخ بيانات صورة QR إلى الحافظة.',
+      copyFallback: 'نسخ الصور غير متاح. تم نسخ رابط البيانات بدلاً من ذلك.',
+      copyError: 'تعذر النسخ الآن. يرجى المحاولة مرة أخرى.',
+    },
+    hi: {
+      paymentMethods: 'हम नकद, Visa, MasterCard, Interac और EMT (Email Money Transfer) स्वीकार करते हैं।',
+      qrTitle: 'आधिकारिक वेबसाइट के लिए QR स्कैन करें',
+      qrHint: 'इस कोड को कैमरे से स्कैन करें और www.junjunhotel.com तुरंत खोलें।',
+      copyQrButton: 'QR इमेज डेटा कॉपी करें',
+      openWebsiteButton: 'वेबसाइट खोलें',
+      copySuccess: 'QR इमेज डेटा क्लिपबोर्ड में कॉपी हो गया है।',
+      copyFallback: 'इमेज क्लिपबोर्ड उपलब्ध नहीं है। डेटा URL कॉपी किया गया।',
+      copyError: 'अभी कॉपी नहीं हो सका। कृपया फिर प्रयास करें।',
+    },
+    ru: {
+      paymentMethods: 'Мы принимаем наличные, Visa, MasterCard, Interac и EMT (денежный перевод по электронной почте).',
+      qrTitle: 'Сканируйте QR для официального сайта',
+      qrHint: 'Наведите камеру на этот код, чтобы сразу открыть www.junjunhotel.com.',
+      copyQrButton: 'Копировать данные QR-изображения',
+      openWebsiteButton: 'Открыть сайт',
+      copySuccess: 'Данные QR-изображения скопированы в буфер обмена.',
+      copyFallback: 'Буфер изображений недоступен. Скопирован data URL.',
+      copyError: 'Сейчас скопировать не удалось. Повторите попытку.',
+    },
+    vi: {
+      paymentMethods: 'Chúng tôi chấp nhận tiền mặt, Visa, MasterCard, Interac và EMT (chuyển tiền qua email).',
+      qrTitle: 'Quét mã QR website chính thức',
+      qrHint: 'Hướng camera vào mã này để mở ngay www.junjunhotel.com.',
+      copyQrButton: 'Sao chép dữ liệu ảnh QR',
+      openWebsiteButton: 'Mở website',
+      copySuccess: 'Đã sao chép dữ liệu ảnh QR vào bộ nhớ tạm.',
+      copyFallback: 'Không hỗ trợ clipboard ảnh. Đã sao chép URL dữ liệu.',
+      copyError: 'Không thể sao chép lúc này. Vui lòng thử lại.',
+    },
+    zhHant: {
+      paymentMethods: '我們接受現金、Visa、MasterCard、Interac 與 EMT（電子郵件匯款）。',
+      qrTitle: '掃描 QR 前往官方網站',
+      qrHint: '使用相機掃描此代碼即可立即開啟 www.junjunhotel.com。',
+      copyQrButton: '複製 QR 圖像資料',
+      openWebsiteButton: '開啟網站',
+      copySuccess: '已將 QR 圖像資料複製到剪貼簿。',
+      copyFallback: '不支援圖片剪貼簿，已改為複製資料 URL。',
+      copyError: '目前無法複製，請稍後再試。',
+    },
+    zh: {
+      paymentMethods: '我们接受现金、Visa、MasterCard、Interac 和 EMT（电子邮件转账）。',
+      qrTitle: '扫描二维码访问官网',
+      qrHint: '用手机相机扫描此码即可立即打开 www.junjunhotel.com。',
+      copyQrButton: '复制二维码图像数据',
+      openWebsiteButton: '打开网站',
+      copySuccess: '二维码图像数据已复制到剪贴板。',
+      copyFallback: '不支持图片剪贴板，已改为复制数据 URL。',
+      copyError: '当前无法复制，请稍后重试。',
+    },
+  };
 
   constructor() {
     this.resetToDefaults();
@@ -807,6 +938,24 @@ export class AppComponent {
       email: contactStrings.emailLabel ?? 'Email:',
       hours: contactStrings.hoursLabel ?? 'Hours:',
       mapTitle: contactStrings.mapTitle ?? 'Jun Jun Hotel Map',
+    };
+  }
+
+  get translatedPaymentMethodsInfo(): string {
+    return this.translatedUiTextByLanguage[this.selectedLanguage]?.paymentMethods
+      ?? this.translatedUiTextByLanguage['en'].paymentMethods;
+  }
+
+  get translatedQrCardLabels() {
+    const text = this.translatedUiTextByLanguage[this.selectedLanguage] ?? this.translatedUiTextByLanguage['en'];
+    return {
+      title: text.qrTitle,
+      hint: text.qrHint,
+      copyQrButton: text.copyQrButton,
+      openWebsiteButton: text.openWebsiteButton,
+      copySuccess: text.copySuccess,
+      copyFallback: text.copyFallback,
+      copyError: text.copyError,
     };
   }
 

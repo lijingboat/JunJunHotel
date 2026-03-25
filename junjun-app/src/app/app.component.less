@@ -826,14 +826,14 @@ main {
 }
 
 .payment-methods-info {
-	display: block;
-	margin: -@spacing-3xl 0 @spacing-3xl 0;
-	padding: 0 @spacing-2xl;
-	font-size: 0.9rem;
-	color: darken(@ink, 5%);
+	display: inline-block;
+	margin: -@spacing-3xl auto @spacing-2xl;
+	padding: @spacing-sm @spacing-2xl;
+	font-size: @font-size-section-text;
 	text-align: center;
-	font-weight: 500;
-	line-height: @line-height-base;
+	background: #f4e7db;
+	border: @border-thin solid rgba(31, 26, 23, @opacity-section-label-border);
+	border-radius: @radius-full;
 }
 
 .page-section {

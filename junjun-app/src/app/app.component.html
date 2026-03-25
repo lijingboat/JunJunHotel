@@ -94,7 +94,9 @@
     <!-- Pricing -->
     <section id="id_appComponent_pricingSection" class="panel apartments page-section">
       <p id="id_appComponent_pricingLabel" class="section-label">{{ translatedPricingLabel }}</p>
-      <p id="id_appComponent_paymentMethods" class="payment-methods-info">We accept Cash, Visa, Master Card, Interac and EMT (Email Money Transfer)</p>
+      <div id="id_appComponent_paymentMethods" class="payment-methods-banner">
+        <p class="payment-methods-info">{{ translatedPaymentMethodsInfo }}</p>
+      </div>
       <div id="id_appComponent_pricingTableWrapper" class="pricing-table-wrapper">
         <table
           id="id_appComponent_pricingTable"
@@ -228,6 +230,7 @@
         [brand]="brand"
         [contact]="translatedContact"
         [labels]="translatedContactCardLabels"
+        [qrLabels]="translatedQrCardLabels"
         [resourceLinks]="translatedResourceLinks"
         (linkClick)="stopNavigation($event)"
       ></app-contact-section>
