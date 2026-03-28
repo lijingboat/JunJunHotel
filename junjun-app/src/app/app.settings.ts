@@ -60,8 +60,8 @@ export const PRICING = {
 export const GALLERY = {
   description: 'The following are the picked images showcasing our rooms and amenities.',
   images: [
-    { src: 'assets/image/Hotel_Room_23.jpg', label: 'Standard 2 persons room', rank: 1 },
-    { src: 'assets/image/Hotel_Room_22.jpg', label: 'Front View', rank: 2 },
+    { src: 'assets/image/Hotel_Room_23.jpg', label: 'Standard 2 persons room', rank: 2 },
+    { src: 'assets/image/Hotel_Room_22.jpg', label: 'Front View', rank: 1 },
     { src: 'assets/image/Hotel_Room_02.jpg', label: 'Hotel Hallway', rank: 3 },
     { src: 'assets/image/Hotel_Room_09.jpg', label: 'Standard Room Inner View', rank: 4 },
     { src: 'assets/image/Hotel_Room_01.jpg', label: 'Standard Room', rank: 5 },

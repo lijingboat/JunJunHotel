@@ -99,3 +99,18 @@ Applied the requested additional polish pass after the original completion:
 
 - VS Code errors check: no errors in `junjun-app/src/app/app.settings.ts`.
 - Build validation: `npm run build` completed successfully.
+
+## Follow-up: Gallery Sequence Swap
+
+- Swapped display order for the two images shown in the reference screenshot by updating gallery rank values:
+  - `assets/image/Hotel_Room_22.jpg` (`Front View`) now rank `1`
+  - `assets/image/Hotel_Room_23.jpg` (`Standard 2 persons room`) now rank `2`
+- Updated file:
+  - `junjun-app/src/app/app.settings.ts`
+- Why rank-only change was used:
+  - Keeps all language-specific gallery labels and popup captions correctly attached via existing index-based translation mapping.
+
+## Follow-up Validation (Gallery Swap)
+
+- VS Code errors check: no errors in `junjun-app/src/app/app.settings.ts`.
+- Build validation: `npm run build` completed successfully.
