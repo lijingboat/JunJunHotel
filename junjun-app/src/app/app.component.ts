@@ -388,7 +388,7 @@ export class AppComponent {
         phoneLabel: 'Phone:',
         addressLabel: 'Address:',
         emailLabel: 'Email:',
-        hoursLabel: 'Hours:',
+        hoursLabel: 'Acceptance Hour:',
         mapTitle: 'Jun Jun Hotel Map',
         phone: this.contact?.phone ?? CONTACT.phone,
         address: this.contact?.address ?? CONTACT.address,
@@ -575,15 +575,12 @@ export class AppComponent {
     return room[key];
   }
 
-  getPricingPrimaryValue(room: (typeof this.roomPricing)[number]): string {
+  getPricingDisplayValue(room: (typeof this.roomPricing)[number]): string {
     const [primary] = `${room.priceAfterTax ?? ''}`.split('|');
-    return primary?.trim() ?? '';
-  }
-
-  getPricingSecondaryValue(room: (typeof this.roomPricing)[number]): string | null {
     const [, secondary] = `${room.priceAfterTax ?? ''}`.split('|');
-    const normalized = secondary?.trim();
-    return normalized ? normalized : null;
+    const normalizedPrimary = primary?.trim() ?? '';
+    const normalizedSecondary = secondary?.trim() ?? '';
+    return normalizedSecondary || normalizedPrimary;
   }
 
   getFaqIndexLabel(faqIndex: number): string {
@@ -923,7 +920,7 @@ export class AppComponent {
       phone: contactStrings.phoneLabel ?? 'Phone:',
       address: contactStrings.addressLabel ?? 'Address:',
       email: contactStrings.emailLabel ?? 'Email:',
-      hours: contactStrings.hoursLabel ?? 'Hours:',
+      hours: contactStrings.hoursLabel ?? 'Acceptance Hour:',
       mapTitle: contactStrings.mapTitle ?? 'Jun Jun Hotel Map',
     };
   }

@@ -94,9 +94,6 @@
     <!-- Pricing -->
     <section id="id_appComponent_pricingSection" class="panel apartments page-section">
       <p id="id_appComponent_pricingLabel" class="section-label">{{ translatedPricingLabel }}</p>
-      <div id="id_appComponent_paymentMethods" class="payment-methods-banner">
-        <p class="payment-methods-info">{{ translatedPaymentMethodsInfo }}</p>
-      </div>
       <div id="id_appComponent_pricingTableWrapper" class="pricing-table-wrapper">
         <table
           id="id_appComponent_pricingTable"
@@ -125,11 +122,7 @@
                 @for (column of visiblePricingColumns; track column.key) {
                   <td [attr.id]="'id_appComponent_pricing_' + column.key + '_' + roomIndex" [attr.data-key]="column.key">
                     @if (column.key === 'priceAfterTax') {
-                      <span class="pricing-price-old">{{ getPricingPrimaryValue(room) }}</span>
-                      @if (getPricingSecondaryValue(room)) {
-                        <br />
-                        <span class="pricing-price-new">{{ getPricingSecondaryValue(room) }}</span>
-                      }
+                      <span class="pricing-price-current">{{ getPricingDisplayValue(room) }}</span>
                     } @else {
                       {{ getPricingValue(room, column.key) }}
                     }
@@ -139,6 +132,9 @@
             }
           </tbody>
         </table>
+      </div>
+      <div id="id_appComponent_paymentMethods" class="payment-methods-banner">
+        <p class="payment-methods-info">{{ translatedPaymentMethodsInfo }}</p>
       </div>
     </section>
 

@@ -371,9 +371,10 @@ app-contact-section {
 
 .brand__text {
 	font-family: @font-logo;
-	font-size: @font-size-brand-text;
+	font-size: clamp(1.75rem, 1vw + 1.4rem, 2.35rem);
 	font-weight: 800;
 	letter-spacing: 0.03em;
+	padding-inline-start: @spacing-sm;
 }
 
 .primary-nav {
@@ -822,9 +823,9 @@ main {
 
 .payment-methods-info {
 	display: inline-block;
-	margin: -@spacing-3xl auto @spacing-2xl;
+	margin: @spacing-5xl auto @spacing-sm;
 	padding: @spacing-sm @spacing-2xl;
-	font-size: @font-size-label;
+	font-size: clamp(0.74rem, 0.2vw + 0.7rem, 0.82rem);
 	text-align: center;
 	background: #f4e7db;
 	border: @border-thin solid rgba(31, 26, 23, @opacity-section-label-border);
@@ -1095,15 +1096,10 @@ main {
 	font-weight: 700;
 }
 
-.pricing-price-new {
-	color: #e33;
-	font-weight: 700;
-}
 
-.pricing-price-old {
+.pricing-price-current {
 	color: @ink;
-	font-weight: 400;
-	text-decoration: line-through;
+	font-weight: 700;
 }
 
 .pricing-table tbody tr:last-child td {
