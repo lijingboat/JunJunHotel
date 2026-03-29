@@ -228,32 +228,41 @@ interface QrCardLabels {
       font-weight: 600;
     }
     .contact-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 0.75rem;
+      row-gap: 1.5rem;
+      align-items: baseline;
     }
     .contact-item {
-      display: grid;
-      grid-template-columns: 88px 1fr;
-      gap: 0.5rem;
-      align-items: start;
+      display: contents;
     }
     .contact-label {
       font-weight: 700;
-      min-width: 80px;
+      white-space: nowrap;
     }
     .contact-item p {
       margin: 0;
-      flex: 1;
-    }
-    .contact-item--hours {
-      grid-template-columns: max-content max-content;
-      column-gap: 0.9rem;
-      align-items: baseline;
     }
     .contact-item--hours .contact-label,
     .contact-item--hours p {
       white-space: nowrap;
+    }
+    @media (max-width: 35.9375rem) {
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.1rem;
+      }
+      .contact-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+      .contact-label {
+        font-size: 0.8rem;
+        opacity: 0.65;
+      }
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
