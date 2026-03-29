@@ -117,6 +117,25 @@ On each successful build/completion:
 2. **Monitor**: Track deployment archive growth; consider cleanup of old archives after 30 days
 3. **Integration**: Update deployment scripts to use new versioned deployment folder structure
 
+## Addendum - About Wording Refinement (Same Day)
+
+- **Request implemented**: Removed all About-section references to quick meals.
+- **File updated**: `junjun-app/src/app/app.settings.ts`
+- **Languages updated**: English, French, Spanish, German, Japanese, Korean, Arabic, Hindi, Russian, Vietnamese, Traditional Chinese, Simplified Chinese.
+- **Natural-language pass**: Reworded each localized sentence to keep meaning and fluency while removing quick-meal phrasing.
+- **Translation sync**: Confirmed all language About paragraphs remain aligned on the same business detail.
+
+### Validation (Addendum)
+
+- Problems check: no issues found in `junjun-app/src`.
+- Build check: `npm run build` succeeded.
+- Build warning: non-blocking style budget warning remains (`app.component.less` over by 247 bytes).
+
+### Deployment (Addendum)
+
+- Current deployment refreshed: `C:\Cloud\GDrive\Work\Rich\Dev\JunJunHotel\deployment\Current`
+- Timestamped archive created: `C:\Cloud\GDrive\Work\Rich\Dev\JunJunHotel\deployment\Archived\junjun-app-2026-03-28_21.15.53`
+
 ---
 
 **Timestamp**: 2026-03-28  
