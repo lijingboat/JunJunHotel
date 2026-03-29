@@ -51,7 +51,7 @@ export const PRICING = {
     { roomType: 'Two Person Room', capacity: '1-2 persons', duration: 'One Night', priceAfterTax: 'CAD $120', facility: 'One Queen Size Bed, Private Shower, TV and Fast Internet' },
     { roomType: 'Three Person Room', capacity: '1-3 persons', duration: 'One Night', priceAfterTax: 'CAD $135', facility: 'One Queen Size Bed, One Single Bed, Private Shower, TV and Fast Internet' },
     { roomType: 'Four Person Bed Room', capacity: '1-3 persons', duration: 'One Night', priceAfterTax: 'CAD $165', facility: 'Two Queen Size Beds, Private Shower, TV and Fast Internet' },
-    { roomType: 'Basement Two Person Bed Room', capacity: '1-2 persons', duration: 'One Night', priceAfterTax: 'CAD $120', facility: 'Basement Single Room with One Queen Size Bed, Private Shower, TV and Fast Internet' },
+    { roomType: 'Basement Two Person Bed Room', capacity: '1-2 persons', duration: 'One Night', priceAfterTax: 'CAD $105', facility: 'Basement Single Room with One Queen Size Bed, Private Shower, TV and Fast Internet' },
     { roomType: 'Basement Three Persons Bed Room', capacity: '1-3 persons', duration: 'One Night', priceAfterTax: 'CAD $120', facility: 'Basement Room with One Queen Size Bed and One Single Bed, Private Shower, TV and Fast Internet' },
     { roomType: 'Temporary Room', capacity: '1-2 persons', duration: '4 Hours', priceAfterTax: 'CAD $80', facility: 'One Queen Size Bed, Private Shower, TV and Fast Internet' },
   ],

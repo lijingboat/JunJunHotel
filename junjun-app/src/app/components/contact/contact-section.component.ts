@@ -46,7 +46,7 @@ interface QrCardLabels {
             <span class="contact-label">{{ labels.email }}</span>
             <p id="id_contactSection_contactEmail">{{ contact.email }}</p>
           </div>
-          <div id="id_contactSection_contactHoursWrapper" class="contact-item">
+          <div id="id_contactSection_contactHoursWrapper" class="contact-item contact-item--hours">
             <span class="contact-label">{{ labels.hours }}</span>
             <p id="id_contactSection_contactHours">{{ contact.operationHours }}</p>
           </div>
@@ -245,6 +245,15 @@ interface QrCardLabels {
     .contact-item p {
       margin: 0;
       flex: 1;
+    }
+    .contact-item--hours {
+      grid-template-columns: max-content max-content;
+      column-gap: 0.9rem;
+      align-items: baseline;
+    }
+    .contact-item--hours .contact-label,
+    .contact-item--hours p {
+      white-space: nowrap;
     }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,

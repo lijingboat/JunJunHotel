@@ -33,6 +33,7 @@ import {
 
 type ViewportTier = 'xs' | 's' | 'm' | 'l';
 type RoomKey = 'roomType' | 'capacity' | 'duration' | 'priceAfterTax' | 'facility';
+type LightboxSource = 'gallery' | 'about';
 
 @Component({
   selector: 'app-root',
@@ -64,6 +65,7 @@ export class AppComponent {
   galleryDisplayConfig: any = {};
   galleryImages: Array<any> = [];
   selectedGalleryIndex: number | null = null;
+  selectedLightboxSource: LightboxSource = 'gallery';
   faqs: Array<any> = [];
   faqConfig: any = {};
   contact: any = {};
@@ -555,7 +557,7 @@ export class AppComponent {
       return null;
     }
 
-    const images = this.translatedGalleryImages;
+    const images = this.currentLightboxImages;
     if (this.selectedGalleryIndex < 0 || this.selectedGalleryIndex >= images.length) {
       return null;
     }
@@ -568,7 +570,21 @@ export class AppComponent {
   }
 
   get canNavigateGalleryRight(): boolean {
-    return this.selectedGalleryIndex !== null && this.selectedGalleryIndex < this.translatedGalleryImages.length - 1;
+    return this.selectedGalleryIndex !== null && this.selectedGalleryIndex < this.currentLightboxImages.length - 1;
+  }
+
+  private get currentLightboxImages(): Array<{ src: string; label: string }> {
+    if (this.selectedLightboxSource === 'about') {
+      return this.translatedAboutImages.map((image) => ({
+        src: image.src,
+        label: image.alt,
+      }));
+    }
+
+    return this.translatedGalleryImages.map((image) => ({
+      src: image.src,
+      label: image.label,
+    }));
   }
 
   getPricingValue(room: (typeof this.roomPricing)[number], key: RoomKey): string {
@@ -669,6 +685,16 @@ export class AppComponent {
       return;
     }
 
+    this.selectedLightboxSource = 'gallery';
+    this.selectedGalleryIndex = index;
+  }
+
+  openAboutLightbox(index: number): void {
+    if (this.currentViewport !== 'm' && this.currentViewport !== 'l') {
+      return;
+    }
+
+    this.selectedLightboxSource = 'about';
     this.selectedGalleryIndex = index;
   }
 
@@ -690,6 +716,7 @@ export class AppComponent {
 
   closeGalleryLightbox(): void {
     this.selectedGalleryIndex = null;
+    this.selectedLightboxSource = 'gallery';
   }
 
   @HostListener('document:keydown.escape')

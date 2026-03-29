@@ -77,11 +77,17 @@
                 <img
                   [attr.id]="'id_appComponent_aboutImage_' + paragraphIndex"
                   class="about-inline-image"
+                  [class.about-inline-image--interactive]="currentViewport === 'm' || currentViewport === 'l'"
                   [class.about-inline-image--left]="paragraphIndex % 2 === 0"
                   [class.about-inline-image--right]="paragraphIndex % 2 !== 0"
                   [src]="aboutImages[paragraphIndex].src"
                   [alt]="translatedAboutImages[paragraphIndex].alt"
                   title="Hotel room image"
+                  [attr.role]="(currentViewport === 'm' || currentViewport === 'l') ? 'button' : null"
+                  [attr.tabindex]="(currentViewport === 'm' || currentViewport === 'l') ? '0' : null"
+                  (click)="openAboutLightbox(paragraphIndex)"
+                  (keydown.enter)="openAboutLightbox(paragraphIndex)"
+                  (keydown.space)="openAboutLightbox(paragraphIndex); $event.preventDefault()"
                 />
               }
               {{ paragraph }}

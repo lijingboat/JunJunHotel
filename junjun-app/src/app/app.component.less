@@ -800,10 +800,7 @@ main {
 }
 
 .panel.gallery {
-	background-color: #fff8f1;
-	background-image:
-		repeating-linear-gradient(0deg, rgba(193, 138, 95, 0.08) 0, rgba(193, 138, 95, 0.08) 1px, transparent 1px, transparent 24px),
-		repeating-linear-gradient(90deg, rgba(193, 138, 95, 0.07) 0, rgba(193, 138, 95, 0.07) 1px, transparent 1px, transparent 24px);
+	background: @cream;
 }
 
 .section-label {
@@ -821,9 +818,15 @@ main {
 	text-transform: uppercase;
 }
 
+.payment-methods-banner {
+	width: 100%;
+}
+
 .payment-methods-info {
-	display: inline-block;
-	margin: @spacing-5xl auto @spacing-sm;
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	margin: @spacing-5xl 0 @spacing-sm;
 	padding: @spacing-sm @spacing-2xl;
 	font-size: clamp(0.74rem, 0.2vw + 0.7rem, 0.82rem);
 	text-align: center;
@@ -996,11 +999,20 @@ main {
 	display: inline-block;
 	margin: @spacing-sm @spacing-3xl @spacing-sm 0;
 	transition: transform @transition-smooth;
-	cursor: pointer;
+	cursor: default;
 }
 
-.about-inline-image:hover {
+.about-inline-image--interactive {
+	cursor: zoom-in;
+}
+
+.about-inline-image--interactive:hover {
 	transform: scale(1.15);
+}
+
+.about-inline-image--interactive:focus-visible {
+	outline: 0.1875rem solid @clay;
+	outline-offset: 0.1875rem;
 }
 
 .about-inline-image--left {
@@ -1280,6 +1292,32 @@ main {
 	.gallery-grid figure:hover .gallery-label {
 		opacity: 1;
 		transform: translateY(0);
+	}
+}
+
+@media (min-width: @breakpoint-m) and (max-width: (@breakpoint-l - 1)) {
+	.nav-cluster {
+		gap: @spacing-md;
+	}
+
+	.nav-language {
+		margin-right: @spacing-sm;
+	}
+
+	.primary-nav {
+		gap: @spacing-lg;
+	}
+
+	.book-button {
+		padding: 0.68rem 1.05rem;
+		white-space: nowrap;
+	}
+
+	.payment-methods-info {
+		white-space: nowrap;
+		padding-left: @spacing-lg;
+		padding-right: @spacing-lg;
+		font-size: clamp(0.7rem, 0.18vw + 0.68rem, 0.78rem);
 	}
 }
 
