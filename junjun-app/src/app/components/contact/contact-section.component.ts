@@ -5,6 +5,7 @@ interface ContactInfo {
   phone: string;
   address: string;
   email: string;
+  website?: string;
   operationHours: string;
   mapEmbedUrl: string;
 }
@@ -14,6 +15,7 @@ interface ContactCardLabels {
   address: string;
   email: string;
   hours: string;
+  website?: string;
   mapTitle: string;
 }
 
@@ -38,6 +40,12 @@ interface QrCardLabels {
             <span class="contact-label">{{ labels.phone }}</span>
             <p id="id_contactSection_contactPhone">{{ contact.phone }}</p>
           </div>
+          @if (contact.website) {
+            <div id="id_contactSection_contactWebsiteWrapper" class="contact-item contact-item--website">
+              <span class="contact-label">{{ labels.website || 'Website:' }}</span>
+              <p id="id_contactSection_contactWebsite">{{ contact.website }}</p>
+            </div>
+          }
           <div id="id_contactSection_contactAddressWrapper" class="contact-item">
             <span class="contact-label">{{ labels.address }}</span>
             <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>

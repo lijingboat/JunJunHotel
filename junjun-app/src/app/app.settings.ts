@@ -96,6 +96,7 @@ export const CONTACT = {
   phone: '647-349-9220',
   address: '374 College St. M5T 1S6 Toronto ON CANADA',
   email: 'junjunhotel@gmail.com',
+  website: 'www.junjunhotel.com',
   operationHours: '10AM-2AM',
   mapEmbedUrl: 'https://maps.google.com/maps?q=374%20College%20St%20Toronto%20ON%20M5T%201S6&t=&z=15&ie=UTF8&iwloc=&output=embed',
 } as const;
@@ -197,6 +198,7 @@ const mkLang = (labels: {
   addressLabel: string;
   emailLabel: string;
   hoursLabel: string;
+  websiteLabel?: string;
   reserveTitle: string;
   reserveDesc: string;
   reserveH: readonly [string, string, string];
@@ -252,7 +254,7 @@ const mkLang = (labels: {
     images: GALLERY.images.map((image, index) => ({ label: labels.galleryLabels[index] ?? image.label })),
   },
   faq: { label: labels.faq, prefix: { question: 'Q', answer: 'A', index: '#' }, items: [...labels.faqItems] },
-  contact: { label: labels.contact, phoneLabel: labels.phoneLabel, addressLabel: labels.addressLabel, emailLabel: labels.emailLabel, hoursLabel: labels.hoursLabel, mapTitle: `${labels.brand} Map`, phone: CONTACT.phone, address: CONTACT.address, email: CONTACT.email, operationHours: CONTACT.operationHours },
+  contact: { label: labels.contact, phoneLabel: labels.phoneLabel, addressLabel: labels.addressLabel, emailLabel: labels.emailLabel, hoursLabel: labels.hoursLabel, websiteLabel: labels.websiteLabel ?? 'Website:', mapTitle: `${labels.brand} Map`, phone: CONTACT.phone, address: CONTACT.address, email: CONTACT.email, website: CONTACT.website, operationHours: CONTACT.operationHours },
   roomReservation: { label: labels.reserve, title: labels.reserveTitle, description: labels.reserveDesc, highlights: [...labels.reserveH], form: { ...labels.reserveForm } },
   noticeBars: { notice_welcome: labels.noticeWelcome, notice_faq_help: labels.noticeFaqHelp },
   resourceLinks: [...labels.resLinks],
@@ -281,7 +283,7 @@ export const STRINGS = {
       { roomType: 'Sous-sol 3 pers.', capacity: '1-3 pers.', duration: 'Une nuit', facility: 'Chambre sous-sol avec un lit queen et un lit simple, douche privée, TV et internet rapide' },
       { roomType: 'Chambre temporaire', capacity: '1-2 pers.', duration: '4 h', facility: 'Un lit queen, douche privée, TV et internet rapide' },
     ],
-    phoneLabel: 'Tél. :', addressLabel: 'Adresse :', emailLabel: 'E-mail :', hoursLabel: "Heure d'acceptation :",
+    phoneLabel: 'Tél. :', addressLabel: 'Adresse :', emailLabel: 'E-mail :', hoursLabel: "Heure d'acceptation :", websiteLabel: 'Site web :',
     reserveTitle: "Veuillez nous appeler au 647-349-9220 pour toute demande ou réservation.",
     reserveDesc: "Consultez les points suivants pour en savoir plus sur notre politique de réservation.",
     reserveH: [
@@ -320,7 +322,7 @@ export const STRINGS = {
       { roomType: 'Sótano triple', capacity: '1-3 pers.', duration: 'Una noche', facility: 'Habitación en sótano con cama queen y cama individual, baño privado, TV e internet rápido' },
       { roomType: 'Habitación temporal', capacity: '1-2 pers.', duration: '4 h', facility: 'Una cama queen, baño privado, TV e internet rápido' },
     ],
-    phoneLabel: 'Tel.:', addressLabel: 'Dirección:', emailLabel: 'Correo:', hoursLabel: 'Hora de aceptación:',
+    phoneLabel: 'Tel.:', addressLabel: 'Dirección:', emailLabel: 'Correo:', hoursLabel: 'Hora de aceptación:', websiteLabel: 'Sitio web:',
     reserveTitle: "Llámenos al 647-349-9220 para consultas y reservas.",
     reserveDesc: "Consulte los siguientes puntos para conocer los detalles y políticas de nuestro servicio de reservas.",
     reserveH: [
@@ -359,7 +361,7 @@ export const STRINGS = {
       { roomType: 'Keller-Dreibettzimmer', capacity: '1-3 Pers.', duration: 'Eine Nacht', facility: 'Kellerunterkunft mit Queensize-Bett und Einzelbett, eigener Dusche, TV und schnellem Internet' },
       { roomType: 'Temporäres Zimmer', capacity: '1-2 Pers.', duration: '4 Std.', facility: 'Ein Queensize-Bett, eigene Dusche, TV und schnelles Internet' },
     ],
-    phoneLabel: 'Tel.:', addressLabel: 'Adresse:', emailLabel: 'E-Mail:', hoursLabel: 'Annahmezeit:',
+    phoneLabel: 'Tel.:', addressLabel: 'Adresse:', emailLabel: 'E-Mail:', hoursLabel: 'Annahmezeit:', websiteLabel: 'Website:',
     reserveTitle: "Bitte rufen Sie uns unter 647-349-9220 für Anfragen und Reservierungen an.",
     reserveDesc: "Bitte beachten Sie die folgenden Hinweise zu unseren Reservierungsrichtlinien.",
     reserveH: [
@@ -398,7 +400,7 @@ export const STRINGS = {
       { roomType: '地下3人部屋', capacity: '1〜3名', duration: '1泊', facility: '地下客室、クイーンベッド1台、シングルベッド1台、専用シャワー、テレビ、高速インターネット' },
       { roomType: '短時間利用', capacity: '1〜2名', duration: '4時間', facility: 'クイーンベッド1台、専用シャワー、テレビ、高速インターネット' },
     ],
-    phoneLabel: '電話：', addressLabel: '住所：', emailLabel: 'メール：', hoursLabel: '受付時間：',
+    phoneLabel: '電話：', addressLabel: '住所：', emailLabel: 'メール：', hoursLabel: '受付時間：', websiteLabel: 'ウェブ：',
     reserveTitle: "お問い合わせ・ご予約は647-349-9220までお電話ください。",
     reserveDesc: "以下の重要事項をご確認の上、ご予約をお願いします。",
     reserveH: [
@@ -437,7 +439,7 @@ export const STRINGS = {
       { roomType: '지하 3인실', capacity: '1-3명', duration: '1박', facility: '지하 객실, 퀸 침대 1개, 싱글 침대 1개, 전용 샤워실, TV, 고속 인터넷' },
       { roomType: '단시간 이용', capacity: '1-2명', duration: '4시간', facility: '퀸 침대 1개, 전용 샤워실, TV, 고속 인터넷' },
     ],
-    phoneLabel: '전화:', addressLabel: '주소:', emailLabel: '이메일:', hoursLabel: '접수 시간:',
+    phoneLabel: '전화:', addressLabel: '주소:', emailLabel: '이메일:', hoursLabel: '접수 시간:', websiteLabel: '웹사이트:',
     reserveTitle: "예약 및 문의는 647-349-9220으로 전화해 주세요.",
     reserveDesc: "객실 예약 서비스에 관한 세부 사항 및 정책을 아래에서 확인하세요.",
     reserveH: [
@@ -476,7 +478,7 @@ export const STRINGS = {
       { roomType: 'سرداب لثلاثة', capacity: '1-3 أشخاص', duration: 'ليلة واحدة', facility: 'غرفة سرداب بسرير كوين وسرير مفرد، حمام خاص، تلفزيون وإنترنت سريع' },
       { roomType: 'غرفة مؤقتة', capacity: '1-2 أشخاص', duration: '4 ساعات', facility: 'سرير كوين، حمام خاص، تلفزيون وإنترنت سريع' },
     ],
-    phoneLabel: 'هاتف:', addressLabel: 'العنوان:', emailLabel: 'البريد:', hoursLabel: 'ساعة القبول:',
+    phoneLabel: 'هاتف:', addressLabel: 'العنوان:', emailLabel: 'البريد:', hoursLabel: 'ساعة القبول:', websiteLabel: 'الموقع:',
     reserveTitle: "يرجى الاتصال بنا على 647-349-9220 للاستفسار والحجز.",
     reserveDesc: "يرجى مراجعة النقاط التالية للاطلاع على تفاصيل وسياسات خدمة الحجز.",
     reserveH: [
@@ -515,7 +517,7 @@ export const STRINGS = {
       { roomType: 'तहखाना 3 व्यक्ति', capacity: '1-3 व्यक्ति', duration: 'एक रात', facility: 'तहखाना कमरा, एक क्वीन बेड और एक सिंगल बेड, निजी शॉवर, टीवी और तेज इंटरनेट' },
       { roomType: 'अस्थायी कमरा', capacity: '1-2 व्यक्ति', duration: '4 घंटे', facility: 'एक क्वीन बेड, निजी शॉवर, टीवी और तेज इंटरनेट' },
     ],
-    phoneLabel: 'फोन:', addressLabel: 'पता:', emailLabel: 'ईमेल:', hoursLabel: 'स्वीकृति समय:',
+    phoneLabel: 'फोन:', addressLabel: 'पता:', emailLabel: 'ईमेल:', hoursLabel: 'स्वीकृति समय:', websiteLabel: 'वेबसाइट:',
     reserveTitle: "पूछताछ और आरक्षण के लिए कृपया 647-349-9220 पर कॉल करें।",
     reserveDesc: "हमारी बुकिंग सेवा के विवरण और नीतियों के लिए कृपया निम्नलिखित बिंदुओं को देखें।",
     reserveH: [
@@ -554,7 +556,7 @@ export const STRINGS = {
       { roomType: 'Подвал на 3 чел.', capacity: '1-3 чел.', duration: 'Одна ночь', facility: 'Номер в подвале, кровать queen, односпальная кровать, собственный душ, ТВ и быстрый интернет' },
       { roomType: 'Краткосрочный номер', capacity: '1-2 чел.', duration: '4 часа', facility: 'Кровать queen, собственный душ, ТВ и быстрый интернет' },
     ],
-    phoneLabel: 'Тел.:', addressLabel: 'Адрес:', emailLabel: 'E-mail:', hoursLabel: 'Часы приема:',
+    phoneLabel: 'Тел.:', addressLabel: 'Адрес:', emailLabel: 'E-mail:', hoursLabel: 'Часы приема:', websiteLabel: 'Сайт:',
     reserveTitle: "Звоните нам по номеру 647-349-9220 для бронирования и справок.",
     reserveDesc: "Ознакомьтесь со следующими важными пунктами о нашем сервисе бронирования.",
     reserveH: [
@@ -593,7 +595,7 @@ export const STRINGS = {
       { roomType: 'Tầng hầm 3 người', capacity: '1-3 người', duration: 'Một đêm', facility: 'Phòng tầng hầm, giường queen và giường đơn, phòng tắm riêng, TV và internet tốc độ cao' },
       { roomType: 'Phòng tạm thời', capacity: '1-2 người', duration: '4 giờ', facility: 'Giường queen, phòng tắm riêng, TV và internet tốc độ cao' },
     ],
-    phoneLabel: 'ĐT:', addressLabel: 'Địa chỉ:', emailLabel: 'Email:', hoursLabel: 'Giờ tiếp nhận:',
+    phoneLabel: 'ĐT:', addressLabel: 'Địa chỉ:', emailLabel: 'Email:', hoursLabel: 'Giờ tiếp nhận:', websiteLabel: 'Website:',
     reserveTitle: "Vui lòng gọi 647-349-9220 để hỏi thông tin và đặt phòng.",
     reserveDesc: "Vui lòng xem các điểm nổi bật sau đây để biết chi tiết và chính sách đặt phòng.",
     reserveH: [
@@ -632,7 +634,7 @@ export const STRINGS = {
       { roomType: '地下室三人房', capacity: '1-3人', duration: '一晚', facility: '地下室客房，一張雙人加大床及一張單人床、獨立淋浴間、電視及高速網路' },
       { roomType: '短時客房', capacity: '1-2人', duration: '4小時', facility: '一張雙人加大床、獨立淋浴間、電視及高速網路' },
     ],
-    phoneLabel: '電話：', addressLabel: '地址：', emailLabel: '電郵：', hoursLabel: '接待時間：',
+    phoneLabel: '電話：', addressLabel: '地址：', emailLabel: '電郵：', hoursLabel: '接待時間：', websiteLabel: '網站：',
     reserveTitle: "如需諮詢或預訂，請致電 647-349-9220。",
     reserveDesc: "請參閱以下重點說明，了解客房預訂服務的詳情與政策。",
     reserveH: [
@@ -671,7 +673,7 @@ export const STRINGS = {
       { roomType: '地下室三人间', capacity: '1-3人', duration: '一晚', facility: '地下室客房，一张大床及一张单人床、独立淋浴间、电视及高速网络' },
       { roomType: '短时客房', capacity: '1-2人', duration: '4小时', facility: '一张大床、独立淋浴间、电视及高速网络' },
     ],
-    phoneLabel: '电话：', addressLabel: '地址：', emailLabel: '邮箱：', hoursLabel: '接待时间：',
+    phoneLabel: '电话：', addressLabel: '地址：', emailLabel: '邮箱：', hoursLabel: '接待时间：', websiteLabel: '网站：',
     reserveTitle: "如需咨询或预订，请致电 647-349-9220。",
     reserveDesc: "请参阅以下重点说明，了解客房预订服务的详情与政策。",
     reserveH: [

@@ -86,6 +86,8 @@ export class AppComponent {
     copySuccess: string;
     copyFallback: string;
     copyError: string;
+    printButtonLabel: string;
+    printAbout: string;
   }> = {
     en: {
       paymentMethods: 'We accept Cash, Visa, Master Card, Interac and EMT (Email Money Transfer).',
@@ -95,15 +97,19 @@ export class AppComponent {
       copySuccess: 'QR image data copied to clipboard.',
       copyFallback: 'Image clipboard is unavailable. Data URL copied instead.',
       copyError: 'Unable to copy now. Please try again.',
+      printButtonLabel: 'Print Brochure',
+      printAbout: 'Jun Jun Hotel is a comfortable private suite in the heart of downtown Toronto — steps from TTC transit, Little Italy, Chinatown, and the University of Toronto. Enjoy a queen-size bed, private shower, large TV, and fast internet. Flexible rates available for overnight stays, extended visits, and short 4-hour bookings.',
     },
     fr: {
-      paymentMethods: 'Nous acceptons les espèces, Visa, MasterCard, Interac et EMT (transfert d\'argent par e-mail).',
+      paymentMethods: 'Nous acceptons les espèces, Visa, MasterCard, Interac et EMT (virement d\'argent par courriel).',
       qrTitle: 'Scannez le QR vers le site officiel',
       qrHint: 'Pointez votre caméra sur ce code pour ouvrir immédiatement www.junjunhotel.com.',
       copyQrButton: 'Copier les données image QR',
       copySuccess: 'Les données de l\'image QR ont été copiées.',
       copyFallback: 'Presse-papiers image indisponible. URL de données copiée.',
       copyError: 'Impossible de copier maintenant. Veuillez réessayer.',
+      printButtonLabel: 'Imprimer la brochure',
+      printAbout: 'L\'Hôtel Jun Jun est une suite privée confortable au cœur du centre-ville de Toronto — à quelques pas de la TTC, de Little Italy, de Chinatown et de l\'Université de Toronto. Profitez d\'un lit queen-size, d\'une douche privée, d\'un grand téléviseur et d\'une connexion internet rapide. Tarifs flexibles pour une nuit, un séjour prolongé ou une courte visite de 4 heures.',
     },
     es: {
       paymentMethods: 'Aceptamos efectivo, Visa, MasterCard, Interac y EMT (transferencia de dinero por correo electrónico).',
@@ -113,6 +119,8 @@ export class AppComponent {
       copySuccess: 'Se copiaron los datos de la imagen QR.',
       copyFallback: 'No hay portapapeles de imagen. Se copió URL de datos.',
       copyError: 'No se pudo copiar ahora. Inténtelo de nuevo.',
+      printButtonLabel: 'Imprimir folleto',
+      printAbout: 'Jun Jun Hotel es una suite privada y confortable en el corazón del centro de Toronto — a pasos de la TTC, Little Italy, Chinatown y la Universidad de Toronto. Disfrute de cama queen-size, baño privado, televisor grande e internet rápido. Tarifas flexibles para una noche, estadías prolongadas o visitas cortas de 4 horas.',
     },
     de: {
       paymentMethods: 'Wir akzeptieren Bargeld, Visa, MasterCard, Interac und EMT (E-Mail-Geldtransfer).',
@@ -122,6 +130,8 @@ export class AppComponent {
       copySuccess: 'QR-Bilddaten wurden in die Zwischenablage kopiert.',
       copyFallback: 'Bild-Zwischenablage nicht verfügbar. Daten-URL kopiert.',
       copyError: 'Kopieren derzeit nicht möglich. Bitte erneut versuchen.',
+      printButtonLabel: 'Broschüre drucken',
+      printAbout: 'Das Jun Jun Hotel ist eine komfortable Privatsuite im Herzen der Innenstadt von Toronto — nur wenige Schritte von TTC, Little Italy, Chinatown und der Universität Toronto entfernt. Genießen Sie ein Queen-Size-Bett, eine eigene Dusche, einen großen Fernseher und schnelles Internet. Flexible Tarife für eine Nacht, Langzeitaufenthalte oder kurze 4-Stunden-Buchungen.',
     },
     ja: {
       paymentMethods: 'お支払いは現金、Visa、MasterCard、Interac、EMT（Eメール送金）に対応しています。',
@@ -131,6 +141,8 @@ export class AppComponent {
       copySuccess: 'QR画像データをクリップボードにコピーしました。',
       copyFallback: '画像コピーは非対応のため、データURLをコピーしました。',
       copyError: '現在コピーできません。もう一度お試しください。',
+      printButtonLabel: 'パンフレットを印刷',
+      printAbout: 'ジュンジュンホテルは、トロント中心部に位置する快適なプライベートスイートです。TTC、リトルイタリー、チャイナタウン、トロント大学まで徒歩圏内。クイーンサイズベッド、専用シャワー、大型テレビ、高速インターネット完備。1泊・長期滞在・4時間プランなど柔軟な料金をご用意しています。',
     },
     ko: {
       paymentMethods: '현금, Visa, MasterCard, Interac 및 EMT(이메일 송금) 결제가 가능합니다.',
@@ -140,6 +152,8 @@ export class AppComponent {
       copySuccess: 'QR 이미지 데이터가 클립보드에 복사되었습니다.',
       copyFallback: '이미지 클립보드 미지원으로 데이터 URL을 복사했습니다.',
       copyError: '지금은 복사할 수 없습니다. 다시 시도해 주세요.',
+      printButtonLabel: '브로셔 인쇄',
+      printAbout: '준준 호텔은 토론토 다운타운 중심에 자리한 편안한 전용 스위트입니다. TTC, 리틀 이탈리, 차이나타운, 토론토대학교까지 도보 거리에 있습니다. 퀸사이즈 침대, 전용 샤워실, 대형 TV, 고속 인터넷 제공. 1박, 장기 숙박, 4시간 단기 이용 등 유연한 요금제를 갖추고 있습니다.',
     },
     ar: {
       paymentMethods: 'نقبل الدفع نقداً وVisa وMasterCard وInterac وEMT (تحويل الأموال عبر البريد الإلكتروني).',
@@ -149,6 +163,8 @@ export class AppComponent {
       copySuccess: 'تم نسخ بيانات صورة QR إلى الحافظة.',
       copyFallback: 'نسخ الصور غير متاح. تم نسخ رابط البيانات بدلاً من ذلك.',
       copyError: 'تعذر النسخ الآن. يرجى المحاولة مرة أخرى.',
+      printButtonLabel: 'طباعة الكتيب',
+      printAbout: 'فندق جون جون جناح خاص مريح في قلب وسط مدينة تورنتو — على بُعد خطوات من مترو TTC وليتل إيطاليا والحي الصيني وجامعة تورنتو. يتوفر سرير كوين، دش خاص، تلفزيون كبير وإنترنت سريع. أسعار مرنة للإقامة الليلية والطويلة والزيارات القصيرة لمدة 4 ساعات.',
     },
     hi: {
       paymentMethods: 'हम नकद, Visa, MasterCard, Interac और EMT (Email Money Transfer) स्वीकार करते हैं।',
@@ -158,6 +174,8 @@ export class AppComponent {
       copySuccess: 'QR इमेज डेटा क्लिपबोर्ड में कॉपी हो गया है।',
       copyFallback: 'इमेज क्लिपबोर्ड उपलब्ध नहीं है। डेटा URL कॉपी किया गया।',
       copyError: 'अभी कॉपी नहीं हो सका। कृपया फिर प्रयास करें।',
+      printButtonLabel: 'ब्रोशर प्रिंट करें',
+      printAbout: 'जुन जुन होटल, टोरंटो डाउनटाउन के केंद्र में एक आरामदायक निजी सूट है — TTC ट्रांजिट, लिटिल इटली, चाइनाटाउन और टोरंटो यूनिवर्सिटी के कदमों की दूरी पर। क्वीन-साइज़ बेड, निजी शॉवर, बड़ा टीवी और तेज़ इंटरनेट उपलब्ध है। एक रात, लंबे प्रवास या 4 घंटे की शॉर्ट बुकिंग के लिए लचीले दर उपलब्ध हैं।',
     },
     ru: {
       paymentMethods: 'Мы принимаем наличные, Visa, MasterCard, Interac и EMT (денежный перевод по электронной почте).',
@@ -167,6 +185,8 @@ export class AppComponent {
       copySuccess: 'Данные QR-изображения скопированы в буфер обмена.',
       copyFallback: 'Буфер изображений недоступен. Скопирован data URL.',
       copyError: 'Сейчас скопировать не удалось. Повторите попытку.',
+      printButtonLabel: 'Распечатать буклет',
+      printAbout: 'Jun Jun Hotel — комфортный частный номер в самом центре Торонто, в шаговой доступности от транзита TTC, Little Italy, Чайнатауна и Университета Торонто. В номере: кровать queen-size, собственный душ, большой телевизор и быстрый интернет. Гибкие тарифы на ночь, длительный срок или короткое пребывание на 4 часа.',
     },
     vi: {
       paymentMethods: 'Chúng tôi chấp nhận tiền mặt, Visa, MasterCard, Interac và EMT (chuyển tiền qua email).',
@@ -176,6 +196,8 @@ export class AppComponent {
       copySuccess: 'Đã sao chép dữ liệu ảnh QR vào bộ nhớ tạm.',
       copyFallback: 'Không hỗ trợ clipboard ảnh. Đã sao chép URL dữ liệu.',
       copyError: 'Không thể sao chép lúc này. Vui lòng thử lại.',
+      printButtonLabel: 'In tờ rơi',
+      printAbout: 'Jun Jun Hotel là suite riêng tư thoải mái ngay trung tâm Toronto — cách TTC, Little Italy, Phố Tàu và Đại học Toronto chỉ vài bước chân. Phòng có giường queen-size, phòng tắm riêng, TV lớn và internet tốc độ cao. Giá linh hoạt theo đêm, dài hạn hoặc ngắn hạn 4 giờ.',
     },
     zhHant: {
       paymentMethods: '我們接受現金、Visa、MasterCard、Interac 與 EMT（電子郵件匯款）。',
@@ -185,6 +207,8 @@ export class AppComponent {
       copySuccess: '已將 QR 圖像資料複製到剪貼簿。',
       copyFallback: '不支援圖片剪貼簿，已改為複製資料 URL。',
       copyError: '目前無法複製，請稍後再試。',
+      printButtonLabel: '列印宣傳冊',
+      printAbout: '君君旅店是位於多倫多市中心的舒適私人套房，鄰近 TTC 交通站、小意大利、唐人街及多倫多大學。提供加大雙人床、獨立淋浴間、大電視及高速網路。提供彈性住宿方案，包括一晚、長期住宿及 4 小時短時方案。',
     },
     zh: {
       paymentMethods: '我们接受现金、Visa、MasterCard、Interac 和 EMT（电子邮件转账）。',
@@ -194,6 +218,8 @@ export class AppComponent {
       copySuccess: '二维码图像数据已复制到剪贴板。',
       copyFallback: '不支持图片剪贴板，已改为复制数据 URL。',
       copyError: '当前无法复制，请稍后重试。',
+      printButtonLabel: '打印宣传册',
+      printAbout: '君君旅店是位于多伦多市中心的舒适私人套房，紧邻 TTC 交通站、小意大利、唐人街及多伦多大学。提供大床、独立淋浴间、大电视及高速网络。提供灵活住宿方案，适合一晚入住、长期住宿及 4 小时短时预订。',
     },
   };
 
@@ -734,6 +760,10 @@ export class AppComponent {
     this.showNextGalleryImage();
   }
 
+  openPrintView(): void {
+    window.print();
+  }
+
   // ===== TRANSLATION GETTERS =====
   private get isEnglishSelected(): boolean {
     return this.selectedLanguage === 'en';
@@ -948,6 +978,7 @@ export class AppComponent {
       address: contactStrings.addressLabel ?? 'Address:',
       email: contactStrings.emailLabel ?? 'Email:',
       hours: contactStrings.hoursLabel ?? 'Acceptance Hour:',
+      website: contactStrings.websiteLabel ?? 'Website:',
       mapTitle: contactStrings.mapTitle ?? 'Jun Jun Hotel Map',
     };
   }
@@ -967,6 +998,16 @@ export class AppComponent {
       copyFallback: text.copyFallback,
       copyError: text.copyError,
     };
+  }
+
+  get translatedPrintButtonLabel(): string {
+    return this.translatedUiTextByLanguage[this.selectedLanguage]?.printButtonLabel
+      ?? this.translatedUiTextByLanguage['en'].printButtonLabel;
+  }
+
+  get translatedPrintAbout(): string {
+    return this.translatedUiTextByLanguage[this.selectedLanguage]?.printAbout
+      ?? this.translatedUiTextByLanguage['en'].printAbout;
   }
 
   get translatedRoomReservationLabel(): string {
