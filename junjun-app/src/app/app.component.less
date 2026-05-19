@@ -1587,7 +1587,7 @@ blockquote footer {
 
 	.site-header__navRow {
 		display: flex !important;
-		align-items: center !important;
+		align-items: flex-end !important;
 		gap: 0 !important;
 	}
 
@@ -1606,8 +1606,8 @@ blockquote footer {
 		.brand__icon,
 		[class*='brand__icon'],
 		[class*='brand-icon'] {
-			width: 1.6rem !important;
-			height: 1.6rem !important;
+			width: 2rem !important;
+			height: 2rem !important;
 		}
 
 		.brand__text,
@@ -1615,29 +1615,32 @@ blockquote footer {
 		[class*='brand__name'],
 		[class*='brand-name'],
 		[class*='brand__text'] {
-			font-size: 1.5rem !important;
+			font-size: 1.65rem !important;
 			font-weight: 700 !important;
 		}
 	}
 
-	// Phone — flex item immediately after brand, vertically centred
+	// Phone — flex item immediately after brand, bottom-aligned
 	.print-header-phone {
 		display: flex !important;
-		align-items: center !important;
+		align-items: flex-end !important;
 		flex: 0 0 auto !important;
 		margin-left: 0.14in !important;
-		font-size: 1.05rem !important;
+		font-size: 1.2rem !important;
 		font-weight: 700 !important;
 		color: #1f1a17 !important;
 		white-space: nowrap !important;
+		line-height: 1 !important;
+		padding-bottom: 0.02in !important;
 	}
 
-	// QR wrap — pushed to far right with margin from edge
+	// QR wrap — pushed to far right, vertically centered with brand row
 	.print-header-qr-wrap {
 		display: flex !important;
 		flex-direction: column !important;
 		align-items: center !important;
 		justify-content: center !important;
+		align-self: center !important;
 		margin-left: auto !important;
 		margin-right: 0.06in !important;
 		gap: 2px !important;
@@ -1645,8 +1648,8 @@ blockquote footer {
 	}
 
 	.print-header-qr {
-		width: 0.72in !important;
-		height: 0.72in !important;
+		width: 0.5in !important;
+		height: 0.5in !important;
 		display: block !important;
 		border-radius: 4px !important;
 	}
@@ -1661,7 +1664,7 @@ blockquote footer {
 
 	// ── MAIN: outer border box ─────────────────────────────────────────
 	#id_appComponent_main {
-		padding: 0.09in !important;
+		padding: 0.07in !important;
 		margin: 0 !important;
 		border: 1px solid #c8c8c8 !important;
 		border-radius: 0 !important;
@@ -1673,13 +1676,13 @@ blockquote footer {
 		color: #1f1a17 !important;
 	}
 
-	// ── SECTIONS: compact padding + light separators ───────────────────
+	// ── SECTIONS: uniform padding + light separators ───────────────────
 	#id_appComponent_aboutSection,
 	#id_appComponent_pricingSection,
 	#id_appComponent_gallerySection,
 	#id_appComponent_contactSection {
 		display: block !important;
-		padding: 0.09in 0 !important;
+		padding: 0.085in 0 !important;
 		box-shadow: none !important;
 		border-radius: 0 !important;
 		border-top: 1px solid rgba(192, 192, 192, 0.45) !important;
@@ -1688,10 +1691,9 @@ blockquote footer {
 		text-align: left !important;
 	}
 
-	// About has NO top border (it's the first section)
+	// About has NO top border (it's the first section), same padding as others
 	#id_appComponent_aboutSection {
 		border-top: none !important;
-		padding-top: 0.04in !important;
 	}
 
 	// Hide eyebrow labels
@@ -1727,6 +1729,13 @@ blockquote footer {
 		border-collapse: collapse !important;
 		box-shadow: none !important;
 		text-align: left !important;
+		border-radius: 0 !important;
+		overflow: hidden !important;
+	}
+
+	.pricing-table thead tr:first-child th:first-child,
+	.pricing-table thead tr:first-child th:last-child {
+		border-radius: 0 !important;
 	}
 
 	.pricing-table th {
@@ -1800,7 +1809,7 @@ blockquote footer {
 	}
 
 	.gallery-grid figure {
-		--gallery-item-ratio: 1 / 0.618 !important;
+		--gallery-item-ratio: 1 / 0.55 !important;
 		border-radius: 5px !important;
 		overflow: hidden !important;
 	}
@@ -1808,12 +1817,15 @@ blockquote footer {
 	#id_appComponent_galleryFigure_0,
 	#id_appComponent_galleryFigure_1,
 	#id_appComponent_galleryFigure_2,
-	#id_appComponent_galleryFigure_3,
-	#id_appComponent_galleryFigure_4,
-	#id_appComponent_galleryFigure_5 {
+	#id_appComponent_galleryFigure_11,
+	#id_appComponent_galleryFigure_12,
+	#id_appComponent_galleryFigure_13 {
 		display: block !important;
 	}
 
+	#id_appComponent_galleryFigure_3,
+	#id_appComponent_galleryFigure_4,
+	#id_appComponent_galleryFigure_5,
 	#id_appComponent_galleryFigure_6,
 	#id_appComponent_galleryFigure_7,
 	#id_appComponent_galleryFigure_8,
@@ -1884,8 +1896,8 @@ blockquote footer {
 		display: none !important;
 	}
 
-	// 4-col info grid: phone | website (row1), address | email (row2), hours full-width (row3)
-	// DOM order must be: phone → website → address → email → hours (see contact template)
+	// 4-col info grid: phone | website (row1), hours | email (row2), address full-width (row3)
+	// DOM order must be: phone → website → hours → email → address (see contact template)
 	.contact-list {
 		display: grid !important;
 		grid-template-columns: max-content 1fr max-content 1fr !important;
@@ -1910,12 +1922,9 @@ blockquote footer {
 		text-align: left !important;
 	}
 
-	// Hours: spans all 4 columns as a flex row
+	// Address: label in col1, value spans cols 2-4 (aligns with grid values above)
 	.contact-item--hours {
-		display: flex !important;
-		grid-column: 1 / -1 !important;
-		align-items: baseline !important;
-		gap: 0.15in !important;
+		display: contents !important;
 	}
 
 	.contact-item--hours .contact-label {
@@ -1926,14 +1935,15 @@ blockquote footer {
 
 	.contact-item--hours p {
 		margin: 0 !important;
+		grid-column: 2 / -1 !important;
 	}
 
-	// Static map — show below contact card, full width
+	// Static map — show below contact card, full width, with top/bottom margin
 	.print-static-map-wrapper {
 		display: block !important;
 		width: 100% !important;
-		margin-top: 0.06in !important;
-		border-radius: 0.3rem !important;
+		margin: 0.07in 0 !important;
+		border-radius: 0 !important;
 		overflow: hidden !important;
 		border: 1px solid rgba(193, 138, 95, 0.25) !important;
 		line-height: 0 !important;
@@ -1942,7 +1952,7 @@ blockquote footer {
 	.print-static-map {
 		display: block !important;
 		width: 100% !important;
-		height: 1.4in !important;
+		height: 1.65in !important;
 		min-height: 0 !important;
 		object-fit: cover !important;
 		border-radius: 0 !important;

@@ -46,17 +46,17 @@ interface QrCardLabels {
               <p id="id_contactSection_contactWebsite">{{ contact.website }}</p>
             </div>
           }
-          <div id="id_contactSection_contactAddressWrapper" class="contact-item">
-            <span class="contact-label">{{ labels.address }}</span>
-            <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>
+          <div id="id_contactSection_contactHoursWrapper" class="contact-item">
+            <span class="contact-label">{{ labels.hours }}</span>
+            <p id="id_contactSection_contactHours">{{ contact.operationHours }}</p>
           </div>
           <div id="id_contactSection_contactEmailWrapper" class="contact-item">
             <span class="contact-label">{{ labels.email }}</span>
             <p id="id_contactSection_contactEmail">{{ contact.email }}</p>
           </div>
-          <div id="id_contactSection_contactHoursWrapper" class="contact-item contact-item--hours">
-            <span class="contact-label">{{ labels.hours }}</span>
-            <p id="id_contactSection_contactHours">{{ contact.operationHours }}</p>
+          <div id="id_contactSection_contactAddressWrapper" class="contact-item contact-item--hours">
+            <span class="contact-label">{{ labels.address }}</span>
+            <p id="id_contactSection_contactAddress" class="address">{{ contact.address }}</p>
           </div>
         </div>
       </div>

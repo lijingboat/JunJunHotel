@@ -71,6 +71,9 @@ export const GALLERY = {
     { src: 'assets/image/Hotel_Room_17.jpg', label: 'Basement Bathroom', rank: 9 },
     { src: 'assets/image/Hotel_Room_16.jpg', label: 'Bathroom Double Beds', rank: 10 },
     { src: 'assets/image/Hotel_Room_15.jpg', label: 'Basement Bathroom', rank: 11 },
+    { src: 'assets/image/Hotel_Room_26.jpg', label: 'Room with Natural Light', rank: 12 },
+    { src: 'assets/image/Hotel_Room_35.jpg', label: 'Cozy Room Interior', rank: 13 },
+    { src: 'assets/image/Hotel_Room_37.jpg', label: 'Bright Room View', rank: 14 },
   ],
 } as const;
 
@@ -274,7 +277,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["Vue de l'entrée de l'hôtel", "Vue intérieure de la chambre", "Vue de la chambre à coucher"],
     galleryDesc: "Voici les images sélectionnées de nos chambres et installations.",
-    galleryLabels: ["Chambre standard 2 personnes", "Vue de l'entrée", "Couloir de l'hôtel", "Vue intérieure de chambre", "Chambre standard", "Chambre pour 3 (2 lits)", "Chambre pour 4 (2 lits queen)", "Vue intérieure sous-sol", "Salle de bain sous-sol", "Salle de bain (2 lits)", "Salle de bain sous-sol"],
+    galleryLabels: ["Chambre standard 2 personnes", "Vue de l'entrée", "Couloir de l'hôtel", "Vue intérieure de chambre", "Chambre standard", "Chambre pour 3 (2 lits)", "Chambre pour 4 (2 lits queen)", "Vue intérieure sous-sol", "Salle de bain sous-sol", "Salle de bain (2 lits)", "Salle de bain sous-sol", "Chambre lumineuse", "Intérieur douillet", "Chambre ensoleillée"],
     pricingRooms: [
       { roomType: 'Chambre 2 pers.', capacity: '1-2 pers.', duration: 'Une nuit', facility: 'Un lit queen, douche privée, TV et internet rapide' },
       { roomType: 'Chambre 3 pers.', capacity: '1-3 pers.', duration: 'Une nuit', facility: 'Un lit queen, un lit simple, douche privée, TV et internet rapide' },
@@ -313,7 +316,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["Vista de la entrada del hotel", "Vista interior de la habitación", "Vista del dormitorio"],
     galleryDesc: "Las siguientes imágenes muestran nuestras habitaciones e instalaciones seleccionadas.",
-    galleryLabels: ["Habitación estándar para 2 personas", "Vista exterior", "Pasillo del hotel", "Vista interior de habitación", "Habitación estándar", "Hab. para 3 (2 camas)", "Hab. para 4 (2 camas queen)", "Vista interior del sótano", "Baño del sótano", "Baño (2 camas)", "Baño del sótano"],
+    galleryLabels: ["Habitación estándar para 2 personas", "Vista exterior", "Pasillo del hotel", "Vista interior de habitación", "Habitación estándar", "Hab. para 3 (2 camas)", "Hab. para 4 (2 camas queen)", "Vista interior del sótano", "Baño del sótano", "Baño (2 camas)", "Baño del sótano", "Habitación con luz natural", "Interior acogedor", "Habitación luminosa"],
     pricingRooms: [
       { roomType: 'Habitación doble', capacity: '1-2 pers.', duration: 'Una noche', facility: 'Una cama queen, baño privado, TV e internet rápido' },
       { roomType: 'Habitación triple', capacity: '1-3 pers.', duration: 'Una noche', facility: 'Una cama queen, una cama individual, baño privado, TV e internet rápido' },
@@ -352,7 +355,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["Blick auf den Hoteleingang", "Hotelzimmer Innenansicht", "Schlafzimmer Ansicht"],
     galleryDesc: "Hier sind ausgewählte Bilder unserer Zimmer und Einrichtungen.",
-    galleryLabels: ["Standardzimmer für 2 Personen", "Außenansicht", "Hotelkorridor", "Zimmer Innenansicht", "Standardzimmer", "Zimmer für 3 (2 Betten)", "Zimmer für 4 (2 Queen-Betten)", "Keller Innenansicht", "Bad im Keller", "Bad (2 Betten)", "Bad im Keller"],
+    galleryLabels: ["Standardzimmer für 2 Personen", "Außenansicht", "Hotelkorridor", "Zimmer Innenansicht", "Standardzimmer", "Zimmer für 3 (2 Betten)", "Zimmer für 4 (2 Queen-Betten)", "Keller Innenansicht", "Bad im Keller", "Bad (2 Betten)", "Bad im Keller", "Zimmer mit Tageslicht", "Gemütliches Zimmer", "Helles Zimmer"],
     pricingRooms: [
       { roomType: 'Doppelzimmer', capacity: '1-2 Pers.', duration: 'Eine Nacht', facility: 'Ein Queensize-Bett, eigene Dusche, TV und schnelles Internet' },
       { roomType: 'Dreibettzimmer', capacity: '1-3 Pers.', duration: 'Eine Nacht', facility: 'Ein Queensize-Bett, ein Einzelbett, eigene Dusche, TV und schnelles Internet' },
@@ -391,7 +394,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["ホテル正面玄関", "ホテル客室内部", "ホテル寝室"],
     galleryDesc: "こちらは選りすぐりの客室・設備の写真です。",
-    galleryLabels: ["スタンダード2名様ルーム", "正面玄関", "ホテル廊下", "客室内部", "スタンダードルーム", "3人用ダブルベッドルーム", "4人用クイーンベッドルーム", "地下室内部", "地下室バスルーム", "バスルーム（ダブルベッド）", "地下室バスルーム"],
+    galleryLabels: ["スタンダード2名様ルーム", "正面玄関", "ホテル廊下", "客室内部", "スタンダードルーム", "3人用ダブルベッドルーム", "4人用クイーンベッドルーム", "地下室内部", "地下室バスルーム", "バスルーム（ダブルベッド）", "地下室バスルーム", "自然光の客室", "落ち着いた室内", "明るい客室"],
     pricingRooms: [
       { roomType: '2人部屋', capacity: '1〜2名', duration: '1泊', facility: 'クイーンベッド1台、専用シャワー、テレビ、高速インターネット' },
       { roomType: '3人部屋', capacity: '1〜3名', duration: '1泊', facility: 'クイーンベッド1台、シングルベッド1台、専用シャワー、テレビ、高速インターネット' },
@@ -430,7 +433,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["호텔 정문 전경", "호텔 객실 내부", "호텔 침실 전경"],
     galleryDesc: "아래는 저희 객실과 시설을 선별한 사진들입니다.",
-    galleryLabels: ["스탠다드 2인실", "정문 전경", "호텔 복도", "객실 내부", "스탠더드 룸", "3인실 더블 침대", "4인실 퀸 침대 2개", "지하실 내부", "지하실 욕실", "욕실 더블 침대", "지하실 욕실"],
+    galleryLabels: ["스탠다드 2인실", "정문 전경", "호텔 복도", "객실 내부", "스탠더드 룸", "3인실 더블 침대", "4인실 퀸 침대 2개", "지하실 내부", "지하실 욕실", "욕실 더블 침대", "지하실 욕실", "자연광 룸", "아늑한 실내", "밝은 룸"],
     pricingRooms: [
       { roomType: '2인실', capacity: '1-2명', duration: '1박', facility: '퀸 침대 1개, 전용 샤워실, TV, 고속 인터넷' },
       { roomType: '3인실', capacity: '1-3명', duration: '1박', facility: '퀸 침대 1개, 싱글 침대 1개, 전용 샤워실, TV, 고속 인터넷' },
@@ -469,7 +472,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["واجهة الفندق", "داخل غرفة الفندق", "غرفة النوم"],
     galleryDesc: "فيما يلي صور مختارة تعرض غرفنا ومرافقنا.",
-    galleryLabels: ["غرفة قياسية لشخصين", "المدخل الأمامي", "ممر الفندق", "داخل الغرفة القياسية", "الغرفة القياسية", "غرفة لـ 3 أشخاص", "غرفة لـ 4 أشخاص", "داخل الطابق السفلي", "حمام الطابق السفلي", "الحمام (سريران)", "حمام الطابق السفلي"],
+    galleryLabels: ["غرفة قياسية لشخصين", "المدخل الأمامي", "ممر الفندق", "داخل الغرفة القياسية", "الغرفة القياسية", "غرفة لـ 3 أشخاص", "غرفة لـ 4 أشخاص", "داخل الطابق السفلي", "حمام الطابق السفلي", "الحمام (سريران)", "حمام الطابق السفلي", "غرفة بإضاءة طبيعية", "داخلية مريحة", "غرفة مشرقة"],
     pricingRooms: [
       { roomType: 'غرفة لشخصين', capacity: '1-2 أشخاص', duration: 'ليلة واحدة', facility: 'سرير كوين، حمام خاص، تلفزيون وإنترنت سريع' },
       { roomType: 'غرفة لثلاثة', capacity: '1-3 أشخاص', duration: 'ليلة واحدة', facility: 'سرير كوين وسرير مفرد، حمام خاص، تلفزيون وإنترنت سريع' },
@@ -508,7 +511,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["होटल के सामने का दृश्य", "होटल के कमरे की आंतरिक सज्जा", "होटल का शयनकक्ष"],
     galleryDesc: "निम्नलिखित चुनी हुई तस्वीरें हमारे कमरों और सुविधाओं को प्रदर्शित करती हैं।",
-    galleryLabels: ["स्टैंडर्ड 2 व्यक्ति कमरा", "सामने का दृश्य", "होटल का गलियारा", "कमरे का आंतरिक दृश्य", "मानक कमरा", "3 व्यक्ति डबल बेड", "4 व्यक्ति क्वीन बेड", "तहखाना आंतरिक दृश्य", "तहखाना बाथरूम", "बाथरूम डबल बेड", "तहखाना बाथरूम"],
+    galleryLabels: ["स्टैंडर्ड 2 व्यक्ति कमरा", "सामने का दृश्य", "होटल का गलियारा", "कमरे का आंतरिक दृश्य", "मानक कमरा", "3 व्यक्ति डबल बेड", "4 व्यक्ति क्वीन बेड", "तहखाना आंतरिक दृश्य", "तहखाना बाथरूम", "बाथरूम डबल बेड", "तहखाना बाथरूम", "प्राकृतिक रोशनी वाला कमरा", "आरामदायक आंतरिक", "उज्ज्वल कमरा"],
     pricingRooms: [
       { roomType: '2 व्यक्ति कमरा', capacity: '1-2 व्यक्ति', duration: 'एक रात', facility: 'एक क्वीन बेड, निजी शॉवर, टीवी और तेज इंटरनेट' },
       { roomType: '3 व्यक्ति कमरा', capacity: '1-3 व्यक्ति', duration: 'एक रात', facility: 'एक क्वीन बेड, एक सिंगल बेड, निजी शॉवर, टीवी और तेज इंटरनेट' },
@@ -547,7 +550,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["Вид на вход в отель", "Интерьер гостиничного номера", "Спальня в отеле"],
     galleryDesc: "Ниже представлены отобранные фотографии наших номеров и удобств.",
-    galleryLabels: ["Стандартный номер на 2 человека", "Вид на вход", "Коридор отеля", "Внутренний вид номера", "Стандартный номер", "Номер на 3 чел.", "Номер на 4 чел.", "Интерьер подвала", "Ванная в подвале", "Ванная (2 кровати)", "Ванная в подвале"],
+    galleryLabels: ["Стандартный номер на 2 человека", "Вид на вход", "Коридор отеля", "Внутренний вид номера", "Стандартный номер", "Номер на 3 чел.", "Номер на 4 чел.", "Интерьер подвала", "Ванная в подвале", "Ванная (2 кровати)", "Ванная в подвале", "Номер с естественным светом", "Уютный интерьер", "Светлый номер"],
     pricingRooms: [
       { roomType: 'Номер на 2 чел.', capacity: '1-2 чел.', duration: 'Одна ночь', facility: 'Кровать queen, собственный душ, ТВ и быстрый интернет' },
       { roomType: 'Номер на 3 чел.', capacity: '1-3 чел.', duration: 'Одна ночь', facility: 'Кровать queen, односпальная кровать, собственный душ, ТВ и быстрый интернет' },
@@ -586,7 +589,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["Cửa trước khách sạn", "Nội thất phòng khách sạn", "Phòng ngủ khách sạn"],
     galleryDesc: "Dưới đây là những hình ảnh chọn lọc giới thiệu phòng và tiện ích của chúng tôi.",
-    galleryLabels: ["Phòng tiêu chuẩn 2 người", "Cổng trước", "Hành lang khách sạn", "Nội thất phòng chuẩn", "Phòng chuẩn", "Phòng 3 người (2 giường)", "Phòng 4 người (2 giường queen)", "Nội thất tầng hầm", "Phòng tắm tầng hầm", "Phòng tắm (2 giường)", "Phòng tắm tầng hầm"],
+    galleryLabels: ["Phòng tiêu chuẩn 2 người", "Cổng trước", "Hành lang khách sạn", "Nội thất phòng chuẩn", "Phòng chuẩn", "Phòng 3 người (2 giường)", "Phòng 4 người (2 giường queen)", "Nội thất tầng hầm", "Phòng tắm tầng hầm", "Phòng tắm (2 giường)", "Phòng tắm tầng hầm", "Phòng có ánh sáng tự nhiên", "Nội thất ấm cúng", "Phòng sáng thoáng"],
     pricingRooms: [
       { roomType: 'Phòng 2 người', capacity: '1-2 người', duration: 'Một đêm', facility: 'Giường queen, phòng tắm riêng, TV và internet tốc độ cao' },
       { roomType: 'Phòng 3 người', capacity: '1-3 người', duration: 'Một đêm', facility: 'Giường queen, giường đơn, phòng tắm riêng, TV và internet tốc độ cao' },
@@ -625,7 +628,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["旅館正門外觀", "旅館房間內部", "旅館臥室"],
     galleryDesc: "以下是精選的客房與設施照片。",
-    galleryLabels: ["標準雙人房", "正門外觀", "旅館走廊", "標準房內部", "標準房", "三人雙床房", "四人雙大床房", "地下室內部", "地下室浴室", "浴室（雙床）", "地下室浴室"],
+    galleryLabels: ["標準雙人房", "正門外觀", "旅館走廊", "標準房內部", "標準房", "三人雙床房", "四人雙大床房", "地下室內部", "地下室浴室", "浴室（雙床）", "地下室浴室", "自然採光客房", "溫馨室內", "明亮客房"],
     pricingRooms: [
       { roomType: '雙人房', capacity: '1-2人', duration: '一晚', facility: '一張雙人加大床、獨立淋浴間、電視及高速網路' },
       { roomType: '三人房', capacity: '1-3人', duration: '一晚', facility: '一張雙人加大床、一張單人床、獨立淋浴間、電視及高速網路' },
@@ -664,7 +667,7 @@ export const STRINGS = {
     ],
     aboutImgAlts: ["旅店正门外观", "旅店客房内部", "旅店卧室"],
     galleryDesc: "以下是精选的客房与设施照片。",
-    galleryLabels: ["标准双人房", "正门外观", "旅店走廊", "标准间内部", "标准间", "三人双床间", "四人双大床间", "地下室内部", "地下室浴室", "浴室（双床）", "地下室浴室"],
+    galleryLabels: ["标准双人房", "正门外观", "旅店走廊", "标准间内部", "标准间", "三人双床间", "四人双大床间", "地下室内部", "地下室浴室", "浴室（双床）", "地下室浴室", "自然采光客房", "温馨室内", "明亮客房"],
     pricingRooms: [
       { roomType: '双人间', capacity: '1-2人', duration: '一晚', facility: '一张大床、独立淋浴间、电视及高速网络' },
       { roomType: '三人间', capacity: '1-3人', duration: '一晚', facility: '一张大床、一张单人床、独立淋浴间、电视及高速网络' },
