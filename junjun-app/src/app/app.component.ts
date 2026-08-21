@@ -7,6 +7,7 @@ import { NavigationToggleComponent } from './components/navigation/navigation-to
 import { RoomReservationSectionComponent } from './components/room-reservation/room-reservation-section.component';
 import { NoticeBarComponent } from './components/notice-bar/notice-bar.component';
 import { AdminPageComponent } from './components/admin/admin-page.component';
+import packageJson from '../../package.json';
 import {
   ABOUT,
   ABOUT_IMAGES,
@@ -75,6 +76,7 @@ export class AppComponent {
   styling: any = {};
   selectedLanguage: string = NAV_LANGUAGE_CONFIG.defaultValue;
   readonly currentYear = SITE_META.year;
+  readonly appVersion = packageJson.version;
   roomReservationConfig: any = {};
   roomReservation: any = {};
   currentViewport: ViewportTier = 'l';

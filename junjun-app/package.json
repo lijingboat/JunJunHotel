@@ -1,12 +1,17 @@
 {
   "name": "junjun-app",
-  "version": "0.0.0",
+  "version": "2026.8.20",
+  "engines": {
+    "node": ">=20 <25"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
+    "deploy:current": "powershell -ExecutionPolicy Bypass -File ..\\deployment\\deploy-current.ps1 -StartServer",
     "serve:ssr:junjun-app": "node dist/junjun-app/server/server.mjs"
   },
   "private": true,

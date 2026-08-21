@@ -261,7 +261,7 @@ const mkLang = (labels: {
   roomReservation: { label: labels.reserve, title: labels.reserveTitle, description: labels.reserveDesc, highlights: [...labels.reserveH], form: { ...labels.reserveForm } },
   noticeBars: { notice_welcome: labels.noticeWelcome, notice_faq_help: labels.noticeFaqHelp },
   resourceLinks: [...labels.resLinks],
-  footer: { copyright: `© 2026 ${labels.brand}` },
+  footer: { copyright: `© ${SITE_META.year} ${labels.brand}` },
 });
 
 export const STRINGS = {
@@ -712,4 +712,3 @@ export const STYLING = {
   spacing: { headerPaddingMobile: '16px', headerPaddingTablet: '16px', headerPaddingDesktop: '16px' },
   dimensions: { heightImageCard: '16.25rem', heightGalleryItem: '13.75rem', heightMapMin: '20rem' },
 } as const;
-

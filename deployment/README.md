@@ -70,11 +70,8 @@ npm run build
 1. **Deploy to Current**
 
 ```bash
-# Clear Current directory
-Remove-Item "deployment\Current" -Recurse -Force
-
-# Copy new build
-Copy-Item "junjun-app\dist\junjun-app" -Destination "deployment\Current" -Recurse
+# Preferred: use the deployment helper script
+powershell -ExecutionPolicy Bypass -File "deployment\deploy-current.ps1" -StartServer
 ```
 
 1. **Create Archive Backup**
@@ -88,10 +85,7 @@ Copy-Item "deployment\Current" -Destination "deployment\Archived\junjun-app-$tim
 1. **Restart Server**
 
 ```bash
-cd "deployment\Current"
-# Kill previous server process
-# Start new server
-node server/server.mjs
+# Included in deployment\deploy-current.ps1 when -StartServer is used
 ```
 
 ## Archive Naming Convention

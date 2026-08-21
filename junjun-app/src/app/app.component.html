@@ -10,7 +10,7 @@
   <!-- Site navigation -->
   <header id="id_appComponent_siteHeader" class="site-header" [class.menu-open]="isMenuOpen">
     <div class="site-header__navRow">
-      <app-navigation-brand id="id_appComponent_navigationBrand" [brand]="translatedBrand" [brandIcon]="brandIcon" (navigateHome)="scrollToTop()">
+      <app-navigation-brand id="id_appComponent_navigationBrand" [brand]="translatedBrand" [brandIcon]="brandIcon" [phone]="translatedContactPhone" (navigateHome)="scrollToTop()">
         <app-navigation-toggle
           id="id_appComponent_navigationToggle"
           [isOpen]="isMenuOpen"
@@ -18,8 +18,6 @@
           (toggle)="toggleMenu()"
         ></app-navigation-toggle>
       </app-navigation-brand>
-      <!-- Print-only: phone number right next to brand title -->
-      <span id="id_appComponent_printHeaderPhone" class="print-header-phone" aria-hidden="true">{{ translatedContactPhone }}</span>
       <!-- Print-only: QR code with website label, floated right -->
       <div id="id_appComponent_printHeaderQrWrap" class="print-header-qr-wrap" aria-hidden="true">
         <img class="print-header-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&format=png&data=https%3A%2F%2Fwww.junjunhotel.com" alt="QR code" />
@@ -268,7 +266,10 @@
   </main>
 
   <footer id="id_appComponent_footer" class="site-footer">
-    <p id="id_appComponent_footerText">{{ translatedFooter }}</p>
+    <div id="id_appComponent_footerMeta" class="site-footer__meta">
+      <p id="id_appComponent_footerText" class="site-footer__copyright">{{ translatedFooter }}</p>
+      <span id="id_appComponent_footerVersion" class="site-footer__version">v{{ appVersion }}</span>
+    </div>
   </footer>
 </div>
 }

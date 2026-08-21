@@ -13,6 +13,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
           [alt]="brand + ' icon'"
         />
         <span id="id_navigationBrand_text" class="brand__text">{{ brand }}</span>
+        @if (phone) {
+          <span id="id_appComponent_headerPhone" class="site-header__phone">{{ phone }}</span>
+        }
       </button>
       <ng-content></ng-content>
     </div>
@@ -22,5 +25,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class NavigationBrandComponent {
   @Input({ required: true }) brand = '';
   @Input({ required: true }) brandIcon = '';
+  @Input() phone = '';
   @Output() navigateHome = new EventEmitter<void>();
 }
